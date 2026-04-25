@@ -2,7 +2,7 @@ package dev.minceraft.sonus.service.server;
 // Created by booky10 in Sonus (01:05 17.11.2025)
 
 import dev.minceraft.sonus.common.adapter.SonusAdapter;
-import dev.minceraft.sonus.common.audio.AudioCategory;
+import dev.minceraft.sonus.api.service.audio.AudioCategory;
 import dev.minceraft.sonus.common.data.ISonusServer;
 import dev.minceraft.sonus.service.SonusService;
 import dev.minceraft.sonus.service.platform.IServer;
@@ -47,7 +47,7 @@ public final class SonusServer implements ISonusServer {
 
     public void registerCategory(AudioCategory category) {
         CategoryData newCategory = new CategoryData(category);
-        CategoryData prevCategory = this.categories.put(category.getUniqueId(), newCategory);
+        CategoryData prevCategory = this.categories.put(category.uniqueId(), newCategory);
         if (prevCategory == null) {
             return; // didn't replace anything
         }
@@ -63,7 +63,7 @@ public final class SonusServer implements ISonusServer {
                 continue; // no voice adapter set
             }
             // remove category and re-add to ensure it is updated correctly
-            adapter.unregisterCategory(player, prevCategory.category().getUniqueId());
+            adapter.unregisterCategory(player, prevCategory.category().uniqueId());
             adapter.registerCategory(player, category);
             newCategory.informedPlayers().add(player.getUniqueId());
         }

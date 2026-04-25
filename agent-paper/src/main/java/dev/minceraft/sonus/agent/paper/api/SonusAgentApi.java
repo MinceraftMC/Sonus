@@ -2,7 +2,7 @@ package dev.minceraft.sonus.agent.paper.api;
 // Created by booky10 in Sonus (18:11 17.11.2025)
 
 import dev.minceraft.sonus.agent.paper.audio.AudioSupplier;
-import dev.minceraft.sonus.common.audio.AudioCategory;
+import dev.minceraft.sonus.api.service.audio.AudioCategory;
 import dev.minceraft.sonus.common.audio.AudioProcessor;
 import dev.minceraft.sonus.common.natives.LameNativesLoader;
 import dev.minceraft.sonus.common.natives.OpusNativesLoader;

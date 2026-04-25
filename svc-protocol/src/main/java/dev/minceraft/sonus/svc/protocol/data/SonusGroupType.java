@@ -1,6 +1,6 @@
 package dev.minceraft.sonus.svc.protocol.data;
 
-import dev.minceraft.sonus.common.rooms.RoomAudioType;
+import dev.minceraft.sonus.api.service.rooms.RoomAudioType;
 import net.kyori.adventure.util.Index;
 
 public enum SonusGroupType {

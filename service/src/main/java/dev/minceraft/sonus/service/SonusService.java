@@ -3,7 +3,6 @@ package dev.minceraft.sonus.service;
 
 import com.google.gson.Gson;
 import dev.minceraft.sonus.common.ISonusService;
-import dev.minceraft.sonus.common.audio.AudioProcessor;
 import dev.minceraft.sonus.common.config.ISonusConfig;
 import dev.minceraft.sonus.common.config.YamlConfigHolder;
 import dev.minceraft.sonus.common.natives.OpusNativesLoader;

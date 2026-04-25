@@ -66,7 +66,7 @@ public class SvcAdapter implements SonusAdapter {
         packet.setChannelId(source.getSenderId(player));
         packet.setSender(source.getSenderId(player));
         packet.setCategory(SonusVolumeCategory.generateId(source.getCategoryId()));
-        packet.setData(audio.setProcessor(() -> connection.getProcessor(source.getSenderId(player))).opus());
+        packet.setData(audio.setProcessor(() -> connection.getProcessor(source.getSenderId(player))).getOpus());
         packet.setSequenceNumber(audio.getSequenceNumber());
         connection.sendPacket(packet);
     }
@@ -82,7 +82,7 @@ public class SvcAdapter implements SonusAdapter {
         packet.setChannelId(source.getSenderId(player));
         packet.setSender(source.getSenderId(player));
         packet.setCategory(SonusVolumeCategory.generateId(source.getCategoryId()));
-        packet.setData(audio.setProcessor(() -> connection.getProcessor(source.getSenderId(player))).opus());
+        packet.setData(audio.setProcessor(() -> connection.getProcessor(source.getSenderId(player))).getOpus());
         packet.setSequenceNumber(audio.getSequenceNumber());
         packet.setLocation(pos);
         packet.setDistance((float) this.service.getConfig().getVoiceChatRange());
@@ -100,7 +100,7 @@ public class SvcAdapter implements SonusAdapter {
         packet.setChannelId(source.getSenderId(player));
         packet.setSender(source.getSenderId(player));
         packet.setCategory(SonusVolumeCategory.generateId(source.getCategoryId()));
-        packet.setData(audio.setProcessor(() -> connection.getProcessor(source.getSenderId(player))).opus());
+        packet.setData(audio.setProcessor(() -> connection.getProcessor(source.getSenderId(player))).getOpus());
         packet.setSequenceNumber(audio.getSequenceNumber());
         packet.setDistance((float) this.service.getConfig().getVoiceChatRange());
         connection.sendPacket(packet);

@@ -1,3 +1,3 @@
 dependencies {
-    api(projects.common)
+    api(projects.commonService)
 }

@@ -34,7 +34,7 @@ public final class AgcNode implements AudioPipelineNode, AutoCloseable {
     @Override
     public void process(SonusAudio audio) {
         // thread safety is not relevant here
-        this.agc.agc(audio.pcm());
+        this.agc.agc(audio.getPcm());
         audio.setDirtyPcm();
     }
 

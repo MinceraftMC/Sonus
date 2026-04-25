@@ -5,7 +5,7 @@ import dev.minceraft.sonus.common.IAudioSource;
 import dev.minceraft.sonus.common.ISonusService;
 import dev.minceraft.sonus.common.adapter.AdapterInfo;
 import dev.minceraft.sonus.common.adapter.SonusAdapter;
-import dev.minceraft.sonus.common.audio.AudioCategory;
+import dev.minceraft.sonus.api.service.audio.AudioCategory;
 import dev.minceraft.sonus.common.audio.SonusAudio;
 import dev.minceraft.sonus.common.data.ISonusPlayer;
 import dev.minceraft.sonus.common.data.Vec3d;
@@ -71,7 +71,7 @@ public class WebAdapter implements SonusAdapter {
             connection.setVoiceActive(source.getSenderId(player), true);
         }
 
-        short[] leftData = audio.pcm();
+        short[] leftData = audio.getPcm();
         short[] rightData = leftData;
         // transform from spatial to stereo
         if (pos != null && player.getPosition() != null) {

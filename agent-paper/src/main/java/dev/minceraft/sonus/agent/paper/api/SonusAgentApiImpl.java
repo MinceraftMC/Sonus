@@ -4,7 +4,7 @@ package dev.minceraft.sonus.agent.paper.api;
 import dev.minceraft.sonus.agent.paper.SonusAgentPlugin;
 import dev.minceraft.sonus.agent.paper.audio.AudioSupplier;
 import dev.minceraft.sonus.agent.paper.audio.AudioTicker;
-import dev.minceraft.sonus.common.audio.AudioCategory;
+import dev.minceraft.sonus.api.service.audio.AudioCategory;
 import dev.minceraft.sonus.common.audio.AudioProcessor;
 import dev.minceraft.sonus.common.natives.LameNativesLoader;
 import dev.minceraft.sonus.common.natives.OpusNativesLoader;

@@ -1,10 +1,10 @@
 package dev.minceraft.sonus.service.processing.util;
 // Created by booky10 in Sonus (03:56 16.11.2025)
 
+import dev.minceraft.sonus.api.service.data.Vec3d;
 import dev.minceraft.sonus.common.IAudioSource;
 import dev.minceraft.sonus.common.audio.SonusAudio;
 import dev.minceraft.sonus.common.data.ISonusPlayer;
-import dev.minceraft.sonus.common.data.Vec3d;
 import dev.minceraft.sonus.service.SonusService;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -35,7 +35,7 @@ public final class SpatialNormProcessor {
         if (gain == 0f) {
             return null; // don't send audio
         } else if (gain != 1f) {
-            short[] pcm = audio.pcm();
+            short[] pcm = audio.getPcm();
             for (int i = 0, len = pcm.length; i < len; i++) {
                 pcm[i] = (short) (pcm[i] * gain);
             }

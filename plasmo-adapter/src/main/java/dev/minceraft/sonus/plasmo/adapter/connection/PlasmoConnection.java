@@ -6,7 +6,7 @@ import com.google.common.collect.Tables;
 import dev.minceraft.sonus.common.audio.AudioProcessor;
 import dev.minceraft.sonus.common.data.ISonusPlayer;
 import dev.minceraft.sonus.common.protocol.udp.WrappedUdpPipelineData;
-import dev.minceraft.sonus.common.version.SemanticVersion;
+import dev.minceraft.sonus.common.protocol.version.SemanticVersion;
 import dev.minceraft.sonus.plasmo.adapter.PlasmoAdapter;
 import dev.minceraft.sonus.plasmo.adapter.pipeline.PlasmoUdpContext;
 import dev.minceraft.sonus.plasmo.protocol.AbstractPlasmoPacket;

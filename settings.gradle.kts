@@ -2,6 +2,7 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 rootProject.name = "Sonus"
 
+include("api-service")
 include("protocol")
 include("service")
 include("agent-paper")
@@ -14,7 +15,7 @@ include("web-adapter")
 include("webrtc-pion")
 include("webrtc-adapter")
 include("webrtc-ipc")
-include("common")
+include("common-service")
 include("common-protocol")
 include("service-velocity")
 include("network")
