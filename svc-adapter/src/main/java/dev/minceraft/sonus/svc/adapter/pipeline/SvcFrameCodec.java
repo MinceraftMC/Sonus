@@ -1,6 +1,7 @@
 package dev.minceraft.sonus.svc.adapter.pipeline;
 
 
+import dev.minceraft.sonus.common.protocol.util.QuietCodecException;
 import dev.minceraft.sonus.common.protocol.util.VarInt;
 import dev.minceraft.sonus.svc.adapter.SvcUdpPipelineNode;
 import dev.minceraft.sonus.svc.protocol.SvcUdpMagicCodec;
@@ -31,8 +32,9 @@ public final class SvcFrameCodec extends SvcUdpPipelineNode<ByteBuf, ByteBuf> {
     public void decode(ChannelHandlerContext ctx, ByteBuf msg, List<Object> out, SvcUdpContext svcCtx) {
         int size = VarInt.read(msg);
         if (msg.readableBytes() != size) {
+            int readable = msg.readableBytes();
             msg.release();
-            throw new IllegalStateException("Received invalid readable byte count: " + msg.readableBytes() + " != " + size);
+            throw new QuietCodecException("Received invalid readable byte count: " + readable + " != " + size);
         }
         out.add(msg);
     }

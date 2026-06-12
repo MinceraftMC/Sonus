@@ -6,12 +6,16 @@ import dev.minceraft.sonus.common.protocol.util.TriConsumer;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 import java.util.function.ToIntBiFunction;
@@ -19,11 +23,16 @@ import java.util.function.ToIntBiFunction;
 @NullMarked
 public class ContextedRegistry<D, T extends ProtocolMessage<?>, C> {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger("Sonus");
+    // bounded so remote senders cycling through ids can't grow this set indefinitely
+    private static final int MAX_WARNED_UNKNOWN_IDS = 128;
+
     private final Codec<D, T, C> codec;
     private final IdCodec<D, C> idCodec;
 
     private final Map<Integer, Supplier<? extends T>> constructors;
     private final Map<Class<? extends T>, Integer> packetIds;
+    private final Set<Integer> warnedUnknownIds = ConcurrentHashMap.newKeySet();
 
     protected ContextedRegistry(Codec<D, T, C> codec, IdCodec<D, C> idCodec, List<Entry<? extends T>> packets, BiConsumer<Integer, T> idConsumer) {
         this.codec = codec;
@@ -45,7 +54,14 @@ public class ContextedRegistry<D, T extends ProtocolMessage<?>, C> {
         int packetId = this.idCodec.decoder.applyAsInt(data, ctx);
         Supplier<? extends T> ctor = this.constructors.get(packetId);
         if (ctor == null) {
-            throw new IllegalStateException("Can't find constructor for decoding packet with id " + packetId);
+            // modified or newer clients may send packet ids this registry doesn't know about;
+            // drop the packet like upstream implementations do, warning only once per id
+            if (this.warnedUnknownIds.size() < MAX_WARNED_UNKNOWN_IDS && this.warnedUnknownIds.add(packetId)) {
+                LOGGER.warn("Received packet with unknown id {}, ignoring it (and any further packets with this id)", packetId);
+            } else {
+                LOGGER.debug("Received packet with unknown id {}, ignoring it", packetId);
+            }
+            return null;
         }
         T packet = ctor.get();
         this.codec.decoder.accept(data, packet, ctx);

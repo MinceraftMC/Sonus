@@ -1,5 +1,6 @@
 package dev.minceraft.sonus.common.protocol.udp;
 
+import dev.minceraft.sonus.common.protocol.util.QuietCodecException;
 import io.netty.channel.ChannelDuplexHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelPromise;
@@ -51,7 +52,8 @@ public abstract class AbstractUdpPipelineNode<E, D, C extends UdpBasedContext<C>
 
                 out.write(ctx, promise, packet::withPacket);
             } catch (Throwable throwable) {
-                LOGGER.error("Failed to encode packet: {}", msg.getClass().getSimpleName(), throwable);
+                LOGGER.error("Failed to encode {} packet in {}",
+                        packet.data().getClass().getSimpleName(), this.getClass().getSimpleName(), throwable);
             } finally {
                 ReferenceCountUtil.release(msg);
                 out.list.clear();
@@ -81,8 +83,13 @@ public abstract class AbstractUdpPipelineNode<E, D, C extends UdpBasedContext<C>
                 for (Object obj : out.list) {
                     ctx.fireChannelRead(packet.withPacket(obj));
                 }
+            } catch (QuietCodecException exception) {
+                // expected for invalid remote input, don't let senders spam the log with stack traces
+                LOGGER.debug("Dropped invalid packet from {}: {}",
+                        packet.context().remoteAddress, exception.getMessage());
             } catch (Throwable throwable) {
-                LOGGER.error("Failed to decode packet: {}", msg.getClass().getSimpleName(), throwable);
+                LOGGER.error("Failed to decode {} packet in {}",
+                        packet.data().getClass().getSimpleName(), this.getClass().getSimpleName(), throwable);
             } finally {
                 ReferenceCountUtil.release(msg);
                 out.list.clear();
