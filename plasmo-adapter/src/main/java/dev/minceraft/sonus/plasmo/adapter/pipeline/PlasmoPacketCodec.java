@@ -26,7 +26,9 @@ public class PlasmoPacketCodec extends PlasmoUdpPipelineNode<ByteBuf, UdpPlasmoP
     public void decode(ChannelHandlerContext ctx, ByteBuf msg, List<Object> out, PlasmoUdpContext adapterCtx) throws Exception {
         try {
             UdpPlasmoPacket<?> read = UdpPlasmoRegistry.REGISTRY.decode(msg);
-            out.add(read);
+            if (read != null) {
+                out.add(read);
+            }
         } finally {
             msg.release();
         }

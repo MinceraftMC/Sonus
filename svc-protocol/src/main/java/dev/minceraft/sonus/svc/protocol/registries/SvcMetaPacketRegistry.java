@@ -37,7 +37,7 @@ public final class SvcMetaPacketRegistry {
             ContextedRegistry.Builder.<PmDataHolderBuf, SvcMetaPacket, SvcPacketContext>createContext()
                     .codec((data, packet, ctx) -> packet.decode(data.getFirst(), ctx),
                             (data, packet, ctx) -> packet.encode(data.getFirst(), ctx))
-                    .idCodec((holder, ctx) -> PACKET_IDS.get(holder.getSecond()),
+                    .idCodec((holder, ctx) -> PACKET_IDS.getOrDefault(holder.getSecond(), -1), // -1 is never registered
                             (id, packet, ctx) -> { /**/ })
                     .idConsumer((id, sample) -> {
                         for (Versioned.VersionedKeyEntry<Key> entry : sample.getPluginMessageChannel().versionedKeys()) {
