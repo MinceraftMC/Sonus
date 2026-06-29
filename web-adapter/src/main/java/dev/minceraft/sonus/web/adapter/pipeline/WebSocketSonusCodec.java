@@ -36,7 +36,10 @@ public class WebSocketSonusCodec extends MessageToMessageCodec<AbstractWebSocket
     @Override
     protected void decode(ChannelHandlerContext ctx, AbstractWebSocketMessage msg, List<Object> out) {
         if (msg instanceof ByteWebSocketMessage binary) {
-            out.add(WsPacketRegistry.REGISTRY.decode(binary.getDirectBuf(), new WsPacketContext(this.connection.getVersion())));
+            WebSocketPacket packet = WsPacketRegistry.REGISTRY.decode(binary.getDirectBuf(), new WsPacketContext(this.connection.getVersion()));
+            if (packet != null) {
+                out.add(packet);
+            }
         } else {
             // unexpected message
             HttpRequestUtil.doSocketClose(ctx, WebSocketCloseStatus.INVALID_MESSAGE_TYPE);
