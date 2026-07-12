@@ -35,7 +35,9 @@ public class SvcPlayerMarkerCodec extends SvcUdpPipelineNode<ByteBuf, ByteBuf> {
         SvcConnection connection = this.adapter.getAdapter().getSessions().getConnection(playerId);
         if (connection != null) {
             svcCtx.connection = connection;
-            out.add(msg.retainedSlice());
+            out.add(msg.slice());
+        } else {
+            msg.release();
         }
     }
 }

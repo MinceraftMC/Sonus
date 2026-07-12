@@ -30,9 +30,13 @@ public class SvcPacketCodec extends SvcUdpPipelineNode<ByteBuf, SvcVoicePacket> 
 
     @Override
     public void decode(ChannelHandlerContext ctx, ByteBuf msg, List<Object> out, SvcUdpContext svcCtx) {
-        SvcVoicePacket packet = SvcVoicePacketRegistry.REGISTRY.decode(msg, svcCtx.connection.getContext());
-        if (packet != null) {
-            out.add(packet);
+        try {
+            SvcVoicePacket packet = SvcVoicePacketRegistry.REGISTRY.decode(msg, svcCtx.connection.getContext());
+            if (packet != null) {
+                out.add(packet);
+            }
+        } finally {
+            msg.release();
         }
     }
 }

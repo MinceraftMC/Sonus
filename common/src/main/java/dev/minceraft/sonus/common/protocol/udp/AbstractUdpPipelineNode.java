@@ -84,7 +84,6 @@ public abstract class AbstractUdpPipelineNode<E, D, C extends UdpBasedContext<C>
             } catch (Throwable throwable) {
                 LOGGER.error("Failed to decode packet: {}", msg.getClass().getSimpleName(), throwable);
             } finally {
-                ReferenceCountUtil.release(msg);
                 out.list.clear();
                 out.handle.recycle(out);
             }
