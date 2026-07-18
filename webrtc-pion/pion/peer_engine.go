@@ -1,13 +1,22 @@
 package pion
 
 import (
+	"strconv"
+
 	"github.com/pion/interceptor"
 	"github.com/pion/webrtc/v4"
+	"minceraft.dev/sonus/webrtc-pion/log"
 )
 
-func constructApi() *webrtc.API {
+func ConstructApi(handlerId uint32) *webrtc.API {
+	loggerFact := SimplePionLoggerFactory{
+		Logger:     log.Logger,
+		NameSuffix: strconv.Itoa(int(handlerId)),
+	}
+
 	mediaEngine := webrtc.MediaEngine{}
 
+	// TODO add more codecs
 	// register rx codec
 	if err := mediaEngine.RegisterCodec(webrtc.RTPCodecParameters{
 		RTPCodecCapability: webrtc.RTPCodecCapability{
@@ -29,14 +38,18 @@ func constructApi() *webrtc.API {
 
 	// some random defaults, Idk
 	interceptorRegistry := interceptor.Registry{}
-	if err := webrtc.RegisterDefaultInterceptors(&mediaEngine, &interceptorRegistry); err != nil {
+	if err := webrtc.RegisterDefaultInterceptorsWithOptions(
+		&mediaEngine, &interceptorRegistry,
+		webrtc.WithInterceptorLoggerFactory(&loggerFact),
+	); err != nil {
 		panic(err)
 	}
 
 	return webrtc.NewAPI(
 		webrtc.WithMediaEngine(&mediaEngine),
 		webrtc.WithInterceptorRegistry(&interceptorRegistry),
+		webrtc.WithSettingEngine(webrtc.SettingEngine{
+			LoggerFactory: &loggerFact,
+		}),
 	)
 }
-
-var WebrtcApi = constructApi()

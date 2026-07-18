@@ -34,8 +34,6 @@ public class PlasmoPluginMessageCodec extends AbstractPluginMessageCodec {
         TcpPlasmoPacket<?> packetObj = TcpPacketRegistry.REGISTRY.decode(packet);
         if (packetObj != null) {
             packetObj.handle(connection.getMetaHandler());
-        } else {
-            LOGGER.warn("Failed to read packet from {}", source.getPlayerId());
         }
     }
 }

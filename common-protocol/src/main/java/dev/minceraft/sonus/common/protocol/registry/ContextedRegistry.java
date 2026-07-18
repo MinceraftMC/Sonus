@@ -45,7 +45,7 @@ public class ContextedRegistry<D, T extends ProtocolMessage<?>, C> {
         int packetId = this.idCodec.decoder.applyAsInt(data, ctx);
         Supplier<? extends T> ctor = this.constructors.get(packetId);
         if (ctor == null) {
-            throw new IllegalStateException("Can't find constructor for decoding packet with id " + packetId);
+            return null;
         }
         T packet = ctor.get();
         this.codec.decoder.accept(data, packet, ctx);

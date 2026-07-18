@@ -80,15 +80,15 @@ public class SvcPlayerCipherCodec extends SvcUdpPipelineNode<ByteBuf, ByteBuf> {
 
     @Override
     public void decode(ChannelHandlerContext ctx, ByteBuf msg, List<Object> out, SvcUdpContext svcCtx) throws Exception {
-        byte[] iv = new byte[this.ivSize];
-        msg.readBytes(iv);
-        // if the IV hasn't changed, retain old decode cipher
-        if (this.lastDecodeIv == null || !Arrays.equals(this.lastDecodeIv, iv)) {
-            VersionedCipher.initCipher(this.connection.getVersion(), this.decodeCipher, Cipher.DECRYPT_MODE, this.key, iv);
-            this.lastDecodeIv = iv;
-        }
-
         try {
+            byte[] iv = new byte[this.ivSize];
+            msg.readBytes(iv);
+            // if the IV hasn't changed, retain old decode cipher
+            if (this.lastDecodeIv == null || !Arrays.equals(this.lastDecodeIv, iv)) {
+                VersionedCipher.initCipher(this.connection.getVersion(), this.decodeCipher, Cipher.DECRYPT_MODE, this.key, iv);
+                this.lastDecodeIv = iv;
+            }
+
             byte[] ciphered = new byte[msg.readableBytes()];
             msg.readBytes(ciphered);
             byte[] unciphered = this.decodeCipher.doFinal(ciphered);
