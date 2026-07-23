@@ -2,7 +2,7 @@ package dev.minceraft.sonus.plasmo.protocol.tcp.data;
 
 import dev.minceraft.sonus.common.protocol.util.DataTypeUtil;
 import dev.minceraft.sonus.common.protocol.util.Utf8String;
-import dev.minceraft.sonus.common.util.GameProfile;
+import dev.minceraft.sonus.common.protocol.util.GameProfile;
 import io.netty.buffer.ByteBuf;
 import org.jetbrains.annotations.NotNull;
 

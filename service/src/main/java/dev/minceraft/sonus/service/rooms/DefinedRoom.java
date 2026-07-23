@@ -1,9 +1,9 @@
 package dev.minceraft.sonus.service.rooms;
 
-import dev.minceraft.sonus.common.IAudioSource;
-import dev.minceraft.sonus.common.audio.SonusAudio;
-import dev.minceraft.sonus.common.data.ISonusPlayer;
-import dev.minceraft.sonus.common.rooms.options.RoomDefinition;
+import dev.minceraft.sonus.service.IAudioSource;
+import dev.minceraft.sonus.service.audio.SonusAudio;
+import dev.minceraft.sonus.service.data.ISonusPlayer;
+import dev.minceraft.sonus.service.rooms.options.RoomDefinition;
 import dev.minceraft.sonus.service.SonusService;
 import org.jspecify.annotations.NullMarked;
 

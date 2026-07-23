@@ -6,7 +6,7 @@ plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
 }
 
-include("api-service")
+
 include("protocol")
 include("service")
 include("agent-paper")

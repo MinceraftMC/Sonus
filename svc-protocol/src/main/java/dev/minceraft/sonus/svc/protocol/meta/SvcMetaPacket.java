@@ -1,6 +1,6 @@
 package dev.minceraft.sonus.svc.protocol.meta;
 
-import dev.minceraft.sonus.common.protocol.version.Versioned;
+import dev.minceraft.sonus.common.version.Versioned;
 import dev.minceraft.sonus.svc.protocol.AbstractSvcPacket;
 import net.kyori.adventure.key.Key;
 import org.jspecify.annotations.NullMarked;

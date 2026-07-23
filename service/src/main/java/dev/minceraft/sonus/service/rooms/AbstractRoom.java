@@ -1,10 +1,9 @@
 package dev.minceraft.sonus.service.rooms;
 // Created by booky10 in Sonus (02:18 17.07.2025)
 
-import dev.minceraft.sonus.common.IAudioSource;
-import dev.minceraft.sonus.common.audio.SonusAudio;
-import dev.minceraft.sonus.common.data.ISonusPlayer;
-import dev.minceraft.sonus.common.rooms.IRoom;
+import dev.minceraft.sonus.service.IAudioSource;
+import dev.minceraft.sonus.service.audio.SonusAudio;
+import dev.minceraft.sonus.service.data.ISonusPlayer;
 import dev.minceraft.sonus.common.rooms.RoomAudioType;
 import dev.minceraft.sonus.service.SonusService;
 import org.jetbrains.annotations.ApiStatus;

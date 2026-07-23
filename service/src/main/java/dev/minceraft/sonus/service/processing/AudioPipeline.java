@@ -1,6 +1,6 @@
 package dev.minceraft.sonus.service.processing;
 
-import dev.minceraft.sonus.common.audio.SonusAudio;
+import dev.minceraft.sonus.service.audio.SonusAudio;
 
 import java.util.List;
 

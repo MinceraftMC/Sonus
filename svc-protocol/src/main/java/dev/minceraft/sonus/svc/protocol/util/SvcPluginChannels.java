@@ -1,12 +1,12 @@
 package dev.minceraft.sonus.svc.protocol.util;
 
-import dev.minceraft.sonus.common.protocol.version.Versioned;
+import dev.minceraft.sonus.common.version.Versioned;
 import net.kyori.adventure.key.Key;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import static dev.minceraft.sonus.common.protocol.version.Versioned.entry;
+import static dev.minceraft.sonus.common.version.Versioned.entry;
 import static dev.minceraft.sonus.svc.protocol.version.VersionManager.V_18;
 import static dev.minceraft.sonus.svc.protocol.version.VersionManager.V_20;
 

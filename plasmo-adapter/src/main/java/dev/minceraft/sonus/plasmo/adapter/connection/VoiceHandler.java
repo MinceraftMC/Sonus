@@ -1,7 +1,7 @@
 package dev.minceraft.sonus.plasmo.adapter.connection;
 
-import dev.minceraft.sonus.common.SonusConstants;
-import dev.minceraft.sonus.common.audio.SonusAudio;
+import dev.minceraft.sonus.service.SonusConstants;
+import dev.minceraft.sonus.service.audio.SonusAudio;
 import dev.minceraft.sonus.plasmo.adapter.PlasmoAdapter;
 import dev.minceraft.sonus.plasmo.protocol.tcp.clientbound.ConfigPacket;
 import dev.minceraft.sonus.plasmo.protocol.tcp.clientbound.PlayerListPacket;

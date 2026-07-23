@@ -1,6 +1,6 @@
 package dev.minceraft.sonus.plasmo.adapter.config;
 
-import dev.minceraft.sonus.common.config.ISubConfig;
+import dev.minceraft.sonus.service.config.ISubConfig;
 import org.spongepowered.configurate.objectmapping.ConfigSerializable;
 
 import java.util.UUID;

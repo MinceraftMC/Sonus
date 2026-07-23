@@ -2,8 +2,8 @@ package dev.minceraft.sonus.protocol.meta.servicebound;
 // Created by booky10 in Sonus (01:15 17.07.2025)
 
 import com.google.common.collect.Table;
-import dev.minceraft.sonus.common.data.WorldRotatedVec3d;
-import dev.minceraft.sonus.common.data.SonusPlayerState;
+import dev.minceraft.sonus.service.data.WorldRotatedVec3d;
+import dev.minceraft.sonus.service.data.SonusPlayerState;
 import dev.minceraft.sonus.common.protocol.util.DataTypeUtil;
 import dev.minceraft.sonus.common.protocol.util.Utf8String;
 import dev.minceraft.sonus.protocol.meta.IMetaHandler;

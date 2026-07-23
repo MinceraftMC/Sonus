@@ -3,16 +3,14 @@ package dev.minceraft.sonus.service.player;
 
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
-import dev.minceraft.sonus.api.service.audio.ISonusAudio;
-import dev.minceraft.sonus.api.service.data.Vec3d;
-import dev.minceraft.sonus.api.service.data.WorldRotatedVec3d;
-import dev.minceraft.sonus.api.service.participant.ISonusSource;
-import dev.minceraft.sonus.common.IAudioSource;
-import dev.minceraft.sonus.common.adapter.SonusAdapter;
-import dev.minceraft.sonus.common.audio.SonusAudio;
-import dev.minceraft.sonus.common.data.ISonusPlayer;
-import dev.minceraft.sonus.common.data.SonusPlayerState;
-import dev.minceraft.sonus.common.rooms.IRoom;
+import dev.minceraft.sonus.service.IAudioSource;
+import dev.minceraft.sonus.service.adapter.SonusAdapter;
+import dev.minceraft.sonus.service.audio.SonusAudio;
+import dev.minceraft.sonus.service.data.ISonusPlayer;
+import dev.minceraft.sonus.service.data.SonusPlayerState;
+import dev.minceraft.sonus.common.data.Vec3d;
+import dev.minceraft.sonus.service.data.WorldRotatedVec3d;
+import dev.minceraft.sonus.service.rooms.IRoom;
 import dev.minceraft.sonus.protocol.meta.IMetaMessage;
 import dev.minceraft.sonus.protocol.meta.MetaRegistry;
 import dev.minceraft.sonus.protocol.meta.agentbound.PlayerConnectionStateMessage;
@@ -45,12 +43,12 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Consumer;
 
-import static dev.minceraft.sonus.common.SonusConstants.PERMISSION_CONNECT;
-import static dev.minceraft.sonus.common.SonusConstants.PERMISSION_GROUPS_BYPASS_PASSWORD;
-import static dev.minceraft.sonus.common.SonusConstants.PERMISSION_GROUPS_USE;
-import static dev.minceraft.sonus.common.SonusConstants.PERMISSION_VOICE_LISTEN;
-import static dev.minceraft.sonus.common.SonusConstants.PERMISSION_VOICE_SPEAK;
-import static dev.minceraft.sonus.common.SonusConstants.PLUGIN_MESSAGE_CHANNEL_KEY;
+import static dev.minceraft.sonus.service.SonusConstants.PERMISSION_CONNECT;
+import static dev.minceraft.sonus.service.SonusConstants.PERMISSION_GROUPS_BYPASS_PASSWORD;
+import static dev.minceraft.sonus.service.SonusConstants.PERMISSION_GROUPS_USE;
+import static dev.minceraft.sonus.service.SonusConstants.PERMISSION_VOICE_LISTEN;
+import static dev.minceraft.sonus.service.SonusConstants.PERMISSION_VOICE_SPEAK;
+import static dev.minceraft.sonus.service.SonusConstants.PLUGIN_MESSAGE_CHANNEL_KEY;
 
 @NullMarked
 public final class SonusPlayer implements ISonusPlayer, CommandSender, AutoCloseable {
@@ -96,7 +94,7 @@ public final class SonusPlayer implements ISonusPlayer, CommandSender, AutoClose
 
         this.maxSequenceNumber.updateAndGet(l -> Math.max(l, audio.getSequenceNumber()));
         this.processAudioInput(audio);
-        this.handleRoomBroadcast(room -> room.sendStaticAudio(this, audio));
+        this.handleRoomBroadcast(room -> room.sendAudio(this, audio));
     }
 
     @Override
@@ -105,7 +103,7 @@ public final class SonusPlayer implements ISonusPlayer, CommandSender, AutoClose
             return;
         }
         this.maxSequenceNumber.set(0L);
-        this.handleRoomBroadcast(room -> room.sendSpatialAudioEnd(this, sequence));
+        this.handleRoomBroadcast(room -> room.sendAudioEnd(this, sequence));
     }
 
     private void processAudioInput(SonusAudio audio) {
@@ -139,7 +137,7 @@ public final class SonusPlayer implements ISonusPlayer, CommandSender, AutoClose
         }
     }
 
-    private boolean canHear(ISonusSource source, boolean spatial) {
+    private boolean canHear(IAudioSource source, boolean spatial) {
         if (this.sonusAdapter == null || !this.isVoiceActive()) {
             return false;
         }
@@ -149,7 +147,7 @@ public final class SonusPlayer implements ISonusPlayer, CommandSender, AutoClose
             return false; // never make players listen to themselves
         }
         // check if player is hidden
-        SonusPlayerState state = this.perPlayerStates.get(source.getUniqueId(this));
+        SonusPlayerState state = this.perPlayerStates.get(source.getSenderId(this));
         if (state != null) {
             if (!spatial && state.staticHidden()) {
                 return false; // player is hidden for static audio
@@ -207,7 +205,7 @@ public final class SonusPlayer implements ISonusPlayer, CommandSender, AutoClose
     }
 
     @Override
-    public void sendStaticAudio(ISonusSource source, ISonusAudio audio) {
+    public void sendStaticAudio(IAudioSource source, SonusAudio audio) {
         if (this.canHear(source, false)) {
             assert this.sonusAdapter != null;
             this.sonusAdapter.sendStaticAudio(this, source, audio);
@@ -215,7 +213,7 @@ public final class SonusPlayer implements ISonusPlayer, CommandSender, AutoClose
     }
 
     @Override
-    public void sendStaticAudioEnd(ISonusSource source, long sequence) {
+    public void sendStaticAudioEnd(IAudioSource source, long sequence) {
         if (this.canHear(source, false)) {
             assert this.sonusAdapter != null;
             this.sonusAdapter.sendAudioEnd(this, source, sequence);
@@ -223,7 +221,7 @@ public final class SonusPlayer implements ISonusPlayer, CommandSender, AutoClose
     }
 
     @Override
-    public void sendSpatialAudio(ISonusSource source, SonusAudio audio, Vec3d position) {
+    public void sendSpatialAudio(IAudioSource source, SonusAudio audio, Vec3d position) {
         if (this.canHear(source, true)) {
             assert this.sonusAdapter != null;
             this.sonusAdapter.sendSpatialAudio(this, source, audio, position);
@@ -231,7 +229,7 @@ public final class SonusPlayer implements ISonusPlayer, CommandSender, AutoClose
     }
 
     @Override
-    public void sendSpatialAudio(ISonusSource source, SonusAudio audio) {
+    public void sendSpatialAudio(IAudioSource source, SonusAudio audio) {
         if (this.canHear(source, true)) {
             assert this.sonusAdapter != null;
             this.sonusAdapter.sendSpatialAudio(this, source, audio);
@@ -239,7 +237,7 @@ public final class SonusPlayer implements ISonusPlayer, CommandSender, AutoClose
     }
 
     @Override
-    public void sendSpatialNormedAudio(ISonusSource source, SonusAudio audio) {
+    public void sendSpatialNormedAudio(IAudioSource source, SonusAudio audio) {
         if (!this.canHear(source, true)) {
             return;
         }
@@ -251,7 +249,7 @@ public final class SonusPlayer implements ISonusPlayer, CommandSender, AutoClose
     }
 
     @Override
-    public void sendSpatialAudioEnd(ISonusSource source, long sequence) {
+    public void sendSpatialAudioEnd(IAudioSource source, long sequence) {
         if (this.canHear(source, true)) {
             assert this.sonusAdapter != null;
             this.sonusAdapter.sendAudioEnd(this, source, sequence);
@@ -259,7 +257,7 @@ public final class SonusPlayer implements ISonusPlayer, CommandSender, AutoClose
     }
 
     @Override
-    public boolean canAccessRoom(dev.minceraft.sonus.api.service.rooms.IRoom room, @Nullable String password) {
+    public boolean canAccessRoom(IRoom room, @Nullable String password) {
         if (!this.hasPermission(PERMISSION_GROUPS_USE, true)) {
             return false; // no permission to use groups
         }

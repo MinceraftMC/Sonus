@@ -1,6 +1,6 @@
 package dev.minceraft.sonus.svc.protocol.data;
 
-
+import dev.minceraft.sonus.common.audio.AudioCategory;
 import dev.minceraft.sonus.common.protocol.util.DataTypeUtil;
 import dev.minceraft.sonus.common.protocol.util.Utf8String;
 import dev.minceraft.sonus.svc.protocol.SvcPacketContext;

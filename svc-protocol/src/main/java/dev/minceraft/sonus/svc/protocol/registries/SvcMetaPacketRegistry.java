@@ -2,7 +2,7 @@ package dev.minceraft.sonus.svc.protocol.registries;
 
 import dev.minceraft.sonus.common.protocol.registry.ContextedRegistry;
 import dev.minceraft.sonus.common.protocol.tcp.holder.PmDataHolderBuf;
-import dev.minceraft.sonus.common.protocol.version.Versioned;
+import dev.minceraft.sonus.common.version.Versioned;
 import dev.minceraft.sonus.svc.protocol.SvcPacketContext;
 import dev.minceraft.sonus.svc.protocol.meta.SvcMetaPacket;
 import dev.minceraft.sonus.svc.protocol.meta.clientbound.AddCategorySvcPacket;

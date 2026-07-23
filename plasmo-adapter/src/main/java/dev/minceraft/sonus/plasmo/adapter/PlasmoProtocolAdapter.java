@@ -1,6 +1,6 @@
 package dev.minceraft.sonus.plasmo.adapter;
 
-import dev.minceraft.sonus.common.ISonusService;
+import dev.minceraft.sonus.service.ISonusService;
 import dev.minceraft.sonus.common.protocol.adapter.UdpSonusAdapter;
 import dev.minceraft.sonus.common.protocol.udp.IUdpServer;
 import dev.minceraft.sonus.common.protocol.udp.UdpBasedContext;

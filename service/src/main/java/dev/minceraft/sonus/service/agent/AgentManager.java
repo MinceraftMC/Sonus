@@ -3,7 +3,7 @@ package dev.minceraft.sonus.service.agent;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import dev.minceraft.sonus.common.SonusConstants;
+import dev.minceraft.sonus.service.SonusConstants;
 import dev.minceraft.sonus.protocol.meta.IAgentManager;
 import dev.minceraft.sonus.protocol.meta.IMetaHandler;
 import dev.minceraft.sonus.protocol.meta.SonusAgentPmCodec;

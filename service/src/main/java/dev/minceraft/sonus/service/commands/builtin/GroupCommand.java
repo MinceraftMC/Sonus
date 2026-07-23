@@ -1,7 +1,7 @@
 package dev.minceraft.sonus.service.commands.builtin;
 
-import dev.minceraft.sonus.common.data.ISonusPlayer;
-import dev.minceraft.sonus.common.rooms.IRoom;
+import dev.minceraft.sonus.service.data.ISonusPlayer;
+import dev.minceraft.sonus.service.rooms.IRoom;
 import dev.minceraft.sonus.common.rooms.RoomAudioType;
 import dev.minceraft.sonus.service.SonusService;
 import dev.minceraft.sonus.service.commands.Command;
@@ -27,8 +27,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import static dev.minceraft.sonus.common.SonusConstants.PERMISSION_GROUPS_BYPASS_PASSWORD;
-import static dev.minceraft.sonus.common.SonusConstants.PERMISSION_GROUPS_USE;
+import static dev.minceraft.sonus.service.SonusConstants.PERMISSION_GROUPS_BYPASS_PASSWORD;
+import static dev.minceraft.sonus.service.SonusConstants.PERMISSION_GROUPS_USE;
 import static dev.minceraft.sonus.service.commands.CommandNode.argument;
 import static dev.minceraft.sonus.service.commands.CommandNode.literal;
 import static net.kyori.adventure.text.Component.text;

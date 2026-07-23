@@ -1,9 +1,8 @@
 package dev.minceraft.sonus.service.rooms;
 
-import dev.minceraft.sonus.common.rooms.IRoom;
 import dev.minceraft.sonus.common.rooms.RoomAudioType;
-import dev.minceraft.sonus.common.rooms.options.RoomDefinition;
-import dev.minceraft.sonus.common.service.ISonusRoomManager;
+import dev.minceraft.sonus.service.rooms.options.RoomDefinition;
+import dev.minceraft.sonus.service.service.ISonusRoomManager;
 import dev.minceraft.sonus.service.SonusService;
 import dev.minceraft.sonus.service.platform.IServer;
 import net.kyori.adventure.text.logger.slf4j.ComponentLogger;

@@ -1,9 +1,9 @@
 package dev.minceraft.sonus.plasmo.adapter;
 
-import dev.minceraft.sonus.common.data.ISonusPlayer;
-import dev.minceraft.sonus.common.data.SonusPlayerState;
-import dev.minceraft.sonus.common.rooms.IRoom;
-import dev.minceraft.sonus.common.service.ISonusServiceEvents;
+import dev.minceraft.sonus.service.data.ISonusPlayer;
+import dev.minceraft.sonus.service.data.SonusPlayerState;
+import dev.minceraft.sonus.service.rooms.IRoom;
+import dev.minceraft.sonus.service.service.ISonusServiceEvents;
 import dev.minceraft.sonus.plasmo.adapter.connection.PlasmoConnection;
 import dev.minceraft.sonus.plasmo.protocol.PlasmoPmChannels;
 import dev.minceraft.sonus.plasmo.protocol.tcp.clientbound.PlayerDisconnectPacket;

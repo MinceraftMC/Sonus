@@ -10,7 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Supplier;
 
-import static dev.minceraft.sonus.common.SonusConstants.FRAME_SIZE;
+import static dev.minceraft.sonus.service.SonusConstants.FRAME_SIZE;
 
 @NullMarked
 public interface AudioSupplier {

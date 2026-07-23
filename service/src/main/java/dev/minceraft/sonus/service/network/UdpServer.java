@@ -1,7 +1,7 @@
 package dev.minceraft.sonus.service.network;
 // Created by booky10 in Sonus (01:08 10.08.2025)
 
-import dev.minceraft.sonus.common.config.ISonusConfig;
+import dev.minceraft.sonus.service.config.ISonusConfig;
 import dev.minceraft.sonus.common.protocol.udp.AbstractMagicUdpCodec;
 import dev.minceraft.sonus.common.protocol.udp.IUdpServer;
 import dev.minceraft.sonus.common.protocol.udp.WrappedUdpPipelineData;

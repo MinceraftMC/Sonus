@@ -4,7 +4,6 @@ val natives: Configuration by configurations.creating {
 
 dependencies {
     api(projects.commonProtocol)
-    api(projects.apiService)
 
     compileOnlyApi(libs.leangen)
     compileOnlyApi(libs.jspecify)

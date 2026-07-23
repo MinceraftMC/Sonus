@@ -1,6 +1,6 @@
 package dev.minceraft.sonus.plasmo.protocol.version;
 
-import dev.minceraft.sonus.common.protocol.version.SemanticVersion;
+import dev.minceraft.sonus.service.version.SemanticVersion;
 import org.jspecify.annotations.NullMarked;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

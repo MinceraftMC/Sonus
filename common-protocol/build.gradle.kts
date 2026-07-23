@@ -6,6 +6,10 @@ dependencies {
     compileOnlyApi(libs.netty.handler)
     compileOnlyApi(libs.leangen)
 
-    compileOnlyApi(projects.apiService)
+    compileOnlyApi(libs.gson)
+    compileOnlyApi(libs.bundles.configurate)
+    compileOnlyApi(libs.guava)
+
     compileOnlyApi(libs.adventure.api)
+    compileOnlyApi(libs.adventure.text.serializer.gson)
 }
