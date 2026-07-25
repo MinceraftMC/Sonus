@@ -1,8 +1,8 @@
 package dev.minceraft.sonus.service.commands.builtin;
 
-import dev.minceraft.sonus.service.data.ISonusPlayer;
-import dev.minceraft.sonus.service.rooms.IRoom;
-import dev.minceraft.sonus.common.rooms.RoomAudioType;
+import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
+import dev.minceraft.sonus.common.participant.builtin.IRoom;
+import dev.minceraft.sonus.common.participant.builtin.RoomAudioType;
 import dev.minceraft.sonus.service.SonusService;
 import dev.minceraft.sonus.service.commands.Command;
 import dev.minceraft.sonus.service.commands.CommandSender;
@@ -27,8 +27,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import static dev.minceraft.sonus.service.SonusConstants.PERMISSION_GROUPS_BYPASS_PASSWORD;
-import static dev.minceraft.sonus.service.SonusConstants.PERMISSION_GROUPS_USE;
+import static dev.minceraft.sonus.common.SonusConstants.PERMISSION_GROUPS_BYPASS_PASSWORD;
+import static dev.minceraft.sonus.common.SonusConstants.PERMISSION_GROUPS_USE;
 import static dev.minceraft.sonus.service.commands.CommandNode.argument;
 import static dev.minceraft.sonus.service.commands.CommandNode.literal;
 import static net.kyori.adventure.text.Component.text;
@@ -129,7 +129,7 @@ public class GroupCommand extends Command {
                     lines.add(translatable("sonus.command.groups.list.entry.no-password",
                             text(room.getName()), text(room.getMembers().size())
                                     .hoverEvent(HoverEvent.showText(getGroupSizeHoverComponent(player, room))))
-                            .clickEvent(ClickEvent.callback(__ -> this.joinGroup(service, player, room.getId(), null)))
+                            .clickEvent(ClickEvent.callback(__ -> this.joinGroup(service, player, room.getUniqueId(), null)))
                     );
                 } else {
                     lines.add(translatable("sonus.command.groups.list.entry.password",
@@ -164,13 +164,13 @@ public class GroupCommand extends Command {
                 .arguments(text(target.getName(player))));
         target.sendMessage(translatable("sonus.command.groups.invite.invitation")
                 .arguments(text(player.getName(target)), text(room.getName()))
-                .clickEvent(ClickEvent.callback(__ -> this.joinGroup(service, target, room.getId(), room.getPassword()))));
+                .clickEvent(ClickEvent.callback(__ -> this.joinGroup(service, target, room.getUniqueId(), room.getPassword()))));
         return true;
     }
 
     private boolean createGroup(SonusService service, SonusPlayer player, String name, RoomAudioType type, @Nullable String password) {
         IRoom room = service.getRoomManager().createStaticRoom(name, password, type, false);
-        this.joinGroup(service, player, room.getId(), password);
+        this.joinGroup(service, player, room.getUniqueId(), password);
         player.sendMessage(translatable("sonus.command.groups.create.success", text(name)));
         return true;
     }
@@ -187,7 +187,7 @@ public class GroupCommand extends Command {
             player.sendMessage(translatable("sonus.command.groups.join.not_found", text(name)));
         } else if (matched.size() == 1) {
             IRoom room = matched.iterator().next();
-            this.joinGroup(service, player, room.getId(), password);
+            this.joinGroup(service, player, room.getUniqueId(), password);
         } else {
             ComponentBuilder<?, ?> message = translatable()
                     .key("sonus.command.groups.join.multiple")

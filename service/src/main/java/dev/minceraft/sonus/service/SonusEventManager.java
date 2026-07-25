@@ -1,10 +1,10 @@
 package dev.minceraft.sonus.service;
 
-import dev.minceraft.sonus.service.data.ISonusPlayer;
-import dev.minceraft.sonus.service.data.SonusPlayerState;
-import dev.minceraft.sonus.service.rooms.IRoom;
-import dev.minceraft.sonus.service.service.ISonusEventManager;
-import dev.minceraft.sonus.service.service.ISonusServiceEvents;
+import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
+import dev.minceraft.sonus.common.data.SonusPlayerState;
+import dev.minceraft.sonus.common.participant.builtin.IRoom;
+import dev.minceraft.sonus.common.adapter.service.ISonusEventManager;
+import dev.minceraft.sonus.common.adapter.service.ISonusServiceEvents;
 import dev.minceraft.sonus.service.player.SonusPlayer;
 import net.kyori.adventure.key.Key;
 import org.jspecify.annotations.NullMarked;

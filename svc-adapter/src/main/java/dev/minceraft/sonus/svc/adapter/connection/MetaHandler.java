@@ -1,9 +1,10 @@
 package dev.minceraft.sonus.svc.adapter.connection;
 
-import dev.minceraft.sonus.common.ISonusService;
+
 import dev.minceraft.sonus.common.SonusConstants;
-import dev.minceraft.sonus.common.rooms.IRoom;
-import dev.minceraft.sonus.common.service.ISonusRoomManager;
+import dev.minceraft.sonus.common.adapter.ISonusService;
+import dev.minceraft.sonus.common.adapter.service.ISonusRoomManager;
+import dev.minceraft.sonus.common.participant.builtin.IRoom;
 import dev.minceraft.sonus.svc.adapter.SvcProtocolAdapter;
 import dev.minceraft.sonus.svc.protocol.meta.IMetaSvcHandler;
 import dev.minceraft.sonus.svc.protocol.meta.clientbound.JoinedGroupSvcPacket;
@@ -54,7 +55,7 @@ public class MetaHandler implements IMetaSvcHandler {
         ISonusRoomManager rooms = this.protocolAdapter.getAdapter().getService().getRoomManager();
         IRoom room = rooms.createStaticRoom(packet.getName(), packet.getPassword(),
                 packet.getType().toSonus(), false);
-        this.tryJoinRoom(room.getId(), packet.getPassword());
+        this.tryJoinRoom(room.getUniqueId(), packet.getPassword());
     }
 
     @Override

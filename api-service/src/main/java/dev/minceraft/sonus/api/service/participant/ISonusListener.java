@@ -2,7 +2,9 @@ package dev.minceraft.sonus.api.service.participant;
 
 import dev.minceraft.sonus.api.service.audio.ISonusAudio;
 import dev.minceraft.sonus.api.service.util.Vec3d;
+import org.jspecify.annotations.NullMarked;
 
+@NullMarked
 public interface ISonusListener extends ISonusParticipant {
 
     void sendStaticAudio(ISonusSource source, ISonusAudio audio);

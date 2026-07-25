@@ -17,7 +17,7 @@ import com.velocitypowered.api.command.VelocityBrigadierMessage;
 import com.velocitypowered.api.permission.Tristate;
 import com.velocitypowered.api.proxy.ConsoleCommandSource;
 import com.velocitypowered.api.proxy.Player;
-import dev.minceraft.sonus.service.data.ISonusPlayer;
+import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
 import dev.minceraft.sonus.service.SonusService;
 import dev.minceraft.sonus.service.commands.ArgumentCommandNode;
 import dev.minceraft.sonus.service.commands.CommandContext;

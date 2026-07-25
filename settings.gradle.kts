@@ -7,6 +7,7 @@ plugins {
 }
 
 
+include("common")
 include("api-service")
 include("protocol")
 include("service")
@@ -20,7 +21,7 @@ include("web-adapter")
 include("webrtc-pion")
 include("webrtc-adapter")
 include("webrtc-ipc")
-include("common-service")
+include("common-adapter")
 include("common-protocol")
 include("service-velocity")
 include("network")

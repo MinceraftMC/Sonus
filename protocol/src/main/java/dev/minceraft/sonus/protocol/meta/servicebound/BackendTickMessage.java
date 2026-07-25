@@ -2,10 +2,10 @@ package dev.minceraft.sonus.protocol.meta.servicebound;
 // Created by booky10 in Sonus (01:15 17.07.2025)
 
 import com.google.common.collect.Table;
-import dev.minceraft.sonus.service.data.WorldRotatedVec3d;
-import dev.minceraft.sonus.service.data.SonusPlayerState;
-import dev.minceraft.sonus.common.protocol.util.DataTypeUtil;
-import dev.minceraft.sonus.common.protocol.util.Utf8String;
+import dev.minceraft.sonus.common.data.SonusPlayerState;
+import dev.minceraft.sonus.common.data.WorldRotatedVec3d;
+import dev.minceraft.sonus.common.util.codec.DataTypeUtil;
+import dev.minceraft.sonus.common.util.codec.Utf8String;
 import dev.minceraft.sonus.protocol.meta.IMetaHandler;
 import dev.minceraft.sonus.protocol.meta.IMetaMessage;
 import io.netty.buffer.ByteBuf;
@@ -30,7 +30,7 @@ public class BackendTickMessage implements IMetaMessage {
         this.positions = DataTypeUtil.readNullable(buf, buffer ->
                 DataTypeUtil.VAR_INT.readMap(buffer, DataTypeUtil::readUniqueId, WorldRotatedVec3d::read));
         this.perPlayerStates = DataTypeUtil.readNullable(buf, buffer -> DataTypeUtil.VAR_INT.readTable(buffer,
-                DataTypeUtil::readUniqueId, DataTypeUtil::readUniqueId, SonusPlayerState::read));
+                DataTypeUtil::readUniqueId, DataTypeUtil::readUniqueId, dev.minceraft.sonus.common.data.SonusPlayerState::read));
         this.teams = DataTypeUtil.readNullable(buf, buffer ->
                 DataTypeUtil.VAR_INT.readMap(buffer, DataTypeUtil::readUniqueId, buff ->
                         DataTypeUtil.readNullable(buff, Utf8String::read)));

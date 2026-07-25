@@ -1,6 +1,6 @@
 package dev.minceraft.sonus.plasmo.adapter;
 
-import dev.minceraft.sonus.service.data.ISonusPlayer;
+import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
 import dev.minceraft.sonus.plasmo.adapter.connection.PlasmoConnection;
 import dev.minceraft.sonus.plasmo.protocol.AbstractPlasmoPacket;
 import dev.minceraft.sonus.plasmo.protocol.tcp.data.VoicePlayerInfo;
@@ -14,7 +14,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
-import static dev.minceraft.sonus.service.SonusConstants.PERMISSION_CONNECT_PLASMO;
+import static dev.minceraft.sonus.common.SonusConstants.PERMISSION_CONNECT_PLASMO;
 
 @NullMarked
 public class PlasmoSessionManager {

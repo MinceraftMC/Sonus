@@ -1,10 +1,10 @@
 package dev.minceraft.sonus.service.processing.util;
 // Created by booky10 in Sonus (03:56 16.11.2025)
 
-import dev.minceraft.sonus.service.IAudioSource;
-import dev.minceraft.sonus.service.audio.SonusAudio;
-import dev.minceraft.sonus.service.data.ISonusPlayer;
+import dev.minceraft.sonus.common.audio.SonusAudio;
 import dev.minceraft.sonus.common.data.Vec3d;
+import dev.minceraft.sonus.common.participant.IAudioSource;
+import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
 import dev.minceraft.sonus.service.SonusService;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;

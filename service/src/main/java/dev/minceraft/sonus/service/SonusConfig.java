@@ -1,10 +1,10 @@
 package dev.minceraft.sonus.service;
 // Created by booky10 in Sonus (01:08 10.08.2025)
 
-import dev.minceraft.sonus.service.config.ConfigHolder;
-import dev.minceraft.sonus.service.config.ISonusConfig;
-import dev.minceraft.sonus.service.config.ISubConfig;
-import dev.minceraft.sonus.service.config.SubConfigSection;
+import dev.minceraft.sonus.common.config.ConfigHolder;
+import dev.minceraft.sonus.common.adapter.config.ISonusConfig;
+import dev.minceraft.sonus.common.config.ISubConfig;
+import dev.minceraft.sonus.common.config.SubConfigSection;
 import dev.minceraft.sonus.common.protocol.codec.OpusCodec;
 import org.jspecify.annotations.NullMarked;
 import org.spongepowered.configurate.objectmapping.ConfigSerializable;

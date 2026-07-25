@@ -5,8 +5,8 @@ import com.destroystokyo.paper.event.server.ServerTickEndEvent;
 import com.google.common.collect.HashBasedTable;
 import dev.minceraft.sonus.agent.paper.util.delta.DeltaTrackerMap;
 import dev.minceraft.sonus.agent.paper.util.delta.DeltaTrackerTable;
-import dev.minceraft.sonus.service.data.SonusPlayerState;
-import dev.minceraft.sonus.service.data.WorldRotatedVec3d;
+import dev.minceraft.sonus.common.data.SonusPlayerState;
+import dev.minceraft.sonus.common.data.WorldRotatedVec3d;
 import dev.minceraft.sonus.protocol.meta.servicebound.BackendTickMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -34,7 +34,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
-import static dev.minceraft.sonus.service.SonusConstants.PLUGIN_MESSAGE_CHANNEL;
+import static dev.minceraft.sonus.common.SonusConstants.PLUGIN_MESSAGE_CHANNEL;
 
 @NullMarked
 public class AgentListener implements Listener {

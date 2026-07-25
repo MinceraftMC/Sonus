@@ -1,7 +1,7 @@
 package dev.minceraft.sonus.web.pion.ipc.pipeline;
 // Created by booky10 in Sonus (9:30 PM 06.03.2026)
 
-import dev.minceraft.sonus.common.protocol.util.VarInt;
+import dev.minceraft.sonus.common.util.codec.VarInt;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;

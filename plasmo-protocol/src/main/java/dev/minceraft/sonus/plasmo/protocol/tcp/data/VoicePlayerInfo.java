@@ -1,7 +1,7 @@
 package dev.minceraft.sonus.plasmo.protocol.tcp.data;
 
-import dev.minceraft.sonus.common.protocol.util.DataTypeUtil;
-import dev.minceraft.sonus.common.protocol.util.Utf8String;
+import dev.minceraft.sonus.common.util.codec.DataTypeUtil;
+import dev.minceraft.sonus.common.util.codec.Utf8String;
 import io.netty.buffer.ByteBuf;
 
 import java.util.UUID;

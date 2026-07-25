@@ -1,7 +1,9 @@
 package dev.minceraft.sonus.api.service.audio;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jspecify.annotations.NullMarked;
 
+@NullMarked
 public interface ISonusAudio {
 
     long getSequenceNumber();

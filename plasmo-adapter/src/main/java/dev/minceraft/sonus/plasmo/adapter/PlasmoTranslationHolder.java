@@ -1,6 +1,6 @@
 package dev.minceraft.sonus.plasmo.adapter;
 
-import dev.minceraft.sonus.service.data.ISonusPlayer;
+import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
 import net.kyori.adventure.text.Component;
 
 import java.util.HashMap;

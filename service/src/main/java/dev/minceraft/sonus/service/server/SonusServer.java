@@ -1,9 +1,9 @@
 package dev.minceraft.sonus.service.server;
 // Created by booky10 in Sonus (01:05 17.11.2025)
 
-import dev.minceraft.sonus.service.adapter.SonusAdapter;
-import dev.minceraft.sonus.service.audio.AudioCategory;
-import dev.minceraft.sonus.service.data.ISonusServer;
+import dev.minceraft.sonus.common.adapter.adapter.SonusAdapter;
+import dev.minceraft.sonus.common.protocol.audio.AudioCategory;
+import dev.minceraft.sonus.common.adapter.data.ISonusServer;
 import dev.minceraft.sonus.service.SonusService;
 import dev.minceraft.sonus.service.platform.IServer;
 import dev.minceraft.sonus.service.player.PlayerManager;

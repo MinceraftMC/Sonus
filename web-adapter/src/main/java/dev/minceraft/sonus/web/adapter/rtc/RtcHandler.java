@@ -3,9 +3,10 @@ package dev.minceraft.sonus.web.adapter.rtc;
 
 import dev.minceraft.sonus.common.SonusConstants;
 import dev.minceraft.sonus.common.audio.AudioProcessor;
-import dev.minceraft.sonus.common.audio.SonusAudio;
-import dev.minceraft.sonus.common.data.ISonusPlayer;
+import dev.minceraft.sonus.common.audio.OpusMode;
 import dev.minceraft.sonus.common.natives.OpusNativesLoader;
+import dev.minceraft.sonus.common.audio.SonusAudio;
+import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
 import dev.minceraft.sonus.web.adapter.config.WebConfig;
 import dev.minceraft.sonus.web.adapter.connection.WebSocketConnection;
 import dev.minceraft.sonus.web.adapter.util.AudioMixer;
@@ -60,7 +61,7 @@ public final class RtcHandler implements AutoCloseable, PionPeer.Callback {
         this.manager = manager;
         this.signalConnection = signalConnection;
         this.opusEncoder = manager.getOpus().new Encoder(SonusConstants.SAMPLE_RATE,
-                2, AudioProcessor.Mode.VOICE);
+                2, OpusMode.VOICE);
 
         // configure pion
         WebConfig config = manager.getConfig();

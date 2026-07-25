@@ -2,10 +2,11 @@ package dev.minceraft.sonus.agent.paper.api;
 // Created by booky10 in Sonus (18:11 17.11.2025)
 
 import dev.minceraft.sonus.agent.paper.audio.AudioSupplier;
-import dev.minceraft.sonus.service.audio.AudioCategory;
-import dev.minceraft.sonus.service.audio.AudioProcessor;
-import dev.minceraft.sonus.service.natives.LameNativesLoader;
-import dev.minceraft.sonus.service.natives.OpusNativesLoader;
+import dev.minceraft.sonus.common.audio.AudioProcessor;
+import dev.minceraft.sonus.common.audio.OpusMode;
+import dev.minceraft.sonus.common.natives.LameNativesLoader;
+import dev.minceraft.sonus.common.natives.OpusNativesLoader;
+import dev.minceraft.sonus.common.protocol.audio.AudioCategory;
 import org.bukkit.entity.Player;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -21,10 +22,10 @@ public interface SonusAgentApi {
 
     AudioPlayer createAudioPlayer(
             Player player, UUID channelId, @Nullable UUID categoryId,
-            AudioSupplier audio, AudioProcessor.Mode mode
+            AudioSupplier audio, OpusMode mode
     );
 
-    AudioProcessor createAudioProcessor(AudioProcessor.Mode mode);
+    AudioProcessor createAudioProcessor(OpusMode mode);
 
     OpusNativesLoader getOpusNatives();
 

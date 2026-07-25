@@ -1,7 +1,7 @@
 package dev.minceraft.sonus.plasmo.adapter.connection;
 
-import dev.minceraft.sonus.service.data.ISonusPlayer;
-import dev.minceraft.sonus.service.version.SemanticVersion;
+import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
+import dev.minceraft.sonus.common.version.SemanticVersion;
 import dev.minceraft.sonus.plasmo.adapter.PlasmoAdapter;
 import dev.minceraft.sonus.plasmo.protocol.tcp.TcpHandler;
 import dev.minceraft.sonus.plasmo.protocol.tcp.clientbound.ConnectionPacket;

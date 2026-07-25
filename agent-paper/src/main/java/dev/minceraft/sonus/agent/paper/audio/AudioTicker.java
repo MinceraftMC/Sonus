@@ -3,7 +3,7 @@ package dev.minceraft.sonus.agent.paper.audio;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
-import dev.minceraft.sonus.service.audio.AudioProcessor;
+import dev.minceraft.sonus.common.audio.AudioProcessor;
 import dev.minceraft.sonus.protocol.meta.servicebound.AudioStreamMessage.Frame;
 import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
@@ -12,8 +12,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.locks.LockSupport;
 
-import static dev.minceraft.sonus.service.SonusConstants.FRAME_SIZE;
-import static dev.minceraft.sonus.service.SonusConstants.SAMPLE_RATE;
+import static dev.minceraft.sonus.common.SonusConstants.FRAME_SIZE;
+import static dev.minceraft.sonus.common.SonusConstants.SAMPLE_RATE;
 
 @NullMarked
 public final class AudioTicker implements AutoCloseable {

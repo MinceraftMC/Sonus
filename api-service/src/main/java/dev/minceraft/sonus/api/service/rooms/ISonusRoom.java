@@ -1,13 +1,13 @@
 package dev.minceraft.sonus.api.service.rooms;
 
 import dev.minceraft.sonus.api.service.ISonusServicePlayer;
-import dev.minceraft.sonus.api.service.participant.ISonusListener;
+import dev.minceraft.sonus.api.service.participant.ISonusSource;
 import org.jetbrains.annotations.Unmodifiable;
 import org.jspecify.annotations.Nullable;
 
 import java.util.Set;
 
-public interface ISonusRoom extends ISonusListener {
+public interface ISonusRoom extends ISonusSource {
 
     String getName();
 

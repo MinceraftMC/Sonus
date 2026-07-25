@@ -3,10 +3,11 @@ package dev.minceraft.sonus.plasmo.adapter.connection;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 import com.google.common.collect.Tables;
-import dev.minceraft.sonus.service.audio.AudioProcessor;
-import dev.minceraft.sonus.service.data.ISonusPlayer;
+import dev.minceraft.sonus.common.audio.AudioProcessor;
+import dev.minceraft.sonus.common.audio.OpusMode;
+import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
 import dev.minceraft.sonus.common.protocol.udp.WrappedUdpPipelineData;
-import dev.minceraft.sonus.service.version.SemanticVersion;
+import dev.minceraft.sonus.common.version.SemanticVersion;
 import dev.minceraft.sonus.plasmo.adapter.PlasmoAdapter;
 import dev.minceraft.sonus.plasmo.adapter.pipeline.PlasmoUdpContext;
 import dev.minceraft.sonus.plasmo.protocol.AbstractPlasmoPacket;
@@ -190,7 +191,7 @@ public class PlasmoConnection implements AutoCloseable {
 
     public AudioProcessor getProcessor(UUID channelId) {
         return this.processors.computeIfAbsent(channelId, __ ->
-                this.adapter.getService().createAudioProcessor(AudioProcessor.Mode.VOICE));
+                this.adapter.getService().createAudioProcessor(OpusMode.VOICE));
     }
 
     public VoiceSourceLine getDefaultSourceLine() {

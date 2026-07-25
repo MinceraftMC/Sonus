@@ -1,15 +1,15 @@
 package dev.minceraft.sonus.plasmo.adapter;
 
-import dev.minceraft.sonus.service.IAudioSource;
-import dev.minceraft.sonus.service.ISonusService;
-import dev.minceraft.sonus.service.adapter.AdapterInfo;
-import dev.minceraft.sonus.service.adapter.SonusAdapter;
-import dev.minceraft.sonus.service.audio.AudioCategory;
-import dev.minceraft.sonus.service.audio.SonusAudio;
-import dev.minceraft.sonus.service.data.ISonusPlayer;
+import dev.minceraft.sonus.common.adapter.ISonusService;
+import dev.minceraft.sonus.common.adapter.adapter.AdapterInfo;
+import dev.minceraft.sonus.common.adapter.adapter.SonusAdapter;
+import dev.minceraft.sonus.common.audio.SonusAudio;
+import dev.minceraft.sonus.common.participant.IAudioSource;
+import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
 import dev.minceraft.sonus.common.data.Vec3d;
-import dev.minceraft.sonus.service.data.WorldRotatedVec3d;
-import dev.minceraft.sonus.common.protocol.util.GameProfile;
+import dev.minceraft.sonus.common.data.WorldRotatedVec3d;
+import dev.minceraft.sonus.common.data.GameProfile;
+import dev.minceraft.sonus.common.protocol.audio.AudioCategory;
 import dev.minceraft.sonus.plasmo.adapter.config.PlasmoConfig;
 import dev.minceraft.sonus.plasmo.adapter.connection.PlasmoConnection;
 import dev.minceraft.sonus.plasmo.protocol.tcp.clientbound.SourceAudioEndPacket;
@@ -71,7 +71,7 @@ public class PlasmoAdapter implements SonusAdapter {
         }
         UUID categoryId = this.extractCategoryId(source, connection);
 
-        SourceInfo sourceInfo = connection.registerSourceInfo(source.getSenderId(player), categoryId, () -> {
+        SourceInfo sourceInfo = connection.registerSourceInfo(source.getUniqueId(player), categoryId, () -> {
             String name = null;
             GameProfile profile = null;
 
@@ -107,13 +107,13 @@ public class PlasmoAdapter implements SonusAdapter {
         }
         UUID categoryId = this.extractCategoryId(source, connection);
 
-        SourceInfo sourceInfo = connection.registerSourceInfo(source.getSenderId(player), categoryId, () -> {
+        SourceInfo sourceInfo = connection.registerSourceInfo(source.getUniqueId(player), categoryId, () -> {
             WorldRotatedVec3d position = player.getPosition();
             if (source instanceof ISonusPlayer speaker && position != null) {
                 Vec3d relativePos = pos.sub(position);
                 return new DirectSourceInfo(
                         ADDON_ID,
-                        source.getSenderId(player),
+                        source.getUniqueId(player),
                         connection.getSourceLine(source.getCategoryId()).getId(),
                         speaker.getName(player),
                         (byte) 1,
@@ -173,7 +173,7 @@ public class PlasmoAdapter implements SonusAdapter {
 
         WorldRotatedVec3d position = source.getPosition();
 
-        SourceInfo sourceInfo = connection.registerSourceInfo(source.getSenderId(player), categoryId, () -> {
+        SourceInfo sourceInfo = connection.registerSourceInfo(source.getUniqueId(player), categoryId, () -> {
             if (source instanceof ISonusPlayer speaker) {
                 return new PlayerSourceInfo(
                         ADDON_ID,
@@ -220,7 +220,7 @@ public class PlasmoAdapter implements SonusAdapter {
         if (source instanceof ISonusPlayer speaker) {
             // In same room override category with group category
             if (speaker.getPrimaryRoom() != null && speaker.getPrimaryRoom().equals(connection.getPlayer().getPrimaryRoom())) {
-                categoryId = speaker.getPrimaryRoom().getId();
+                categoryId = speaker.getPrimaryRoom().getUniqueId();
             }
         }
         if (categoryId == null) {
@@ -235,7 +235,7 @@ public class PlasmoAdapter implements SonusAdapter {
         }
         SourceAudioPlasmoPacket packet = new SourceAudioPlasmoPacket();
         packet.setDistance((short) this.getService().getConfig().getVoiceChatRange());
-        packet.setAudioData(audio.setProcessor(() -> connection.getProcessor(source.getSenderId(connection.getPlayer()))).opus());
+        packet.setAudioData(audio.setProcessor(() -> connection.getProcessor(source.getUniqueId(connection.getPlayer()))).opus());
         packet.setSequenceNumber(audio.getSequenceNumber());
         packet.setSourceId(sourceInfo.getId());
         packet.setSourceState(sourceInfo.getState());
@@ -254,7 +254,7 @@ public class PlasmoAdapter implements SonusAdapter {
 
         SourceAudioEndPacket packet = new SourceAudioEndPacket();
         packet.setSequenceNumber(sequence);
-        packet.setSourceId(source.getSenderId(player));
+        packet.setSourceId(source.getUniqueId(player));
 
         connection.sendPacket(packet);
     }

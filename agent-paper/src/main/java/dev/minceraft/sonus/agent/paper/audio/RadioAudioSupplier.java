@@ -4,7 +4,7 @@ package dev.minceraft.sonus.agent.paper.audio;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-import static dev.minceraft.sonus.service.SonusConstants.FRAME_SIZE;
+import static dev.minceraft.sonus.common.SonusConstants.FRAME_SIZE;
 
 @NullMarked
 public class RadioAudioSupplier implements AudioSupplier {

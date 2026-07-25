@@ -1,6 +1,6 @@
 package dev.minceraft.sonus.service.commands.builtin;
 
-import dev.minceraft.sonus.service.adapter.SonusAdapter;
+import dev.minceraft.sonus.common.adapter.adapter.SonusAdapter;
 import dev.minceraft.sonus.service.SonusService;
 import dev.minceraft.sonus.service.commands.Command;
 import dev.minceraft.sonus.service.commands.LiteralCommandNode;

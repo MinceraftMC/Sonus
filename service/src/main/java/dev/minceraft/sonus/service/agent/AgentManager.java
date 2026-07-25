@@ -3,7 +3,7 @@ package dev.minceraft.sonus.service.agent;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import dev.minceraft.sonus.service.SonusConstants;
+import dev.minceraft.sonus.common.SonusConstants;
 import dev.minceraft.sonus.protocol.meta.IAgentManager;
 import dev.minceraft.sonus.protocol.meta.IMetaHandler;
 import dev.minceraft.sonus.protocol.meta.SonusAgentPmCodec;
@@ -15,6 +15,8 @@ import org.jspecify.annotations.NullMarked;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
+
+import static dev.minceraft.sonus.common.SonusConstants.PLUGIN_MESSAGE_CHANNEL;
 
 @NullMarked
 public class AgentManager implements IAgentManager {
@@ -33,7 +35,7 @@ public class AgentManager implements IAgentManager {
 
     public AgentManager(SonusService service) {
         this.service = service;
-        this.codec = new SonusAgentPmCodec(Set.of(Key.key(SonusConstants.PLUGIN_MESSAGE_CHANNEL)), this);
+        this.codec = new SonusAgentPmCodec(Set.of(Key.key(PLUGIN_MESSAGE_CHANNEL)), this);
     }
 
     @Override

@@ -1,8 +1,9 @@
 package dev.minceraft.sonus.svc.adapter;
 
 import com.google.common.collect.ImmutableMap;
-import dev.minceraft.sonus.common.data.ISonusPlayer;
-import dev.minceraft.sonus.common.rooms.IRoom;
+
+import dev.minceraft.sonus.common.participant.builtin.IRoom;
+import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
 import dev.minceraft.sonus.svc.adapter.connection.SvcConnection;
 import dev.minceraft.sonus.svc.protocol.AbstractSvcPacket;
 import dev.minceraft.sonus.svc.protocol.data.SonusClientGroup;
@@ -66,7 +67,7 @@ public class SvcSessionManager {
         IRoom primaryRoom = connection.getPlayer().getPrimaryRoom();
         if (primaryRoom != null) {
             JoinedGroupSvcPacket packet = new JoinedGroupSvcPacket();
-            packet.setGroupId(primaryRoom.getId());
+            packet.setGroupId(primaryRoom.getUniqueId());
             packet.setWrongPassword(false);
             connection.sendPacket(packet);
         }
@@ -111,7 +112,7 @@ public class SvcSessionManager {
         return new SvcPlayerState(
                 player.getUniqueId(viewer), player.getName(viewer),
                 player.isDeafened(), !player.isVoiceActive(),
-                primaryRoom == null ? null : primaryRoom.getId()
+                primaryRoom == null ? null : primaryRoom.getUniqueId()
         );
     }
 

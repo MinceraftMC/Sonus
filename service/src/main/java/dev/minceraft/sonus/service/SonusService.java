@@ -2,14 +2,15 @@ package dev.minceraft.sonus.service;
 // Created by booky10 in Sonus (01:33 17.07.2025)
 
 import com.google.gson.Gson;
-import dev.minceraft.sonus.service.config.ISonusConfig;
-import dev.minceraft.sonus.service.config.YamlConfigHolder;
-import dev.minceraft.sonus.service.natives.OpusNativesLoader;
-import dev.minceraft.sonus.service.natives.SpeexNativesLoader;
+import dev.minceraft.sonus.common.adapter.ISonusService;
+import dev.minceraft.sonus.common.adapter.config.ISonusConfig;
+import dev.minceraft.sonus.common.config.YamlConfigHolder;
+import dev.minceraft.sonus.common.natives.OpusNativesLoader;
+import dev.minceraft.sonus.common.natives.SpeexNativesLoader;
 import dev.minceraft.sonus.common.protocol.udp.IUdpServer;
-import dev.minceraft.sonus.service.service.ISonusEventManager;
-import dev.minceraft.sonus.service.service.ISonusRoomManager;
-import dev.minceraft.sonus.service.service.ISonusScheduler;
+import dev.minceraft.sonus.common.adapter.service.ISonusEventManager;
+import dev.minceraft.sonus.common.adapter.service.ISonusRoomManager;
+import dev.minceraft.sonus.common.adapter.service.ISonusScheduler;
 import dev.minceraft.sonus.service.adapter.AdapterManager;
 import dev.minceraft.sonus.service.agent.AgentManager;
 import dev.minceraft.sonus.service.commands.CommandHolder;

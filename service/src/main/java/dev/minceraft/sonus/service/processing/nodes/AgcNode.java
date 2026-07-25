@@ -1,12 +1,12 @@
 package dev.minceraft.sonus.service.processing.nodes;
 
-import dev.minceraft.sonus.service.audio.SonusAudio;
-import dev.minceraft.sonus.service.natives.SpeexNativesLoader;
-import dev.minceraft.sonus.service.natives.SpeexNativesLoader.AutomaticGainControl;
+import dev.minceraft.sonus.common.audio.SonusAudio;
+import dev.minceraft.sonus.common.natives.SpeexNativesLoader;
+import dev.minceraft.sonus.common.natives.SpeexNativesLoader.AutomaticGainControl;
 import dev.minceraft.sonus.service.processing.AudioPipelineNode;
 
-import static dev.minceraft.sonus.service.SonusConstants.FRAME_SIZE;
-import static dev.minceraft.sonus.service.SonusConstants.SAMPLE_RATE;
+import static dev.minceraft.sonus.common.SonusConstants.FRAME_SIZE;
+import static dev.minceraft.sonus.common.SonusConstants.SAMPLE_RATE;
 
 public final class AgcNode implements AudioPipelineNode, AutoCloseable {
 

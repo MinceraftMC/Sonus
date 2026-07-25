@@ -1,4 +1,6 @@
 dependencies {
+    api(projects.common)
+
     compileOnlyApi(libs.jspecify)
     compileOnlyApi(libs.checkerqual)
 

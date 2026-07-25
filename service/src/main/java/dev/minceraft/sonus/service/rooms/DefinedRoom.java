@@ -1,9 +1,9 @@
 package dev.minceraft.sonus.service.rooms;
 
-import dev.minceraft.sonus.service.IAudioSource;
-import dev.minceraft.sonus.service.audio.SonusAudio;
-import dev.minceraft.sonus.service.data.ISonusPlayer;
-import dev.minceraft.sonus.service.rooms.options.RoomDefinition;
+import dev.minceraft.sonus.common.audio.SonusAudio;
+import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
+import dev.minceraft.sonus.common.participant.IAudioSource;
+import dev.minceraft.sonus.common.participant.builtin.RoomDefinition;
 import dev.minceraft.sonus.service.SonusService;
 import org.jspecify.annotations.NullMarked;
 
@@ -22,7 +22,7 @@ public class DefinedRoom extends AbstractRoom {
     @Override
     protected void sendAudio0(IAudioSource source, SonusAudio audio) {
         for (ISonusPlayer receiver : this.members.values()) {
-            if (receiver.getSenderId(receiver).equals(source.getSenderId(receiver))) {
+            if (receiver.getUniqueId(receiver).equals(source.getUniqueId(receiver))) {
                 continue;
             }
             RoomDefinition.RelationState state = this.definition.getState(source, receiver);
@@ -37,7 +37,7 @@ public class DefinedRoom extends AbstractRoom {
     @Override
     protected void sendAudioEnd0(IAudioSource source, long sequence) {
         for (ISonusPlayer receiver : this.members.values()) {
-            if (receiver.getSenderId(receiver).equals(source.getSenderId(receiver))) {
+            if (receiver.getUniqueId(receiver).equals(source.getUniqueId(receiver))) {
                 continue;
             }
             RoomDefinition.RelationState state = this.definition.getState(source, receiver);

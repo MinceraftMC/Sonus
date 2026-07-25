@@ -4,10 +4,10 @@ package dev.minceraft.sonus.agent.paper;
 import dev.minceraft.sonus.agent.paper.api.SonusAgentApi;
 import dev.minceraft.sonus.agent.paper.api.SonusAgentApiImpl;
 import dev.minceraft.sonus.agent.paper.config.SonusAgentConfig;
-import dev.minceraft.sonus.service.config.YamlConfigHolder;
-import dev.minceraft.sonus.service.natives.LameNativesLoader;
-import dev.minceraft.sonus.service.natives.OpusNativesLoader;
-import dev.minceraft.sonus.service.rooms.options.RoomDefinition;
+import dev.minceraft.sonus.common.config.YamlConfigHolder;
+import dev.minceraft.sonus.common.natives.LameNativesLoader;
+import dev.minceraft.sonus.common.natives.OpusNativesLoader;
+import dev.minceraft.sonus.common.participant.builtin.RoomDefinition;
 import dev.minceraft.sonus.protocol.meta.IMetaMessage;
 import dev.minceraft.sonus.protocol.meta.MetaRegistry;
 import dev.minceraft.sonus.protocol.meta.servicebound.UpdateRoomDefinitionMessage;
@@ -24,7 +24,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-import static dev.minceraft.sonus.service.SonusConstants.PLUGIN_MESSAGE_CHANNEL;
+import static dev.minceraft.sonus.common.SonusConstants.PLUGIN_MESSAGE_CHANNEL;
 
 @NullMarked
 public class SonusAgentPlugin extends JavaPlugin {

@@ -1,9 +1,9 @@
 package dev.minceraft.sonus.svc.adapter;
 
-import dev.minceraft.sonus.common.data.ISonusPlayer;
 import dev.minceraft.sonus.common.data.SonusPlayerState;
-import dev.minceraft.sonus.common.rooms.IRoom;
-import dev.minceraft.sonus.common.service.ISonusServiceEvents;
+import dev.minceraft.sonus.common.adapter.service.ISonusServiceEvents;
+import dev.minceraft.sonus.common.participant.builtin.IRoom;
+import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
 import dev.minceraft.sonus.svc.adapter.connection.SvcConnection;
 import dev.minceraft.sonus.svc.protocol.data.SonusClientGroup;
 import dev.minceraft.sonus.svc.protocol.data.SvcPlayerState;
@@ -70,15 +70,15 @@ public class SvcSonusListener implements ISonusServiceEvents {
                 if (currentRoom == null) {
                     // Send empty JoinedGroup packet to indicate no current room
                     connection.sendPacket(new JoinedGroupSvcPacket());
-                } else if (currentRoom.getId() != connection.getCurrentRoomId()) {
+                } else if (currentRoom.getUniqueId() != connection.getCurrentRoomId()) {
                     // if the player's primary room differs from the connection's current room,
                     // send a GroupJoined packet to update it
 
                     JoinedGroupSvcPacket joinPacket = new JoinedGroupSvcPacket();
-                    joinPacket.setGroupId(currentRoom.getId());
+                    joinPacket.setGroupId(currentRoom.getUniqueId());
                     connection.sendPacket(joinPacket);
 
-                    connection.setCurrentRoomId(currentRoom.getId());
+                    connection.setCurrentRoomId(currentRoom.getUniqueId());
                 }
             }
 
@@ -109,7 +109,7 @@ public class SvcSonusListener implements ISonusServiceEvents {
     @Override
     public void onGroupRemove(IRoom room) {
         RemoveGroupSvcPacket packet = new RemoveGroupSvcPacket();
-        packet.setGroupId(room.getId());
+        packet.setGroupId(room.getUniqueId());
         this.adapter.getSessions().broadcast(packet);
     }
 

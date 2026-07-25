@@ -2,7 +2,7 @@ package dev.minceraft.sonus.protocol.meta;
 // Created by booky10 in Sonus (01:56 17.07.2025)
 
 import dev.minceraft.sonus.common.protocol.registry.SimpleRegistry;
-import dev.minceraft.sonus.common.protocol.util.VarInt;
+import dev.minceraft.sonus.common.util.codec.VarInt;
 import dev.minceraft.sonus.protocol.meta.agentbound.PlayerConnectionStateMessage;
 import dev.minceraft.sonus.protocol.meta.agentbound.TriggerCommandUpdateMessage;
 import dev.minceraft.sonus.protocol.meta.servicebound.AudioStreamMessage;

@@ -2,9 +2,9 @@ package dev.minceraft.sonus.plasmo.protocol.tcp.data.source;
 
 
 import dev.minceraft.sonus.common.data.Vec3d;
-import dev.minceraft.sonus.common.protocol.util.DataTypeUtil;
-import dev.minceraft.sonus.common.protocol.util.Utf8String;
-import dev.minceraft.sonus.common.protocol.util.GameProfile;
+import dev.minceraft.sonus.common.util.codec.DataTypeUtil;
+import dev.minceraft.sonus.common.util.codec.Utf8String;
+import dev.minceraft.sonus.common.data.GameProfile;
 import dev.minceraft.sonus.plasmo.protocol.tcp.data.CodecInfo;
 import io.netty.buffer.ByteBuf;
 import org.checkerframework.checker.nullness.qual.Nullable;

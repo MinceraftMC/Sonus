@@ -1,7 +1,7 @@
 package dev.minceraft.sonus.common.protocol.udp;
 
 import dev.minceraft.sonus.common.protocol.adapter.UdpSonusAdapter;
-import dev.minceraft.sonus.common.protocol.util.TypeUtil;
+import dev.minceraft.sonus.common.util.TypeUtil;
 import io.leangen.geantyref.TypeToken;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;

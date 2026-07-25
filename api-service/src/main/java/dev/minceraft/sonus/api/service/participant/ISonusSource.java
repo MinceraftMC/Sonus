@@ -1,10 +1,12 @@
 package dev.minceraft.sonus.api.service.participant;
 
 import dev.minceraft.sonus.api.service.util.WorldRotatedVec3d;
+import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 import java.util.UUID;
 
+@NullMarked
 public interface ISonusSource extends ISonusParticipant {
 
     default @Nullable UUID getCategoryId() {

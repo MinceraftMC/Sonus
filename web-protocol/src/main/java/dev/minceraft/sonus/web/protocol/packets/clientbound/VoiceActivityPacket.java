@@ -1,7 +1,7 @@
 package dev.minceraft.sonus.web.protocol.packets.clientbound;
 // Created by booky10 in Sonus (00:56 23.12.2025)
 
-import dev.minceraft.sonus.common.protocol.util.DataTypeUtil;
+import dev.minceraft.sonus.common.util.codec.DataTypeUtil;
 import dev.minceraft.sonus.web.protocol.WsPacketContext;
 import dev.minceraft.sonus.web.protocol.packets.IWebSocketHandler;
 import dev.minceraft.sonus.web.protocol.packets.WebSocketPacket;
