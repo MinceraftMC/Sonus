@@ -1,7 +1,7 @@
 package dev.minceraft.sonus.api.service.participant;
 
 import dev.minceraft.sonus.api.service.audio.ISonusAudio;
-import dev.minceraft.sonus.api.service.data.Vec3d;
+import dev.minceraft.sonus.api.service.util.Vec3d;
 
 public interface ISonusListener extends ISonusParticipant {
 

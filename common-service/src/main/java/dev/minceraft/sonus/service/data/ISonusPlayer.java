@@ -1,10 +1,11 @@
 package dev.minceraft.sonus.service.data;
 
-import dev.minceraft.sonus.service.IAudioSource;
+import dev.minceraft.sonus.common.protocol.util.GameProfile;
 import dev.minceraft.sonus.service.adapter.SonusAdapter;
 import dev.minceraft.sonus.service.audio.SonusAudio;
+import dev.minceraft.sonus.service.participant.IAudioListener;
+import dev.minceraft.sonus.service.participant.IAudioSource;
 import dev.minceraft.sonus.service.rooms.IRoom;
-import dev.minceraft.sonus.common.protocol.util.GameProfile;
 import io.netty.buffer.ByteBuf;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
@@ -14,16 +15,9 @@ import org.jspecify.annotations.Nullable;
 
 import java.util.List;
 import java.util.Locale;
-import java.util.UUID;
 
 @NullMarked
-public interface ISonusPlayer extends IAudioSource {
-
-    UUID getUniqueId(@Nullable ISonusPlayer viewer);
-
-    default UUID getUniqueId() {
-        return this.getUniqueId(null);
-    }
+public interface ISonusPlayer extends IAudioSource, IAudioListener {
 
     String getName(@Nullable ISonusPlayer viewer);
 
@@ -58,18 +52,6 @@ public interface ISonusPlayer extends IAudioSource {
     SonusAdapter getAdapter();
 
     boolean setAdapter(@Nullable SonusAdapter adapter);
-
-    void sendStaticAudio(IAudioSource source, SonusAudio audio);
-
-    void sendStaticAudioEnd(IAudioSource source, long sequence);
-
-    void sendSpatialAudio(IAudioSource source, SonusAudio audio, Vec3d position);
-
-    void sendSpatialAudio(IAudioSource source, SonusAudio audio);
-
-    void sendSpatialNormedAudio(IAudioSource source, SonusAudio audio);
-
-    void sendSpatialAudioEnd(IAudioSource source, long sequence);
 
     boolean canAccessRoom(IRoom room, @Nullable String password);
 

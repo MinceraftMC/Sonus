@@ -3,6 +3,7 @@ val natives: Configuration by configurations.creating {
 }
 
 dependencies {
+    api(projects.apiService)
     api(projects.commonProtocol)
 
     compileOnlyApi(libs.leangen)

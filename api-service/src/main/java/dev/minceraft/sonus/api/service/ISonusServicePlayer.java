@@ -3,7 +3,7 @@ package dev.minceraft.sonus.api.service;
 import dev.minceraft.sonus.api.service.audio.ISonusAudio;
 import dev.minceraft.sonus.api.service.participant.ISonusListener;
 import dev.minceraft.sonus.api.service.participant.ISonusSource;
-import dev.minceraft.sonus.api.service.rooms.IRoom;
+import dev.minceraft.sonus.api.service.rooms.ISonusRoom;
 import net.kyori.adventure.text.Component;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -24,21 +24,21 @@ public interface ISonusServicePlayer extends ISonusSource, ISonusListener {
     @Nullable
     String getTeam();
 
-    boolean canAccessRoom(IRoom room, @Nullable String password);
+    boolean canAccessRoom(ISonusRoom room, @Nullable String password);
 
-    void joinRoom(IRoom room);
+    void joinRoom(ISonusRoom room);
 
-    void leaveRoom(IRoom room);
-
-    @Nullable
-    IRoom getServerRoom();
-
-    void setServerRoom(@Nullable IRoom room);
+    void leaveRoom(ISonusRoom room);
 
     @Nullable
-    IRoom getPrimaryRoom();
+    ISonusRoom getServerRoom();
 
-    void setPrimaryRoom(@Nullable IRoom room);
+    void setServerRoom(@Nullable ISonusRoom room);
+
+    @Nullable
+    ISonusRoom getPrimaryRoom();
+
+    void setPrimaryRoom(@Nullable ISonusRoom room);
 
     boolean isMuted();
 

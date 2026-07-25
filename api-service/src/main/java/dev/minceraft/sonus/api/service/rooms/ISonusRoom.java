@@ -2,11 +2,12 @@ package dev.minceraft.sonus.api.service.rooms;
 
 import dev.minceraft.sonus.api.service.ISonusServicePlayer;
 import dev.minceraft.sonus.api.service.participant.ISonusListener;
+import org.jetbrains.annotations.Unmodifiable;
 import org.jspecify.annotations.Nullable;
 
 import java.util.Set;
 
-public interface IRoom extends ISonusListener {
+public interface ISonusRoom extends ISonusListener {
 
     String getName();
 
@@ -15,6 +16,7 @@ public interface IRoom extends ISonusListener {
 
     void setPassword(@Nullable String password);
 
+    @Unmodifiable
     Set<? extends ISonusServicePlayer> getMembers();
 
     boolean addMember(ISonusServicePlayer player);

@@ -7,6 +7,7 @@ plugins {
 }
 
 
+include("api-service")
 include("protocol")
 include("service")
 include("agent-paper")
