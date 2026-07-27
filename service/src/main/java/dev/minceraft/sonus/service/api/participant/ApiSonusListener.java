@@ -6,7 +6,9 @@ import dev.minceraft.sonus.api.service.participant.ISonusSource;
 import dev.minceraft.sonus.api.service.util.Vec3d;
 import dev.minceraft.sonus.common.participant.IAudioListener;
 import dev.minceraft.sonus.service.api.audio.ApiAudio;
+import org.jspecify.annotations.NullMarked;
 
+@NullMarked
 public class ApiSonusListener<T extends IAudioListener> extends ApiSonusParticipant<T> implements ISonusListener {
 
     public ApiSonusListener(T delegate) {

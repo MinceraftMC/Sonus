@@ -6,12 +6,14 @@ import dev.minceraft.sonus.api.service.rooms.RoomAudioType;
 import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
 import dev.minceraft.sonus.common.participant.builtin.IRoom;
 import dev.minceraft.sonus.service.api.participant.ApiSonusSource;
+import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+@NullMarked
 public class ApiRoom extends ApiSonusSource<IRoom> implements ISonusRoom {
 
     public ApiRoom(IRoom delegate) {

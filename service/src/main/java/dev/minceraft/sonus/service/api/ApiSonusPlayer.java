@@ -3,6 +3,7 @@ package dev.minceraft.sonus.service.api;
 import dev.minceraft.sonus.api.service.ISonusServicePlayer;
 import dev.minceraft.sonus.api.service.audio.ISonusAudio;
 import dev.minceraft.sonus.api.service.rooms.ISonusRoom;
+import dev.minceraft.sonus.common.participant.builtin.IRoom;
 import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
 import dev.minceraft.sonus.service.api.audio.ApiAudio;
 import dev.minceraft.sonus.service.api.participant.ApiSonusListenerAndSource;
@@ -51,7 +52,11 @@ public class ApiSonusPlayer extends ApiSonusListenerAndSource<ISonusPlayer> impl
 
     @Override
     public @Nullable ISonusRoom getServerRoom() {
-        return new ApiRoom(this.delegate.getServerRoom());
+        IRoom serverRoom = this.delegate.getServerRoom();
+        if (serverRoom == null) {
+            return null;
+        }
+        return new ApiRoom(serverRoom);
     }
 
     @Override
@@ -61,7 +66,11 @@ public class ApiSonusPlayer extends ApiSonusListenerAndSource<ISonusPlayer> impl
 
     @Override
     public @Nullable ISonusRoom getPrimaryRoom() {
-        return new ApiRoom(this.delegate.getPrimaryRoom());
+        IRoom primaryRoom = this.delegate.getPrimaryRoom();
+        if (primaryRoom == null) {
+            return null;
+        }
+        return new ApiRoom(primaryRoom);
     }
 
     @Override

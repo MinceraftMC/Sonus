@@ -1,7 +1,9 @@
 package dev.minceraft.sonus.api.service.util;
 
 import net.kyori.adventure.key.Key;
+import org.jspecify.annotations.NullMarked;
 
+@NullMarked
 public class WorldRotatedVec3d extends Vec3d {
 
     protected final float yaw;

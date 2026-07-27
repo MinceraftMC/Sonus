@@ -8,10 +8,12 @@ import dev.minceraft.sonus.api.service.util.WorldRotatedVec3d;
 import dev.minceraft.sonus.common.participant.IAudioListener;
 import dev.minceraft.sonus.common.participant.IAudioSource;
 import dev.minceraft.sonus.service.api.audio.ApiAudio;
+import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 import java.util.UUID;
 
+@NullMarked
 public class ApiSonusListenerAndSource<T extends IAudioListener & IAudioSource> extends ApiSonusParticipant<T> implements ISonusListener, ISonusSource {
 
     public ApiSonusListenerAndSource(T delegate) {

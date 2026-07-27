@@ -1,5 +1,8 @@
 package dev.minceraft.sonus.service.api;
 
+import org.jspecify.annotations.NullMarked;
+
+@NullMarked
 public abstract class ApiDelegation<T> {
 
     protected final T delegate;

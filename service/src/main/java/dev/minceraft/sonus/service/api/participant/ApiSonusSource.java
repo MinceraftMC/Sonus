@@ -3,10 +3,12 @@ package dev.minceraft.sonus.service.api.participant;
 import dev.minceraft.sonus.api.service.participant.ISonusSource;
 import dev.minceraft.sonus.api.service.util.WorldRotatedVec3d;
 import dev.minceraft.sonus.common.participant.IAudioSource;
+import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 import java.util.UUID;
 
+@NullMarked
 public class ApiSonusSource<T extends IAudioSource> extends ApiSonusParticipant<T> implements ISonusSource {
 
     public ApiSonusSource(T delegate) {
