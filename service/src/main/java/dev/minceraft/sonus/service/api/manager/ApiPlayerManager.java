@@ -1,11 +1,11 @@
 package dev.minceraft.sonus.service.api.manager;
 
-import dev.minceraft.sonus.api.service.ISonusServicePlayer;
+import dev.minceraft.sonus.api.service.participant.builtin.ISonusServicePlayer;
 import dev.minceraft.sonus.api.service.manager.ISonusPlayerManager;
 import dev.minceraft.sonus.common.adapter.IPlayerManager;
 import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
 import dev.minceraft.sonus.service.api.ApiDelegation;
-import dev.minceraft.sonus.service.api.ApiSonusPlayer;
+import dev.minceraft.sonus.service.api.participant.builtin.ApiSonusPlayer;
 import org.jetbrains.annotations.Unmodifiable;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;

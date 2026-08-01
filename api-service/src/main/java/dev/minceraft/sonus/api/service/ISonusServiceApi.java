@@ -1,6 +1,7 @@
 package dev.minceraft.sonus.api.service;
 
 import dev.minceraft.sonus.api.service.audio.ISonusAudio;
+import dev.minceraft.sonus.api.service.manager.ISonusEventManager;
 import dev.minceraft.sonus.api.service.manager.ISonusPlayerManager;
 import dev.minceraft.sonus.api.service.manager.ISonusRoomManager;
 import net.kyori.adventure.util.Services;
@@ -12,6 +13,8 @@ public interface ISonusServiceApi {
     ISonusPlayerManager getPlayerManager();
 
     ISonusRoomManager getRoomManager();
+
+    ISonusEventManager getEventManager();
 
     ISonusAudio audioFromPcm(long sequence, short[] pcm);
 

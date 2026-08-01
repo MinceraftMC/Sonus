@@ -1,4 +1,4 @@
-package dev.minceraft.sonus.api.service;
+package dev.minceraft.sonus.api.service.participant.builtin;
 
 import dev.minceraft.sonus.api.service.audio.ISonusAudio;
 import dev.minceraft.sonus.api.service.participant.ISonusListener;

@@ -3,12 +3,14 @@ package dev.minceraft.sonus.service.api;
 import dev.minceraft.sonus.api.service.ISonusServiceApi;
 import dev.minceraft.sonus.api.service.audio.AudioCategory;
 import dev.minceraft.sonus.api.service.audio.ISonusAudio;
+import dev.minceraft.sonus.api.service.manager.ISonusEventManager;
 import dev.minceraft.sonus.api.service.manager.ISonusPlayerManager;
 import dev.minceraft.sonus.api.service.manager.ISonusRoomManager;
 import dev.minceraft.sonus.common.adapter.adapter.SonusAdapter;
 import dev.minceraft.sonus.common.audio.SonusAudio;
 import dev.minceraft.sonus.service.SonusService;
 import dev.minceraft.sonus.service.api.audio.ApiAudio;
+import dev.minceraft.sonus.service.api.manager.ApiEventManager;
 import dev.minceraft.sonus.service.api.manager.ApiPlayerManager;
 import dev.minceraft.sonus.service.api.manager.ApiRoomManager;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
@@ -20,6 +22,7 @@ public class ApiServiceImpl implements ISonusServiceApi {
     private @MonotonicNonNull SonusService service;
     private @MonotonicNonNull ApiPlayerManager playerManager;
     private @MonotonicNonNull ApiRoomManager roomManager;
+    private @MonotonicNonNull ApiEventManager eventManager;
 
     public static void init(SonusService service) {
         ApiServiceImpl instance = (ApiServiceImpl) ISonusServiceApi.getInstance();
@@ -30,6 +33,7 @@ public class ApiServiceImpl implements ISonusServiceApi {
         this.service = service;
         this.playerManager = new ApiPlayerManager(service.getPlayerManager());
         this.roomManager = new ApiRoomManager(service.getRoomManager());
+        this.eventManager = new ApiEventManager(service);
     }
 
     @Override
@@ -43,10 +47,8 @@ public class ApiServiceImpl implements ISonusServiceApi {
     }
 
     @Override
-    public void registerAudioCategory(AudioCategory category) {
-        for (SonusAdapter adapter : this.service.getAdapters().getAdapters()) {
-            adapter.registerCategory();
-        }
+    public ISonusEventManager getEventManager() {
+        return this.eventManager;
     }
 
     @Override

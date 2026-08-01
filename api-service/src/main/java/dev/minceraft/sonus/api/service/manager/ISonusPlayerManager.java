@@ -1,6 +1,6 @@
 package dev.minceraft.sonus.api.service.manager;
 
-import dev.minceraft.sonus.api.service.ISonusServicePlayer;
+import dev.minceraft.sonus.api.service.participant.builtin.ISonusServicePlayer;
 import org.jetbrains.annotations.Unmodifiable;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;

@@ -1,11 +1,12 @@
 package dev.minceraft.sonus.service.api;
 
-import dev.minceraft.sonus.api.service.ISonusServicePlayer;
+import dev.minceraft.sonus.api.service.participant.builtin.ISonusServicePlayer;
 import dev.minceraft.sonus.api.service.rooms.ISonusRoom;
 import dev.minceraft.sonus.api.service.rooms.RoomAudioType;
 import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
 import dev.minceraft.sonus.common.participant.builtin.IRoom;
 import dev.minceraft.sonus.service.api.participant.ApiSonusSource;
+import dev.minceraft.sonus.service.api.participant.builtin.ApiSonusPlayer;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
