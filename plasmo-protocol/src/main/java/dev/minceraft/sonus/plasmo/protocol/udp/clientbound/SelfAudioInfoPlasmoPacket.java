@@ -1,6 +1,6 @@
 package dev.minceraft.sonus.plasmo.protocol.udp.clientbound;
 
-import dev.minceraft.sonus.common.protocol.util.DataTypeUtil;
+import dev.minceraft.sonus.common.util.codec.DataTypeUtil;
 import dev.minceraft.sonus.plasmo.protocol.cipher.ICipher;
 import dev.minceraft.sonus.plasmo.protocol.cipher.IEncryptable;
 import dev.minceraft.sonus.plasmo.protocol.udp.UdpHandler;

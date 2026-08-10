@@ -6,6 +6,9 @@ plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
 }
 
+
+include("common")
+include("api-service")
 include("protocol")
 include("service")
 include("agent-paper")
@@ -18,7 +21,7 @@ include("web-adapter")
 include("webrtc-pion")
 include("webrtc-adapter")
 include("webrtc-ipc")
-include("common")
+include("common-adapter")
 include("common-protocol")
 include("service-velocity")
 include("network")

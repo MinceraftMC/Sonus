@@ -1,7 +1,7 @@
 package dev.minceraft.sonus.plasmo.protocol.udp;
 
 import dev.minceraft.sonus.common.protocol.registry.SimpleRegistry;
-import dev.minceraft.sonus.common.protocol.util.DataTypeUtil;
+import dev.minceraft.sonus.common.util.codec.DataTypeUtil;
 import dev.minceraft.sonus.plasmo.protocol.udp.bothbound.CustomPlasmoPacket;
 import dev.minceraft.sonus.plasmo.protocol.udp.bothbound.PingPlasmoPacket;
 import dev.minceraft.sonus.plasmo.protocol.udp.clientbound.SelfAudioInfoPlasmoPacket;

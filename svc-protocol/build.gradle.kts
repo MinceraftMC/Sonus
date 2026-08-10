@@ -1,4 +1,4 @@
 dependencies {
-    compileOnlyApi(projects.common)
+    compileOnlyApi(projects.commonProtocol)
     compileOnly(libs.netty.buffer)
 }

@@ -4,10 +4,11 @@ package dev.minceraft.sonus.agent.paper.api;
 import dev.minceraft.sonus.agent.paper.SonusAgentPlugin;
 import dev.minceraft.sonus.agent.paper.audio.AudioSupplier;
 import dev.minceraft.sonus.agent.paper.audio.AudioTicker;
-import dev.minceraft.sonus.common.audio.AudioCategory;
 import dev.minceraft.sonus.common.audio.AudioProcessor;
+import dev.minceraft.sonus.common.audio.OpusMode;
 import dev.minceraft.sonus.common.natives.LameNativesLoader;
 import dev.minceraft.sonus.common.natives.OpusNativesLoader;
+import dev.minceraft.sonus.common.protocol.audio.AudioCategory;
 import dev.minceraft.sonus.protocol.meta.servicebound.RegisterAudioCategoryMessage;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.ApiStatus;
@@ -50,7 +51,7 @@ public class SonusAgentApiImpl implements SonusAgentApi {
     @Override
     public AudioPlayer createAudioPlayer(
             Player player, UUID channelId, @Nullable UUID categoryId,
-            AudioSupplier audio, AudioProcessor.Mode mode
+            AudioSupplier audio, OpusMode mode
     ) {
         AudioProcessor processor = this.createAudioProcessor(mode);
         AudioTicker ticker = new AudioTicker(audio, processor, AUDIO_TICKER_FRAMES);
@@ -61,7 +62,7 @@ public class SonusAgentApiImpl implements SonusAgentApi {
     }
 
     @Override
-    public AudioProcessor createAudioProcessor(AudioProcessor.Mode mode) {
+    public AudioProcessor createAudioProcessor(OpusMode mode) {
         return new AudioProcessor(this.plugin.getOpusNatives(), () -> this.plugin.getSonusConfig().mtu, mode);
     }
 

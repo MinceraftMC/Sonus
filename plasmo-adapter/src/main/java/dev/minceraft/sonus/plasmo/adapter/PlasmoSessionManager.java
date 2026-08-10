@@ -1,6 +1,6 @@
 package dev.minceraft.sonus.plasmo.adapter;
 
-import dev.minceraft.sonus.common.data.ISonusPlayer;
+import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
 import dev.minceraft.sonus.plasmo.adapter.connection.PlasmoConnection;
 import dev.minceraft.sonus.plasmo.protocol.AbstractPlasmoPacket;
 import dev.minceraft.sonus.plasmo.protocol.tcp.data.VoicePlayerInfo;

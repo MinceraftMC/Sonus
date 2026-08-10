@@ -3,14 +3,15 @@ package dev.minceraft.sonus.service.player;
 
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
-import dev.minceraft.sonus.common.IAudioSource;
-import dev.minceraft.sonus.common.adapter.SonusAdapter;
-import dev.minceraft.sonus.common.audio.SonusAudio;
-import dev.minceraft.sonus.common.data.ISonusPlayer;
+import dev.minceraft.sonus.common.adapter.adapter.SonusAdapter;
 import dev.minceraft.sonus.common.data.SonusPlayerState;
+import dev.minceraft.sonus.common.audio.SonusAudio;
 import dev.minceraft.sonus.common.data.Vec3d;
 import dev.minceraft.sonus.common.data.WorldRotatedVec3d;
-import dev.minceraft.sonus.common.rooms.IRoom;
+import dev.minceraft.sonus.common.participant.IAudioSource;
+import dev.minceraft.sonus.common.participant.builtin.IRoom;
+import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
+import dev.minceraft.sonus.common.util.ISonusAdapterDummy;
 import dev.minceraft.sonus.protocol.meta.IMetaMessage;
 import dev.minceraft.sonus.protocol.meta.MetaRegistry;
 import dev.minceraft.sonus.protocol.meta.agentbound.PlayerConnectionStateMessage;
@@ -147,7 +148,7 @@ public final class SonusPlayer implements ISonusPlayer, CommandSender, AutoClose
             return false; // never make players listen to themselves
         }
         // check if player is hidden
-        SonusPlayerState state = this.perPlayerStates.get(source.getSenderId(this));
+        SonusPlayerState state = this.perPlayerStates.get(source.getUniqueId(this));
         if (state != null) {
             if (!spatial && state.staticHidden()) {
                 return false; // player is hidden for static audio
@@ -276,7 +277,7 @@ public final class SonusPlayer implements ISonusPlayer, CommandSender, AutoClose
     @Override
     public void joinRoom(IRoom room) {
         Preconditions.checkNotNull(room, "Room cannot be null");
-        if (this.voiceRooms.putIfAbsent(room.getId(), room) == null) {
+        if (this.voiceRooms.putIfAbsent(room.getUniqueId(), room) == null) {
             room.addMember(this);
         }
     }
@@ -284,7 +285,7 @@ public final class SonusPlayer implements ISonusPlayer, CommandSender, AutoClose
     @Override
     public void leaveRoom(IRoom room) {
         Preconditions.checkNotNull(room, "Room cannot be null");
-        if (this.voiceRooms.remove(room.getId()) == null) {
+        if (this.voiceRooms.remove(room.getUniqueId()) == null) {
             return; // wasn't in room
         }
         room.removeMember(this);
@@ -390,14 +391,20 @@ public final class SonusPlayer implements ISonusPlayer, CommandSender, AutoClose
     }
 
     @Override
-    public boolean setAdapter(@Nullable SonusAdapter adapter) {
+    public boolean setAdapter(@Nullable ISonusAdapterDummy dummy) {
+        if (!(dummy instanceof SonusAdapter adapter)) {
+            LOGGER.error("Player {}({}) tried to connect via {}, but the adapter is not a SonusAdapter!",
+                    this.getName(), this.getUniqueId(), dummy);
+            return false;
+        }
+
         synchronized (this) {
-            if (adapter != null && this.sonusAdapter != null) {
+            if (this.sonusAdapter != null) {
                 LOGGER.warn("Player {}({}) tried to connect via {}, but is already connected via another adapter: {}",
                         this.getName(), this.getUniqueId(), adapter.getAdapterInfo().id(), this.sonusAdapter.getAdapterInfo().id());
                 return false; // Already connected via an adapter
             }
-            if (this.sonusAdapter == null && adapter != null && !this.hasPermission(PERMISSION_CONNECT, true)) {
+            if (!this.hasPermission(PERMISSION_CONNECT, true)) {
                 return false; // No permission to connect
             }
             this.sonusAdapter = adapter;
@@ -513,11 +520,6 @@ public final class SonusPlayer implements ISonusPlayer, CommandSender, AutoClose
         } finally {
             buf.release();
         }
-    }
-
-    @Override
-    public UUID getSenderId(ISonusPlayer viewer) {
-        return this.getUniqueId(viewer);
     }
 
     @Override

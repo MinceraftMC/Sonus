@@ -1,9 +1,8 @@
 package dev.minceraft.sonus.service.rooms;
 
-import dev.minceraft.sonus.common.rooms.IRoom;
-import dev.minceraft.sonus.common.rooms.RoomAudioType;
-import dev.minceraft.sonus.common.rooms.options.RoomDefinition;
-import dev.minceraft.sonus.common.service.ISonusRoomManager;
+import dev.minceraft.sonus.common.adapter.service.ISonusRoomManager;
+import dev.minceraft.sonus.common.participant.builtin.IRoom;
+import dev.minceraft.sonus.common.participant.builtin.RoomDefinition;
 import dev.minceraft.sonus.service.SonusService;
 import dev.minceraft.sonus.service.platform.IServer;
 import net.kyori.adventure.text.logger.slf4j.ComponentLogger;
@@ -67,7 +66,7 @@ public class SonusRoomManager implements ISonusRoomManager {
     }
 
     @Override
-    public IRoom createStaticRoom(String name, @Nullable String password, RoomAudioType audioType, boolean persist) {
+    public IRoom createStaticRoom(String name, @Nullable String password, dev.minceraft.sonus.common.participant.builtin.RoomAudioType audioType, boolean persist) {
         StaticRoom room = persist
                 ? new StaticRoom(this.service, UUID.randomUUID())
                 : new TransientStaticRoom(this.service, UUID.randomUUID());
@@ -80,7 +79,7 @@ public class SonusRoomManager implements ISonusRoomManager {
 
     @Override
     public boolean createRoom(IRoom room) {
-        if (this.rooms.putIfAbsent(room.getId(), room) == null) {
+        if (this.rooms.putIfAbsent(room.getUniqueId(), room) == null) {
             // broadcast room creation
             this.service.getEventManager().onGroupCreate(room);
             return true;
@@ -90,7 +89,7 @@ public class SonusRoomManager implements ISonusRoomManager {
 
     @Override
     public boolean removeRoom(IRoom room) {
-        if (this.rooms.remove(room.getId()) != null) {
+        if (this.rooms.remove(room.getUniqueId()) != null) {
             // broadcast room removal
             this.service.getEventManager().onGroupRemove(room);
             return true;

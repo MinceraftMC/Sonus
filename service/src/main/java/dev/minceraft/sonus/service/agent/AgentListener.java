@@ -6,11 +6,12 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.cache.RemovalListener;
 import com.google.common.collect.Table;
-import dev.minceraft.sonus.common.IAudioSource;
 import dev.minceraft.sonus.common.audio.AudioProcessor;
+import dev.minceraft.sonus.common.audio.OpusMode;
 import dev.minceraft.sonus.common.audio.SonusAudio;
 import dev.minceraft.sonus.common.data.SonusPlayerState;
 import dev.minceraft.sonus.common.data.WorldRotatedVec3d;
+import dev.minceraft.sonus.common.participant.IAudioSource;
 import dev.minceraft.sonus.protocol.meta.IMetaHandler;
 import dev.minceraft.sonus.protocol.meta.servicebound.AudioStreamMessage;
 import dev.minceraft.sonus.protocol.meta.servicebound.BackendTickMessage;
@@ -47,7 +48,7 @@ public class AgentListener implements IMetaHandler, AutoCloseable {
             .build(new CacheLoader<>() {
                 @Override
                 public AudioProcessor load(UUID key) {
-                    return AgentListener.this.service.createAudioProcessor(AudioProcessor.Mode.AUDIO);
+                    return AgentListener.this.service.createAudioProcessor(OpusMode.AUDIO);
                 }
             });
 

@@ -6,11 +6,14 @@ plugins {
 
 dependencies {
     api(projects.protocol)
+    api(projects.apiService)
 
     // included in all service implementations
     compileOnlyApi(libs.adventure.text.logger.slf4j)
 
     implementation(projects.network)
+    api(projects.commonAdapter)
+
     implementation(projects.svcAdapter)
     implementation(projects.plasmoAdapter)
     implementation(projects.webAdapter)

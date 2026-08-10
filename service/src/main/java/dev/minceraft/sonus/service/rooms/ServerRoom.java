@@ -1,7 +1,7 @@
 package dev.minceraft.sonus.service.rooms;
 // Created by booky10 in Sonus (19:28 15.11.2025)
 
-import dev.minceraft.sonus.common.rooms.options.RoomDefinition;
+import dev.minceraft.sonus.common.participant.builtin.RoomDefinition;
 import dev.minceraft.sonus.service.SonusService;
 import dev.minceraft.sonus.service.platform.IServer;
 import org.jspecify.annotations.NullMarked;

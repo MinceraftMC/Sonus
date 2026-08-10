@@ -2,18 +2,18 @@ package dev.minceraft.sonus.service;
 // Created by booky10 in Sonus (01:33 17.07.2025)
 
 import com.google.gson.Gson;
-import dev.minceraft.sonus.common.ISonusService;
-import dev.minceraft.sonus.common.audio.AudioProcessor;
-import dev.minceraft.sonus.common.config.ISonusConfig;
+import dev.minceraft.sonus.common.adapter.ISonusService;
+import dev.minceraft.sonus.common.adapter.config.ISonusConfig;
 import dev.minceraft.sonus.common.config.YamlConfigHolder;
 import dev.minceraft.sonus.common.natives.OpusNativesLoader;
 import dev.minceraft.sonus.common.natives.SpeexNativesLoader;
 import dev.minceraft.sonus.common.protocol.udp.IUdpServer;
-import dev.minceraft.sonus.common.service.ISonusEventManager;
-import dev.minceraft.sonus.common.service.ISonusRoomManager;
-import dev.minceraft.sonus.common.service.ISonusScheduler;
+import dev.minceraft.sonus.common.adapter.service.ISonusEventManager;
+import dev.minceraft.sonus.common.adapter.service.ISonusRoomManager;
+import dev.minceraft.sonus.common.adapter.service.ISonusScheduler;
 import dev.minceraft.sonus.service.adapter.AdapterManager;
 import dev.minceraft.sonus.service.agent.AgentManager;
+import dev.minceraft.sonus.service.api.ApiServiceImpl;
 import dev.minceraft.sonus.service.commands.CommandHolder;
 import dev.minceraft.sonus.service.commands.builtin.SonusCommand;
 import dev.minceraft.sonus.service.network.UdpServer;
@@ -66,12 +66,16 @@ public final class SonusService implements ISonusService {
         LOGGER.info("Loading configuration...");
         this.config.reloadConfig();
 
+        LOGGER.info("Initializing managers");
         this.adapters.init();
         this.roomManager.init();
         this.agentManager.init();
         this.udpServer.bind();
 
         this.initCommands();
+
+        LOGGER.info("Initializing api");
+        ApiServiceImpl.init(this);
     }
 
     private void initCommands() {

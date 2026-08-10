@@ -3,7 +3,7 @@ package dev.minceraft.sonus.common.config;
 import dev.minceraft.sonus.common.config.serializer.AddressSerializer;
 import dev.minceraft.sonus.common.config.serializer.RoomDefinitionSerializer;
 import dev.minceraft.sonus.common.config.serializer.SubConfigSerializer;
-import dev.minceraft.sonus.common.rooms.options.RoomDefinition;
+import dev.minceraft.sonus.common.participant.builtin.RoomDefinition;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import org.spongepowered.configurate.loader.AbstractConfigurationLoader;

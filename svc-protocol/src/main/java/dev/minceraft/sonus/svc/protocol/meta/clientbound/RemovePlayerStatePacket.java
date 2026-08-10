@@ -1,6 +1,6 @@
 package dev.minceraft.sonus.svc.protocol.meta.clientbound;
 
-import dev.minceraft.sonus.common.protocol.util.DataTypeUtil;
+import dev.minceraft.sonus.common.util.codec.DataTypeUtil;
 import dev.minceraft.sonus.svc.protocol.SvcPacketContext;
 import dev.minceraft.sonus.svc.protocol.meta.IMetaSvcHandler;
 import dev.minceraft.sonus.svc.protocol.meta.SvcMetaPacket;

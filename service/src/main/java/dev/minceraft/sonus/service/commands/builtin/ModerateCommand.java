@@ -1,7 +1,7 @@
 package dev.minceraft.sonus.service.commands.builtin;
 
-import dev.minceraft.sonus.common.data.ISonusPlayer;
-import dev.minceraft.sonus.common.rooms.IRoom;
+import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
+import dev.minceraft.sonus.common.participant.builtin.IRoom;
 import dev.minceraft.sonus.service.SonusService;
 import dev.minceraft.sonus.service.commands.Command;
 import dev.minceraft.sonus.service.commands.CommandSender;

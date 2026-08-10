@@ -1,10 +1,10 @@
 package dev.minceraft.sonus.service;
 
-import dev.minceraft.sonus.common.data.ISonusPlayer;
+import dev.minceraft.sonus.common.adapter.service.ISonusEventManager;
+import dev.minceraft.sonus.common.adapter.service.ISonusServiceEvents;
 import dev.minceraft.sonus.common.data.SonusPlayerState;
-import dev.minceraft.sonus.common.rooms.IRoom;
-import dev.minceraft.sonus.common.service.ISonusEventManager;
-import dev.minceraft.sonus.common.service.ISonusServiceEvents;
+import dev.minceraft.sonus.common.participant.builtin.IRoom;
+import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
 import dev.minceraft.sonus.service.player.SonusPlayer;
 import net.kyori.adventure.key.Key;
 import org.jspecify.annotations.NullMarked;
@@ -29,6 +29,9 @@ public class SonusEventManager implements ISonusEventManager {
 
     @Override
     public void registerListener(ISonusServiceEvents events) {
+        if (events.getClass().isInstance(this)) {
+            throw new IllegalArgumentException("Cannot register SonusEventManager as a listener to itself, this would cause StackOverflows. Dont do this!");
+        }
         this.listeners.add(events);
     }
 
