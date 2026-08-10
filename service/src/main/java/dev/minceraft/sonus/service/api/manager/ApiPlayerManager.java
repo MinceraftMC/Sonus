@@ -1,12 +1,11 @@
 package dev.minceraft.sonus.service.api.manager;
 
-import dev.minceraft.sonus.api.service.participant.builtin.ISonusServicePlayer;
 import dev.minceraft.sonus.api.service.manager.ISonusPlayerManager;
+import dev.minceraft.sonus.api.service.participant.builtin.ISonusServicePlayer;
 import dev.minceraft.sonus.common.adapter.IPlayerManager;
 import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
 import dev.minceraft.sonus.service.api.ApiDelegation;
 import dev.minceraft.sonus.service.api.participant.builtin.ApiSonusPlayer;
-import org.jetbrains.annotations.Unmodifiable;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -28,7 +27,7 @@ public class ApiPlayerManager extends ApiDelegation<IPlayerManager> implements I
     }
 
     @Override
-    public @Unmodifiable Collection<? extends ISonusServicePlayer> getPlayers() {
+    public Collection<? extends ISonusServicePlayer> getPlayers() {
         Set<ApiSonusPlayer> players = new HashSet<>();
         for (ISonusPlayer player : this.delegate.getPlayers()) {
             players.add(new ApiSonusPlayer(player));

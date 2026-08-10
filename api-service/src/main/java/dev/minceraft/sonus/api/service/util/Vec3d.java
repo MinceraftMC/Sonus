@@ -1,5 +1,11 @@
 package dev.minceraft.sonus.api.service.util;
 
+import org.jspecify.annotations.NullUnmarked;
+
+/**
+ * The utility Vec3d holder
+ */
+@NullUnmarked
 public class Vec3d {
 
     public static final Vec3d ZERO = new Vec3d();

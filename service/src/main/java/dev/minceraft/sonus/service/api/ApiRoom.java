@@ -27,6 +27,11 @@ public class ApiRoom extends ApiSonusSource<IRoom> implements ISonusRoom {
     }
 
     @Override
+    public void setName(String name) {
+        this.delegate.setName(name);
+    }
+
+    @Override
     public @Nullable String getPassword() {
         return this.delegate.getPassword();
     }
@@ -76,5 +81,10 @@ public class ApiRoom extends ApiSonusSource<IRoom> implements ISonusRoom {
             case NORMAL -> dev.minceraft.sonus.common.participant.builtin.RoomAudioType.NORMAL;
             case ISOLATED -> dev.minceraft.sonus.common.participant.builtin.RoomAudioType.ISOLATED;
         });
+    }
+
+    @Override
+    public boolean isVisible() {
+        return this.delegate.isVisible();
     }
 }

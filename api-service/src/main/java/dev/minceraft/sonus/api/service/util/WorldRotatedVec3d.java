@@ -3,6 +3,10 @@ package dev.minceraft.sonus.api.service.util;
 import net.kyori.adventure.key.Key;
 import org.jspecify.annotations.NullMarked;
 
+/**
+ * The utility {@link Vec3d} extension with yaw, pitch and dimension
+ *
+ */
 @NullMarked
 public class WorldRotatedVec3d extends Vec3d {
 

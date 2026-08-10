@@ -7,10 +7,10 @@ import dev.minceraft.sonus.api.service.manager.ISonusRoomManager;
 import net.kyori.adventure.util.Services;
 import org.jspecify.annotations.NullMarked;
 
-@NullMarked
 /**
  * The main API class for the Sonus Service
  */
+@NullMarked
 public interface ISonusServiceApi {
 
     ISonusPlayerManager getPlayerManager();

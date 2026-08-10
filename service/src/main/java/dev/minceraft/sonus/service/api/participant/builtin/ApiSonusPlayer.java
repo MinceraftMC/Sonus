@@ -150,11 +150,6 @@ public class ApiSonusPlayer extends ApiSonusListenerAndSource<ISonusPlayer> impl
     }
 
     @Override
-    public boolean isOnline() {
-        return this.delegate.isOnline();
-    }
-
-    @Override
     public void disconnect() {
         this.delegate.disconnect();
     }

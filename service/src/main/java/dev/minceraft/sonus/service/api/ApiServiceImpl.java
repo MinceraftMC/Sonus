@@ -1,12 +1,10 @@
 package dev.minceraft.sonus.service.api;
 
 import dev.minceraft.sonus.api.service.ISonusServiceApi;
-import dev.minceraft.sonus.api.service.audio.AudioCategory;
 import dev.minceraft.sonus.api.service.audio.ISonusAudio;
 import dev.minceraft.sonus.api.service.manager.ISonusEventManager;
 import dev.minceraft.sonus.api.service.manager.ISonusPlayerManager;
 import dev.minceraft.sonus.api.service.manager.ISonusRoomManager;
-import dev.minceraft.sonus.common.adapter.adapter.SonusAdapter;
 import dev.minceraft.sonus.common.audio.SonusAudio;
 import dev.minceraft.sonus.service.SonusService;
 import dev.minceraft.sonus.service.api.audio.ApiAudio;
