@@ -6,6 +6,8 @@ import dev.minceraft.sonus.common.config.serializer.SubConfigSerializer;
 import dev.minceraft.sonus.common.participant.builtin.RoomDefinition;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.spongepowered.configurate.loader.AbstractConfigurationLoader;
 
 import java.io.IOException;
@@ -22,6 +24,8 @@ import java.util.function.Supplier;
 
 @NullMarked
 public class ConfigHolder<T, L extends AbstractConfigurationLoader<?>> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger("Sonus");
 
     private final Class<T> clazz;
     private final Function<ConfigHolder<T, L>, T> def;

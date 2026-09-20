@@ -1,10 +1,14 @@
-package dev.minceraft.sonus.service.rooms;
+package dev.minceraft.sonus.service.manager;
 
 import dev.minceraft.sonus.common.adapter.service.ISonusRoomManager;
 import dev.minceraft.sonus.common.participant.builtin.IRoom;
 import dev.minceraft.sonus.common.participant.builtin.RoomDefinition;
 import dev.minceraft.sonus.service.SonusService;
 import dev.minceraft.sonus.service.platform.IServer;
+import dev.minceraft.sonus.service.rooms.DefinedRoom;
+import dev.minceraft.sonus.service.rooms.ServerRoom;
+import dev.minceraft.sonus.service.rooms.StaticRoom;
+import dev.minceraft.sonus.service.rooms.TransientStaticRoom;
 import net.kyori.adventure.text.logger.slf4j.ComponentLogger;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;

@@ -4,22 +4,22 @@ package dev.minceraft.sonus.service;
 import com.google.gson.Gson;
 import dev.minceraft.sonus.common.adapter.ISonusService;
 import dev.minceraft.sonus.common.adapter.config.ISonusConfig;
+import dev.minceraft.sonus.common.adapter.service.ISonusEventManager;
+import dev.minceraft.sonus.common.adapter.service.ISonusRoomManager;
+import dev.minceraft.sonus.common.adapter.service.ISonusScheduler;
 import dev.minceraft.sonus.common.config.YamlConfigHolder;
 import dev.minceraft.sonus.common.natives.OpusNativesLoader;
 import dev.minceraft.sonus.common.natives.SpeexNativesLoader;
 import dev.minceraft.sonus.common.protocol.udp.IUdpServer;
-import dev.minceraft.sonus.common.adapter.service.ISonusEventManager;
-import dev.minceraft.sonus.common.adapter.service.ISonusRoomManager;
-import dev.minceraft.sonus.common.adapter.service.ISonusScheduler;
 import dev.minceraft.sonus.service.adapter.AdapterManager;
 import dev.minceraft.sonus.service.agent.AgentManager;
 import dev.minceraft.sonus.service.api.ApiServiceImpl;
 import dev.minceraft.sonus.service.commands.CommandHolder;
 import dev.minceraft.sonus.service.commands.builtin.SonusCommand;
+import dev.minceraft.sonus.service.manager.PlayerManager;
+import dev.minceraft.sonus.service.manager.SonusRoomManager;
 import dev.minceraft.sonus.service.network.UdpServer;
 import dev.minceraft.sonus.service.platform.IServicePlatform;
-import dev.minceraft.sonus.service.player.PlayerManager;
-import dev.minceraft.sonus.service.rooms.SonusRoomManager;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -31,9 +31,8 @@ import java.nio.file.Path;
 @NullMarked
 public final class SonusService implements ISonusService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger("Sonus");
     public static final Gson GSON = new Gson();
-
+    private static final Logger LOGGER = LoggerFactory.getLogger("Sonus");
     private final IServicePlatform platform;
     private final PlayerManager players;
     private final CommandHolder commands = new CommandHolder();

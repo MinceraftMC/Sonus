@@ -5,12 +5,15 @@ import dev.minceraft.sonus.api.service.audio.ISonusAudio;
 import dev.minceraft.sonus.api.service.manager.ISonusEventManager;
 import dev.minceraft.sonus.api.service.manager.ISonusPlayerManager;
 import dev.minceraft.sonus.api.service.manager.ISonusRoomManager;
+import dev.minceraft.sonus.api.service.participant.builtin.ISonusBasicSource;
 import dev.minceraft.sonus.common.audio.SonusAudio;
 import dev.minceraft.sonus.service.SonusService;
 import dev.minceraft.sonus.service.api.audio.ApiAudio;
 import dev.minceraft.sonus.service.api.manager.ApiEventManager;
 import dev.minceraft.sonus.service.api.manager.ApiPlayerManager;
 import dev.minceraft.sonus.service.api.manager.ApiRoomManager;
+import dev.minceraft.sonus.service.api.participant.builtin.ApiBasicSource;
+import dev.minceraft.sonus.service.participant.BasicAudioSource;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.jspecify.annotations.NullMarked;
 
@@ -57,5 +60,10 @@ public class ApiServiceImpl implements ISonusServiceApi {
     @Override
     public ISonusAudio audioFromOpus(long sequence, byte[] opus) {
         return new ApiAudio(SonusAudio.fromOpus(sequence, opus));
+    }
+
+    @Override
+    public ISonusBasicSource createBasicSource() {
+        return new ApiBasicSource(new BasicAudioSource());
     }
 }

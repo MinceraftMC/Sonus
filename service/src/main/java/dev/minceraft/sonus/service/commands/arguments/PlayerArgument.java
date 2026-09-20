@@ -3,7 +3,7 @@ package dev.minceraft.sonus.service.commands.arguments;
 import dev.minceraft.sonus.service.commands.ArgumentType;
 import dev.minceraft.sonus.service.commands.CommandContext;
 import dev.minceraft.sonus.service.commands.CommandException;
-import dev.minceraft.sonus.service.player.SonusPlayer;
+import dev.minceraft.sonus.service.participant.SonusPlayer;
 import org.jspecify.annotations.NullMarked;
 
 import static net.kyori.adventure.text.Component.text;

@@ -1,4 +1,4 @@
-package dev.minceraft.sonus.service.player;
+package dev.minceraft.sonus.service.manager;
 // Created by booky10 in Sonus (02:18 17.07.2025)
 
 import com.google.common.base.Ticker;
@@ -11,6 +11,7 @@ import dev.minceraft.sonus.service.SonusConfig;
 import dev.minceraft.sonus.service.SonusService;
 import dev.minceraft.sonus.service.platform.IPlatformPlayer;
 import dev.minceraft.sonus.service.platform.IServer;
+import dev.minceraft.sonus.service.participant.SonusPlayer;
 import dev.minceraft.sonus.service.server.SonusServer;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.jspecify.annotations.NullMarked;

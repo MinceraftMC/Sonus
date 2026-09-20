@@ -10,7 +10,7 @@ import dev.minceraft.sonus.service.commands.LiteralCommandNode;
 import dev.minceraft.sonus.service.commands.arguments.PlayerArgument;
 import dev.minceraft.sonus.service.commands.arguments.RoomTypeArgument;
 import dev.minceraft.sonus.service.commands.arguments.StringArgument;
-import dev.minceraft.sonus.service.player.SonusPlayer;
+import dev.minceraft.sonus.service.participant.SonusPlayer;
 import dev.minceraft.sonus.service.rooms.TransientStaticRoom;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.ComponentBuilder;

@@ -4,6 +4,7 @@ import dev.minceraft.sonus.api.service.audio.ISonusAudio;
 import dev.minceraft.sonus.api.service.manager.ISonusEventManager;
 import dev.minceraft.sonus.api.service.manager.ISonusPlayerManager;
 import dev.minceraft.sonus.api.service.manager.ISonusRoomManager;
+import dev.minceraft.sonus.api.service.participant.builtin.ISonusBasicSource;
 import net.kyori.adventure.util.Services;
 import org.jspecify.annotations.NullMarked;
 
@@ -40,6 +41,8 @@ public interface ISonusServiceApi {
      * @return an instance of ISonusAudio holding the information
      */
     ISonusAudio audioFromOpus(long sequence, byte[] opus);
+
+    ISonusBasicSource createBasicSource();
 
     /**
      * Utility method to get the instance of the SonusServiceApi

@@ -5,7 +5,7 @@ import dev.minceraft.sonus.common.adapter.service.ISonusServiceEvents;
 import dev.minceraft.sonus.common.data.SonusPlayerState;
 import dev.minceraft.sonus.common.participant.builtin.IRoom;
 import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
-import dev.minceraft.sonus.service.player.SonusPlayer;
+import dev.minceraft.sonus.service.participant.SonusPlayer;
 import net.kyori.adventure.key.Key;
 import org.jspecify.annotations.NullMarked;
 import org.slf4j.Logger;

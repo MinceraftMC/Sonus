@@ -4,7 +4,7 @@ import dev.minceraft.sonus.common.adapter.adapter.SonusAdapter;
 import dev.minceraft.sonus.service.SonusService;
 import dev.minceraft.sonus.service.commands.Command;
 import dev.minceraft.sonus.service.commands.LiteralCommandNode;
-import dev.minceraft.sonus.service.player.SonusPlayer;
+import dev.minceraft.sonus.service.participant.SonusPlayer;
 import org.jspecify.annotations.NullMarked;
 
 import static dev.minceraft.sonus.service.commands.CommandNode.literal;

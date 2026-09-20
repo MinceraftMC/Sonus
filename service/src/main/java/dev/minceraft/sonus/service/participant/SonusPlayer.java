@@ -1,4 +1,4 @@
-package dev.minceraft.sonus.service.player;
+package dev.minceraft.sonus.service.participant;
 // Created by booky10 in Sonus (02:18 17.07.2025)
 
 import com.google.common.base.Preconditions;
