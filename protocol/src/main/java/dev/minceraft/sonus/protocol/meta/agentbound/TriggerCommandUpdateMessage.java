@@ -1,6 +1,6 @@
 package dev.minceraft.sonus.protocol.meta.agentbound;
 
-import dev.minceraft.sonus.common.protocol.util.DataTypeUtil;
+import dev.minceraft.sonus.common.util.codec.DataTypeUtil;
 import dev.minceraft.sonus.protocol.meta.IMetaHandler;
 import dev.minceraft.sonus.protocol.meta.IMetaMessage;
 import io.netty.buffer.ByteBuf;

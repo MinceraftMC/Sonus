@@ -1,6 +1,6 @@
 package dev.minceraft.sonus.web.adapter.pipeline;
 
-import dev.minceraft.sonus.common.data.ISonusPlayer;
+import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
 import dev.minceraft.sonus.web.adapter.WebAdapter;
 import dev.minceraft.sonus.web.adapter.connection.WebSocketConnection;
 import dev.minceraft.sonus.web.adapter.util.HttpErrorException;

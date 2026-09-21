@@ -1,10 +1,10 @@
 package dev.minceraft.sonus.web.protocol.model;
 // Created by booky10 in Sonus (20:36 28.11.2025)
 
-import dev.minceraft.sonus.common.data.ISonusPlayer;
-import dev.minceraft.sonus.common.protocol.util.DataTypeUtil;
-import dev.minceraft.sonus.common.rooms.IRoom;
-import dev.minceraft.sonus.common.rooms.RoomAudioType;
+import dev.minceraft.sonus.common.participant.builtin.IRoom;
+import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
+import dev.minceraft.sonus.common.participant.builtin.RoomAudioType;
+import dev.minceraft.sonus.common.util.codec.DataTypeUtil;
 import io.netty.buffer.ByteBuf;
 import net.kyori.adventure.text.Component;
 import org.jspecify.annotations.NullMarked;
@@ -43,7 +43,7 @@ public class SonusWebRoom {
 
     public static SonusWebRoom fromRoom(IRoom room, ISonusPlayer viewer) {
         boolean bypassPassword = viewer.hasPermission(PERMISSION_GROUPS_BYPASS_PASSWORD, false);
-        UUID uniqueId = room.getId();
+        UUID uniqueId = room.getUniqueId();
         Component name = viewer.renderComponent(text(room.getName()));
         boolean password = room.getPassword() != null && !bypassPassword;
         boolean joinable = room.isVisible();

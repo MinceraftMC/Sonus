@@ -1,9 +1,9 @@
 package dev.minceraft.sonus.plasmo.adapter;
 
-import dev.minceraft.sonus.common.data.ISonusPlayer;
+import dev.minceraft.sonus.common.adapter.service.ISonusServiceEvents;
 import dev.minceraft.sonus.common.data.SonusPlayerState;
-import dev.minceraft.sonus.common.rooms.IRoom;
-import dev.minceraft.sonus.common.service.ISonusServiceEvents;
+import dev.minceraft.sonus.common.participant.builtin.IRoom;
+import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
 import dev.minceraft.sonus.plasmo.adapter.connection.PlasmoConnection;
 import dev.minceraft.sonus.plasmo.protocol.PlasmoPmChannels;
 import dev.minceraft.sonus.plasmo.protocol.tcp.clientbound.PlayerDisconnectPacket;
@@ -94,14 +94,14 @@ public class PlasmoSonusListener implements ISonusServiceEvents {
         }
 
         VoiceSourceLine sourceLine = new VoiceSourceLine(
-                room.getId().toString(),
+                room.getUniqueId().toString(),
                 room.getName(),
                 PlasmoConstants.DEFAULT_GROUP_ICON,
                 1.0,
                 200,
                 Set.of()
         );
-        connection.registerVoiceSourceLine(room.getId(), sourceLine);
+        connection.registerVoiceSourceLine(room.getUniqueId(), sourceLine);
 
         SourceLineRegisterPacket packet = new SourceLineRegisterPacket();
         packet.setSourceLine(sourceLine);
@@ -124,7 +124,7 @@ public class PlasmoSonusListener implements ISonusServiceEvents {
             }
             plasmoConnection.unregisterSourceInfo(player.getUniqueId());
         }
-        this.adapter.unregisterCategory(player, room.getId());
+        this.adapter.unregisterCategory(player, room.getUniqueId());
     }
 
     @Override

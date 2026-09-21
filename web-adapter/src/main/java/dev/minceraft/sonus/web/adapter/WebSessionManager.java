@@ -1,7 +1,8 @@
 package dev.minceraft.sonus.web.adapter;
 
-import dev.minceraft.sonus.common.data.ISonusPlayer;
-import dev.minceraft.sonus.common.rooms.IRoom;
+
+import dev.minceraft.sonus.common.participant.builtin.IRoom;
+import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
 import dev.minceraft.sonus.web.adapter.connection.WebSocketConnection;
 import dev.minceraft.sonus.web.adapter.util.WebTokenUtil;
 import dev.minceraft.sonus.web.protocol.AbstractWebPacket;

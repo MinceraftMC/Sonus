@@ -1,12 +1,10 @@
 package dev.minceraft.sonus.service.rooms;
 // Created by booky10 in Sonus (02:18 17.07.2025)
 
-import dev.minceraft.sonus.common.IAudioSource;
-import dev.minceraft.sonus.common.audio.SonusAudio;
-import dev.minceraft.sonus.common.data.ISonusPlayer;
-import dev.minceraft.sonus.common.rooms.IRoom;
-import dev.minceraft.sonus.common.rooms.RoomAudioType;
 import dev.minceraft.sonus.service.SonusService;
+import dev.minceraft.sonus.common.audio.SonusAudio;
+import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
+import dev.minceraft.sonus.common.participant.IAudioSource;
 import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -18,7 +16,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 @NullMarked
-public abstract class AbstractRoom implements IRoom {
+public abstract class AbstractRoom implements dev.minceraft.sonus.common.participant.builtin.IRoom {
 
     protected final SonusService service;
     protected final UUID roomId;
@@ -26,7 +24,7 @@ public abstract class AbstractRoom implements IRoom {
 
     protected final Map<UUID, ISonusPlayer> members = new ConcurrentHashMap<>();
 
-    protected RoomAudioType roomAudioType = RoomAudioType.OPEN;
+    protected dev.minceraft.sonus.common.participant.builtin.RoomAudioType roomAudioType = dev.minceraft.sonus.common.participant.builtin.RoomAudioType.OPEN;
     protected @Nullable String password;
 
     public AbstractRoom(SonusService service, UUID roomId) {
@@ -73,7 +71,7 @@ public abstract class AbstractRoom implements IRoom {
     }
 
     @Override
-    public UUID getId() {
+    public UUID getUniqueId(@Nullable ISonusPlayer viewer) {
         return this.roomId;
     }
 
@@ -99,11 +97,11 @@ public abstract class AbstractRoom implements IRoom {
     }
 
     @Override
-    public RoomAudioType getRoomAudioType() {
+    public dev.minceraft.sonus.common.participant.builtin.RoomAudioType getRoomAudioType() {
         return this.roomAudioType;
     }
 
-    public void setRoomAudioType(RoomAudioType type) {
+    public void setRoomAudioType(dev.minceraft.sonus.common.participant.builtin.RoomAudioType type) {
         this.roomAudioType = Objects.requireNonNull(type);
     }
 

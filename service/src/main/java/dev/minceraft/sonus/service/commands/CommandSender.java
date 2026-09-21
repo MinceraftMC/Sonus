@@ -1,6 +1,6 @@
 package dev.minceraft.sonus.service.commands;
 
-import dev.minceraft.sonus.common.data.ISonusPlayer;
+import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
 import net.kyori.adventure.text.Component;
 
 import java.util.UUID;

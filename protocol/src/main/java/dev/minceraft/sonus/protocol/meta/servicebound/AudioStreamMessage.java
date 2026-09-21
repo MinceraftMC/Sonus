@@ -1,9 +1,9 @@
 package dev.minceraft.sonus.protocol.meta.servicebound;
 // Created by booky10 in Sonus (00:05 17.11.2025)
 
-import dev.minceraft.sonus.common.protocol.util.DataTypeUtil;
-import dev.minceraft.sonus.common.protocol.util.VarInt;
-import dev.minceraft.sonus.common.protocol.util.VarLong;
+import dev.minceraft.sonus.common.util.codec.DataTypeUtil;
+import dev.minceraft.sonus.common.util.codec.VarInt;
+import dev.minceraft.sonus.common.util.codec.VarLong;
 import dev.minceraft.sonus.protocol.meta.IMetaHandler;
 import dev.minceraft.sonus.protocol.meta.IMetaMessage;
 import io.netty.buffer.ByteBuf;

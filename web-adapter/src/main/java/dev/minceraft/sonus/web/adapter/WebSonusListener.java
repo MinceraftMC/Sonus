@@ -1,9 +1,9 @@
 package dev.minceraft.sonus.web.adapter;
 
-import dev.minceraft.sonus.common.data.ISonusPlayer;
+import dev.minceraft.sonus.common.adapter.service.ISonusServiceEvents;
 import dev.minceraft.sonus.common.data.SonusPlayerState;
-import dev.minceraft.sonus.common.rooms.IRoom;
-import dev.minceraft.sonus.common.service.ISonusServiceEvents;
+import dev.minceraft.sonus.common.participant.builtin.IRoom;
+import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
 import dev.minceraft.sonus.web.adapter.connection.WebSocketConnection;
 import dev.minceraft.sonus.web.protocol.model.SonusWebPlayerState;
 import dev.minceraft.sonus.web.protocol.model.SonusWebRoom;
@@ -66,7 +66,7 @@ public class WebSonusListener implements ISonusServiceEvents {
 
     @Override
     public void onGroupRemove(IRoom room) {
-        this.adapter.getSessions().broadcast(new RoomRemovePacket(room.getId()));
+        this.adapter.getSessions().broadcast(new RoomRemovePacket(room.getUniqueId()));
     }
 
     @Override

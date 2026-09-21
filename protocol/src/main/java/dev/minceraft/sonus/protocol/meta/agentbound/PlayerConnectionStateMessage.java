@@ -1,7 +1,7 @@
 package dev.minceraft.sonus.protocol.meta.agentbound;
 // Created by booky10 in Sonus (18:53 17.11.2025)
 
-import dev.minceraft.sonus.common.protocol.util.DataTypeUtil;
+import dev.minceraft.sonus.common.util.codec.DataTypeUtil;
 import dev.minceraft.sonus.protocol.meta.IMetaHandler;
 import dev.minceraft.sonus.protocol.meta.IMetaMessage;
 import io.netty.buffer.ByteBuf;

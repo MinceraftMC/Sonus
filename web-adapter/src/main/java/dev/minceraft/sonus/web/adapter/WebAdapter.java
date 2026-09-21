@@ -1,15 +1,15 @@
 package dev.minceraft.sonus.web.adapter;
 // Created by booky10 in Sonus (02:19 10.08.2025)
 
-import dev.minceraft.sonus.common.IAudioSource;
-import dev.minceraft.sonus.common.ISonusService;
-import dev.minceraft.sonus.common.adapter.AdapterInfo;
-import dev.minceraft.sonus.common.adapter.SonusAdapter;
-import dev.minceraft.sonus.common.audio.AudioCategory;
+import dev.minceraft.sonus.common.adapter.ISonusService;
+import dev.minceraft.sonus.common.adapter.adapter.AdapterInfo;
+import dev.minceraft.sonus.common.adapter.adapter.SonusAdapter;
 import dev.minceraft.sonus.common.audio.SonusAudio;
-import dev.minceraft.sonus.common.data.ISonusPlayer;
 import dev.minceraft.sonus.common.data.Vec3d;
 import dev.minceraft.sonus.common.data.WorldRotatedVec3d;
+import dev.minceraft.sonus.common.participant.IAudioSource;
+import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
+import dev.minceraft.sonus.common.protocol.audio.AudioCategory;
 import dev.minceraft.sonus.web.adapter.config.WebConfig;
 import dev.minceraft.sonus.web.adapter.connection.WebSocketConnection;
 import dev.minceraft.sonus.web.adapter.rtc.RtcHandler;
@@ -68,7 +68,7 @@ public class WebAdapter implements SonusAdapter {
         // as we mix webrtc audio on the server, we have
         // to calculate voice activity on the server too
         if (source instanceof ISonusPlayer) {
-            connection.setVoiceActive(source.getSenderId(player), true);
+            connection.setVoiceActive(source.getUniqueId(player), true);
         }
 
         short[] leftData = audio.pcm();
@@ -82,14 +82,14 @@ public class WebAdapter implements SonusAdapter {
         }
 
         // apply source-specific volumes server-side
-        float volume = connection.getVolume(VolumeType.PLAYER, source.getSenderId(player));
+        float volume = connection.getVolume(VolumeType.PLAYER, source.getUniqueId(player));
         UUID categoryId = source.getCategoryId();
         if (categoryId != null) {
             volume *= connection.getVolume(VolumeType.CATEGORY, categoryId);
         }
 
         // append to audio mixer queue
-        UUID channelId = source.getSenderId(player);
+        UUID channelId = source.getUniqueId(player);
         rtcHandler.queueAudio(channelId, leftData, rightData, volume);
     }
 
@@ -116,7 +116,7 @@ public class WebAdapter implements SonusAdapter {
     public void sendAudioEnd(ISonusPlayer player, IAudioSource source, long sequence) {
         WebSocketConnection connection = this.sessions.getConnection(player.getUniqueId());
         if (connection != null) {
-            connection.setVoiceActive(source.getSenderId(player), false);
+            connection.setVoiceActive(source.getUniqueId(player), false);
         }
     }
 

@@ -1,7 +1,7 @@
 package dev.minceraft.sonus.plasmo.protocol;
 
 
-import dev.minceraft.sonus.common.adapter.UdpSonusAdapter;
+import dev.minceraft.sonus.common.protocol.adapter.UdpSonusAdapter;
 import dev.minceraft.sonus.common.protocol.udp.AbstractMagicUdpCodec;
 import dev.minceraft.sonus.plasmo.protocol.udp.UdpPlasmoPacket;
 import io.leangen.geantyref.TypeToken;

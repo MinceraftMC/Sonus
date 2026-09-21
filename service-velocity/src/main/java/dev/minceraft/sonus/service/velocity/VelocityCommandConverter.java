@@ -17,7 +17,7 @@ import com.velocitypowered.api.command.VelocityBrigadierMessage;
 import com.velocitypowered.api.permission.Tristate;
 import com.velocitypowered.api.proxy.ConsoleCommandSource;
 import com.velocitypowered.api.proxy.Player;
-import dev.minceraft.sonus.common.data.ISonusPlayer;
+import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
 import dev.minceraft.sonus.service.SonusService;
 import dev.minceraft.sonus.service.commands.ArgumentCommandNode;
 import dev.minceraft.sonus.service.commands.CommandContext;
@@ -26,7 +26,7 @@ import dev.minceraft.sonus.service.commands.CommandNode;
 import dev.minceraft.sonus.service.commands.CommandSender;
 import dev.minceraft.sonus.service.commands.LiteralCommandNode;
 import dev.minceraft.sonus.service.commands.arguments.EnumArgument;
-import dev.minceraft.sonus.service.player.SonusPlayer;
+import dev.minceraft.sonus.service.participant.SonusPlayer;
 import net.kyori.adventure.text.Component;
 import org.jspecify.annotations.NullMarked;
 

@@ -1,8 +1,8 @@
 package dev.minceraft.sonus.svc.protocol.voice.clientbound;
 
 import dev.minceraft.sonus.common.data.Vec3d;
-import dev.minceraft.sonus.common.protocol.util.DataTypeUtil;
-import dev.minceraft.sonus.common.protocol.util.Utf8String;
+import dev.minceraft.sonus.common.util.codec.DataTypeUtil;
+import dev.minceraft.sonus.common.util.codec.Utf8String;
 import dev.minceraft.sonus.svc.protocol.SvcPacketContext;
 import dev.minceraft.sonus.svc.protocol.voice.IVoiceSvcHandler;
 import io.netty.buffer.ByteBuf;

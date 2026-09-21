@@ -2,7 +2,7 @@ package dev.minceraft.sonus.plasmo.protocol.udp.bothbound;
 
 
 import dev.minceraft.sonus.common.protocol.util.PacketDirection;
-import dev.minceraft.sonus.common.protocol.util.Utf8String;
+import dev.minceraft.sonus.common.util.codec.Utf8String;
 import dev.minceraft.sonus.plasmo.protocol.udp.UdpHandler;
 import dev.minceraft.sonus.plasmo.protocol.udp.UdpPlasmoPacket;
 import io.netty.buffer.ByteBuf;

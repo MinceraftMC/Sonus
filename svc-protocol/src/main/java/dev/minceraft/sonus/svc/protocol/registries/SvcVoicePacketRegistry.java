@@ -2,7 +2,7 @@ package dev.minceraft.sonus.svc.protocol.registries;
 
 import dev.minceraft.sonus.common.protocol.registry.ContextedRegistry;
 import dev.minceraft.sonus.common.protocol.registry.SimpleRegistry;
-import dev.minceraft.sonus.common.protocol.util.VarInt;
+import dev.minceraft.sonus.common.util.codec.VarInt;
 import dev.minceraft.sonus.svc.protocol.SvcPacketContext;
 import dev.minceraft.sonus.svc.protocol.voice.SvcVoicePacket;
 import dev.minceraft.sonus.svc.protocol.voice.clientbound.AuthenticateAckSvcPacket;

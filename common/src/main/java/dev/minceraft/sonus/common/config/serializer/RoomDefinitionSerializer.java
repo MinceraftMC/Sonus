@@ -1,6 +1,6 @@
 package dev.minceraft.sonus.common.config.serializer;
 
-import dev.minceraft.sonus.common.rooms.options.RoomDefinition;
+import dev.minceraft.sonus.common.participant.builtin.RoomDefinition;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.spongepowered.configurate.ConfigurationNode;
 import org.spongepowered.configurate.serialize.SerializationException;
