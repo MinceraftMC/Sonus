@@ -17,6 +17,7 @@ import dev.minceraft.sonus.service.api.ApiServiceImpl;
 import dev.minceraft.sonus.service.commands.CommandHolder;
 import dev.minceraft.sonus.service.commands.builtin.SonusCommand;
 import dev.minceraft.sonus.service.manager.PlayerManager;
+import dev.minceraft.sonus.service.manager.SonusCategoryManager;
 import dev.minceraft.sonus.service.manager.SonusRoomManager;
 import dev.minceraft.sonus.service.network.UdpServer;
 import dev.minceraft.sonus.service.platform.IServicePlatform;
@@ -40,6 +41,7 @@ public final class SonusService implements ISonusService {
     private final SonusEventManager eventManager = new SonusEventManager(this);
     private final SonusScheduler scheduler = new SonusScheduler();
     private final SonusRoomManager roomManager = new SonusRoomManager(this);
+    private final SonusCategoryManager categoryManager = new SonusCategoryManager(this);
     private final AdapterManager adapters = new AdapterManager(this);
     private final AgentManager agentManager = new AgentManager(this);
     private final YamlConfigHolder<SonusConfig> config;
@@ -155,6 +157,11 @@ public final class SonusService implements ISonusService {
     @Override
     public PlayerManager getPlayerManager() {
         return this.players;
+    }
+
+    @Override
+    public SonusCategoryManager getCategoryManager() {
+        return this.categoryManager;
     }
 
     @Override

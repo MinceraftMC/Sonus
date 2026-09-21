@@ -1,6 +1,7 @@
 package dev.minceraft.sonus.api.service;
 
 import dev.minceraft.sonus.api.service.audio.ISonusAudio;
+import dev.minceraft.sonus.api.service.manager.ISonusCategoryManager;
 import dev.minceraft.sonus.api.service.manager.ISonusEventManager;
 import dev.minceraft.sonus.api.service.manager.ISonusPlayerManager;
 import dev.minceraft.sonus.api.service.manager.ISonusRoomManager;
@@ -19,6 +20,8 @@ public interface ISonusServiceApi {
     ISonusRoomManager getRoomManager();
 
     ISonusEventManager getEventManager();
+
+    ISonusCategoryManager getCategoryManager();
 
     /**
      * Creates the sonus audio wrapper with pcm data

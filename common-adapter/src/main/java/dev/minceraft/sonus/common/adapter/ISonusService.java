@@ -1,5 +1,6 @@
 package dev.minceraft.sonus.common.adapter;
 
+import dev.minceraft.sonus.common.adapter.service.ICategoryManager;
 import dev.minceraft.sonus.common.audio.AudioProcessor;
 import dev.minceraft.sonus.common.adapter.config.ISonusConfig;
 import dev.minceraft.sonus.common.audio.OpusMode;
@@ -34,6 +35,8 @@ public interface ISonusService {
     ISonusRoomManager getRoomManager();
 
     IPlayerManager getPlayerManager();
+
+    ICategoryManager getCategoryManager();
 
     OpusNativesLoader getOpusNatives();
 

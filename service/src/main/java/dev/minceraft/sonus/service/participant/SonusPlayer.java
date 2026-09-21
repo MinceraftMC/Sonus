@@ -4,8 +4,8 @@ package dev.minceraft.sonus.service.participant;
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
 import dev.minceraft.sonus.common.adapter.adapter.SonusAdapter;
-import dev.minceraft.sonus.common.data.SonusPlayerState;
 import dev.minceraft.sonus.common.audio.SonusAudio;
+import dev.minceraft.sonus.common.data.SonusPlayerState;
 import dev.minceraft.sonus.common.data.Vec3d;
 import dev.minceraft.sonus.common.data.WorldRotatedVec3d;
 import dev.minceraft.sonus.common.participant.IAudioSource;
@@ -138,6 +138,13 @@ public final class SonusPlayer implements ISonusPlayer, CommandSender, AutoClose
         }
     }
 
+    private void ensureCategory(IAudioSource source) {
+        UUID categoryId = source.getCategoryId();
+        if (categoryId != null) {
+            this.service.getCategoryManager().ensureCategory(this, categoryId);
+        }
+    }
+
     private boolean canHear(IAudioSource source, boolean spatial) {
         if (this.sonusAdapter == null || !this.isVoiceActive()) {
             return false;
@@ -207,6 +214,7 @@ public final class SonusPlayer implements ISonusPlayer, CommandSender, AutoClose
 
     @Override
     public void sendStaticAudio(IAudioSource source, SonusAudio audio) {
+        this.ensureCategory(source);
         if (this.canHear(source, false)) {
             assert this.sonusAdapter != null;
             this.sonusAdapter.sendStaticAudio(this, source, audio);
@@ -215,6 +223,7 @@ public final class SonusPlayer implements ISonusPlayer, CommandSender, AutoClose
 
     @Override
     public void sendStaticAudioEnd(IAudioSource source, long sequence) {
+        this.ensureCategory(source);
         if (this.canHear(source, false)) {
             assert this.sonusAdapter != null;
             this.sonusAdapter.sendAudioEnd(this, source, sequence);
@@ -223,6 +232,7 @@ public final class SonusPlayer implements ISonusPlayer, CommandSender, AutoClose
 
     @Override
     public void sendSpatialAudio(IAudioSource source, SonusAudio audio, Vec3d position) {
+        this.ensureCategory(source);
         if (this.canHear(source, true)) {
             assert this.sonusAdapter != null;
             this.sonusAdapter.sendSpatialAudio(this, source, audio, position);
@@ -231,6 +241,7 @@ public final class SonusPlayer implements ISonusPlayer, CommandSender, AutoClose
 
     @Override
     public void sendSpatialAudio(IAudioSource source, SonusAudio audio) {
+        this.ensureCategory(source);
         if (this.canHear(source, true)) {
             assert this.sonusAdapter != null;
             this.sonusAdapter.sendSpatialAudio(this, source, audio);
@@ -239,6 +250,7 @@ public final class SonusPlayer implements ISonusPlayer, CommandSender, AutoClose
 
     @Override
     public void sendSpatialNormedAudio(IAudioSource source, SonusAudio audio) {
+        this.ensureCategory(source);
         if (!this.canHear(source, true)) {
             return;
         }
@@ -251,6 +263,7 @@ public final class SonusPlayer implements ISonusPlayer, CommandSender, AutoClose
 
     @Override
     public void sendSpatialAudioEnd(IAudioSource source, long sequence) {
+        this.ensureCategory(source);
         if (this.canHear(source, true)) {
             assert this.sonusAdapter != null;
             this.sonusAdapter.sendAudioEnd(this, source, sequence);
@@ -697,8 +710,8 @@ public final class SonusPlayer implements ISonusPlayer, CommandSender, AutoClose
         if (server == prevServer) {
             return; // nothing changed
         }
-        if (prevServer != null) {
-            prevServer.onDisconnect(this);
+        if (prevServer != null) { // Switched
+            this.service.getCategoryManager().onDisconnect(this); // remove player from all categories
         }
         this.server = server;
     }

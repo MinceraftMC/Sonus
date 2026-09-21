@@ -19,6 +19,7 @@ import dev.minceraft.sonus.protocol.meta.servicebound.RegisterAudioCategoryMessa
 import dev.minceraft.sonus.protocol.meta.servicebound.UpdateRoomDefinitionMessage;
 import dev.minceraft.sonus.service.SonusService;
 import dev.minceraft.sonus.service.manager.PlayerManager;
+import dev.minceraft.sonus.service.manager.SonusCategoryManager;
 import dev.minceraft.sonus.service.participant.SonusPlayer;
 import dev.minceraft.sonus.service.server.SonusServer;
 import org.jspecify.annotations.NullMarked;
@@ -79,15 +80,10 @@ public class AgentListener implements IMetaHandler, AutoCloseable {
         if (frames.isEmpty()) {
             return; // no frames sent
         }
-        // ensure category is sent to the player if set
-        UUID categoryId = message.getCategoryId();
-        if (categoryId != null) {
-            this.server.ensureCategory(player, categoryId);
-        }
 
         // send all frames at once, the client will queue them (at most 32)
         UUID channelId = message.getChannelId();
-        IAudioSource source = new IAudioSource.Static(channelId, categoryId);
+        IAudioSource source = new IAudioSource.Static(channelId, message.getCategoryId());
         Supplier<AudioProcessor> processor = () -> this.processorCache.getUnchecked(channelId);
         for (AudioStreamMessage.Frame frame : frames) {
             SonusAudio audio = SonusAudio.fromOpus(frame.sequence(), frame.data()).setProcessor(processor);
@@ -97,7 +93,7 @@ public class AgentListener implements IMetaHandler, AutoCloseable {
 
     @Override
     public void handleRegisterAudioCategory(RegisterAudioCategoryMessage message) {
-        this.server.registerCategory(message.getCategory());
+        this.service.getCategoryManager().registerCategory(message.getCategory(), SonusCategoryManager.CategorySource.AGENT);
     }
 
     private void handlePositions(@Nullable Map<UUID, WorldRotatedVec3d> positions) {
