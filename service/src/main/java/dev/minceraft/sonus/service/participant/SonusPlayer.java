@@ -92,10 +92,22 @@ public final class SonusPlayer implements ISonusPlayer, CommandSender, AutoClose
                 || !this.platform.hasPermission(PERMISSION_VOICE_SPEAK, true)) {
             return;
         }
+        long sequence = audio.getSequenceNumber();
 
-        this.maxSequenceNumber.updateAndGet(l -> Math.max(l, audio.getSequenceNumber()));
+        this.maxSequenceNumber.updateAndGet(l -> Math.max(l, sequence));
+
+        audio = this.service.getEventManager().onPlayerInputAudio(this, audio);
+        if (audio == null) {
+            return; // event cancelled
+        }
         this.processAudioInput(audio);
-        this.handleRoomBroadcast(room -> room.sendAudio(this, audio));
+        audio = this.service.getEventManager().onPlayerInputPostAudio(this, audio);
+        if (audio == null) {
+            return; // event cancelled
+        }
+
+        final SonusAudio finalAudio = audio;
+        this.handleRoomBroadcast(room -> room.sendAudio(this, finalAudio));
     }
 
     @Override
@@ -214,6 +226,11 @@ public final class SonusPlayer implements ISonusPlayer, CommandSender, AutoClose
 
     @Override
     public void sendStaticAudio(IAudioSource source, SonusAudio audio) {
+        audio = this.service.getEventManager().onPlayerOutputAudio(this, source, audio);
+        if (audio == null) {
+            return; // event canceled
+        }
+
         this.ensureCategory(source);
         if (this.canHear(source, false)) {
             assert this.sonusAdapter != null;
@@ -232,6 +249,11 @@ public final class SonusPlayer implements ISonusPlayer, CommandSender, AutoClose
 
     @Override
     public void sendSpatialAudio(IAudioSource source, SonusAudio audio, Vec3d position) {
+        audio = this.service.getEventManager().onPlayerOutputAudio(this, source, audio);
+        if (audio == null) {
+            return; // event canceled
+        }
+
         this.ensureCategory(source);
         if (this.canHear(source, true)) {
             assert this.sonusAdapter != null;
@@ -241,6 +263,11 @@ public final class SonusPlayer implements ISonusPlayer, CommandSender, AutoClose
 
     @Override
     public void sendSpatialAudio(IAudioSource source, SonusAudio audio) {
+        audio = this.service.getEventManager().onPlayerOutputAudio(this, source, audio);
+        if (audio == null) {
+            return; // event canceled
+        }
+
         this.ensureCategory(source);
         if (this.canHear(source, true)) {
             assert this.sonusAdapter != null;
@@ -250,6 +277,11 @@ public final class SonusPlayer implements ISonusPlayer, CommandSender, AutoClose
 
     @Override
     public void sendSpatialNormedAudio(IAudioSource source, SonusAudio audio) {
+        audio = this.service.getEventManager().onPlayerOutputAudio(this, source, audio);
+        if (audio == null) {
+            return; // event canceled
+        }
+
         this.ensureCategory(source);
         if (!this.canHear(source, true)) {
             return;

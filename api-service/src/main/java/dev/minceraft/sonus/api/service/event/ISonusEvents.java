@@ -1,9 +1,12 @@
 package dev.minceraft.sonus.api.service.event;
 
+import dev.minceraft.sonus.api.service.audio.ISonusAudio;
+import dev.minceraft.sonus.api.service.participant.ISonusSource;
 import dev.minceraft.sonus.api.service.participant.builtin.ISonusServicePlayer;
 import dev.minceraft.sonus.api.service.rooms.ISonusRoom;
 import net.kyori.adventure.key.Key;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Set;
 import java.util.UUID;
@@ -105,5 +108,48 @@ public interface ISonusEvents {
      * @param player the player
      */
     default void onConnectionState(ISonusServicePlayer player) {
+    }
+
+    /**
+     * Called when a player will receive an audio frame. You can cancel the audio frame by returning null.
+     *
+     * @param receiver the player who will receive the audio frame
+     * @param source   the source of the audio frame
+     * @param audio    the audio frame
+     * @return the audio frame to send to the player, or null to cancel the audio frame
+     */
+    @Nullable
+    default ISonusAudio onPlayerOutputAudio(ISonusServicePlayer receiver, ISonusSource source, ISonusAudio audio) {
+        return audio;
+    }
+
+    /**
+     * Called when a player sends an audio frame. You can cancel the audio frame by returning null.
+     * <p>
+     * Note: This is called before internal processing, if you want to modify the audio after internal processing,
+     * use {@link #onPlayerInputPostAudio(ISonusServicePlayer, ISonusAudio)} instead.
+     *
+     * @param sender the player who sent the audio frame
+     * @param audio  the audio frame
+     * @return the audio frame to send to the server, or null to cancel the audio frame
+     */
+    @Nullable
+    default ISonusAudio onPlayerInputAudio(ISonusServicePlayer sender, ISonusAudio audio) {
+        return audio;
+    }
+
+    /**
+     * Called when a player sends an audio frame after internal processing. You can cancel the audio frame by returning null.
+     * <p>
+     * Note: This is called after internal processing, if you want to modify the audio before internal processing,
+     * use {@link #onPlayerInputAudio(ISonusServicePlayer, ISonusAudio)} instead.
+     *
+     * @param sender the player who sent the audio frame
+     * @param audio  the audio frame
+     * @return the audio frame to send to the server, or null to cancel the audio frame
+     */
+    @Nullable
+    default ISonusAudio onPlayerInputPostAudio(ISonusServicePlayer sender, ISonusAudio audio) {
+        return audio;
     }
 }

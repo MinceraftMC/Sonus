@@ -1,10 +1,13 @@
 package dev.minceraft.sonus.common.adapter.service;
 
-import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
+import dev.minceraft.sonus.common.audio.SonusAudio;
 import dev.minceraft.sonus.common.data.SonusPlayerState;
+import dev.minceraft.sonus.common.participant.IAudioSource;
 import dev.minceraft.sonus.common.participant.builtin.IRoom;
+import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
 import net.kyori.adventure.key.Key;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Set;
 import java.util.UUID;
@@ -46,5 +49,20 @@ public interface ISonusServiceEvents {
     }
 
     default void onPlayerVisibilityStateUpdate(ISonusPlayer player, ISonusPlayer target, SonusPlayerState state) {
+    }
+
+    @Nullable
+    default SonusAudio onPlayerOutputAudio(ISonusPlayer receiver, IAudioSource source, SonusAudio audio) {
+        return audio;
+    }
+
+    @Nullable
+    default SonusAudio onPlayerInputAudio(ISonusPlayer sender, SonusAudio audio){
+        return audio;
+    }
+
+    @Nullable
+    default SonusAudio onPlayerInputPostAudio(ISonusPlayer sender, SonusAudio audio){
+        return audio;
     }
 }

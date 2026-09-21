@@ -2,12 +2,15 @@ package dev.minceraft.sonus.service;
 
 import dev.minceraft.sonus.common.adapter.service.ISonusEventManager;
 import dev.minceraft.sonus.common.adapter.service.ISonusServiceEvents;
+import dev.minceraft.sonus.common.audio.SonusAudio;
 import dev.minceraft.sonus.common.data.SonusPlayerState;
+import dev.minceraft.sonus.common.participant.IAudioSource;
 import dev.minceraft.sonus.common.participant.builtin.IRoom;
 import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
 import dev.minceraft.sonus.service.participant.SonusPlayer;
 import net.kyori.adventure.key.Key;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -168,5 +171,53 @@ public class SonusEventManager implements ISonusEventManager {
                 LOGGER.error("Error in onPlayerVisibilityStateUpdate for listener {}", listener.getClass().getSimpleName(), exception);
             }
         }
+    }
+
+    @Override
+    @Nullable
+    public SonusAudio onPlayerOutputAudio(ISonusPlayer receiver, IAudioSource source, SonusAudio audio) {
+        for (ISonusServiceEvents listener : this.listeners) {
+            try {
+                audio = listener.onPlayerOutputAudio(receiver, source, audio);
+                if (audio == null) {
+                    return null;
+                }
+            } catch (Exception exception) {
+                LOGGER.error("Error in onPlayerOutputAudio for listener {}", listener.getClass().getSimpleName(), exception);
+            }
+        }
+        return audio;
+    }
+
+    @Override
+    @Nullable
+    public SonusAudio onPlayerInputAudio(ISonusPlayer sender, SonusAudio audio) {
+        for (ISonusServiceEvents listener : this.listeners) {
+            try {
+                audio = listener.onPlayerInputAudio(sender, audio);
+                if (audio == null) {
+                    return null;
+                }
+            } catch (Exception exception) {
+                LOGGER.error("Error in onPlayerInputAudio for listener {}", listener.getClass().getSimpleName(), exception);
+            }
+        }
+        return audio;
+    }
+
+    @Override
+    @Nullable
+    public SonusAudio onPlayerInputPostAudio(ISonusPlayer sender, SonusAudio audio) {
+        for (ISonusServiceEvents listener : this.listeners) {
+            try {
+                audio = listener.onPlayerInputPostAudio(sender, audio);
+                if (audio == null) {
+                    return null;
+                }
+            } catch (Exception exception) {
+                LOGGER.error("Error in onPlayerInputPostAudio for listener {}", listener.getClass().getSimpleName(), exception);
+            }
+        }
+        return audio;
     }
 }

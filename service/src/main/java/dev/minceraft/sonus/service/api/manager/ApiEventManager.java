@@ -1,15 +1,22 @@
 package dev.minceraft.sonus.service.api.manager;
 
+import dev.minceraft.sonus.api.service.audio.ISonusAudio;
 import dev.minceraft.sonus.api.service.event.ISonusEvents;
 import dev.minceraft.sonus.api.service.manager.ISonusEventManager;
+import dev.minceraft.sonus.api.service.participant.ISonusSource;
 import dev.minceraft.sonus.common.adapter.service.ISonusServiceEvents;
+import dev.minceraft.sonus.common.audio.SonusAudio;
+import dev.minceraft.sonus.common.participant.IAudioSource;
 import dev.minceraft.sonus.common.participant.builtin.IRoom;
 import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
 import dev.minceraft.sonus.service.SonusService;
 import dev.minceraft.sonus.service.api.ApiRoom;
+import dev.minceraft.sonus.service.api.audio.ApiAudio;
+import dev.minceraft.sonus.service.api.participant.ApiSonusParticipant;
 import dev.minceraft.sonus.service.api.participant.builtin.ApiSonusPlayer;
 import net.kyori.adventure.key.Key;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -152,5 +159,58 @@ public class ApiEventManager implements ISonusServiceEvents, ISonusEventManager 
                 LOGGER.warn("Error in onPlayerDisconnect for listener {}", listener.getClass().getSimpleName(), exception);
             }
         }
+    }
+
+    @Override
+    @Nullable
+    public SonusAudio onPlayerOutputAudio(ISonusPlayer receiver, IAudioSource source, SonusAudio audio) {
+        ISonusAudio pipeAudio = new ApiAudio(audio);
+        ISonusSource apiSource = ApiSonusParticipant.toApi(source);
+
+        for (ISonusEvents listener : this.listeners) {
+            try {
+                pipeAudio = listener.onPlayerOutputAudio(new ApiSonusPlayer(receiver), apiSource, pipeAudio);
+                if (pipeAudio == null) {
+                    return null;
+                }
+            } catch (Exception exception) {
+                LOGGER.warn("Error in onPlayerOutputAudio for listener {}", listener.getClass().getSimpleName(), exception);
+            }
+        }
+        return ((ApiAudio) pipeAudio).getDelegate();
+    }
+
+    @Override
+    @Nullable
+    public SonusAudio onPlayerInputAudio(ISonusPlayer sender, SonusAudio audio) {
+        ISonusAudio pipeAudio = new ApiAudio(audio);
+        for (ISonusEvents listener : this.listeners) {
+            try {
+                pipeAudio = listener.onPlayerInputAudio(new ApiSonusPlayer(sender), pipeAudio);
+                if (pipeAudio == null) {
+                    return null;
+                }
+            } catch (Exception exception) {
+                LOGGER.warn("Error in onPlayerInputAudio for listener {}", listener.getClass().getSimpleName(), exception);
+            }
+        }
+        return ((ApiAudio) pipeAudio).getDelegate();
+    }
+
+    @Override
+    @Nullable
+    public SonusAudio onPlayerInputPostAudio(ISonusPlayer sender, SonusAudio audio) {
+        ISonusAudio pipeAudio = new ApiAudio(audio);
+        for (ISonusEvents listener : this.listeners) {
+            try {
+                pipeAudio = listener.onPlayerInputPostAudio(new ApiSonusPlayer(sender), pipeAudio);
+                if (pipeAudio == null) {
+                    return null;
+                }
+            } catch (Exception exception) {
+                LOGGER.warn("Error in onPlayerInputPostAudio for listener {}", listener.getClass().getSimpleName(), exception);
+            }
+        }
+        return ((ApiAudio) pipeAudio).getDelegate();
     }
 }
