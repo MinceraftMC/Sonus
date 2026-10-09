@@ -1,7 +1,7 @@
 package dev.minceraft.sonus.protocol.meta.servicebound;
 // Created by booky10 in Sonus (00:51 17.11.2025)
 
-import dev.minceraft.sonus.common.audio.AudioCategory;
+import dev.minceraft.sonus.common.protocol.audio.AudioCategory;
 import dev.minceraft.sonus.protocol.meta.IMetaHandler;
 import dev.minceraft.sonus.protocol.meta.IMetaMessage;
 import io.netty.buffer.ByteBuf;

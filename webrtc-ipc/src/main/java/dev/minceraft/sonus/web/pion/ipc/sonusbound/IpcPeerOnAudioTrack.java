@@ -1,7 +1,7 @@
 package dev.minceraft.sonus.web.pion.ipc.sonusbound;
 // Created by booky10 in Sonus (8:37 PM 06.03.2026)
 
-import dev.minceraft.sonus.common.protocol.util.VarInt;
+import dev.minceraft.sonus.common.util.codec.VarInt;
 import dev.minceraft.sonus.web.pion.ipc.IpcMessage;
 import dev.minceraft.sonus.web.pion.ipc.IpcTypes;
 import io.netty.buffer.ByteBuf;

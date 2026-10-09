@@ -1,8 +1,8 @@
 package dev.minceraft.sonus.web.protocol.packets.servicebound;
 // Created by booky10 in Sonus (5:22 PM 02.03.2026)
 
-import dev.minceraft.sonus.common.protocol.util.DataTypeUtil;
-import dev.minceraft.sonus.common.protocol.util.VarInt;
+import dev.minceraft.sonus.common.util.codec.DataTypeUtil;
+import dev.minceraft.sonus.common.util.codec.VarInt;
 import dev.minceraft.sonus.web.protocol.WsPacketContext;
 import dev.minceraft.sonus.web.protocol.packets.IWebSocketHandler;
 import dev.minceraft.sonus.web.protocol.packets.WebSocketPacket;

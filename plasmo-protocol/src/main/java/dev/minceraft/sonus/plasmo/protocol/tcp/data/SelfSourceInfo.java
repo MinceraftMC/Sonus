@@ -1,7 +1,7 @@
 package dev.minceraft.sonus.plasmo.protocol.tcp.data;
 
 
-import dev.minceraft.sonus.common.protocol.util.DataTypeUtil;
+import dev.minceraft.sonus.common.util.codec.DataTypeUtil;
 import dev.minceraft.sonus.plasmo.protocol.tcp.data.source.SourceInfo;
 import dev.minceraft.sonus.plasmo.protocol.tcp.data.source.SourceType;
 import io.netty.buffer.ByteBuf;

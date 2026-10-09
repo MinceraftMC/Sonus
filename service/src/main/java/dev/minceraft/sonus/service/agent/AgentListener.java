@@ -6,19 +6,21 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.cache.RemovalListener;
 import com.google.common.collect.Table;
-import dev.minceraft.sonus.common.IAudioSource;
 import dev.minceraft.sonus.common.audio.AudioProcessor;
+import dev.minceraft.sonus.common.audio.OpusMode;
 import dev.minceraft.sonus.common.audio.SonusAudio;
 import dev.minceraft.sonus.common.data.SonusPlayerState;
 import dev.minceraft.sonus.common.data.WorldRotatedVec3d;
+import dev.minceraft.sonus.common.participant.IAudioSource;
 import dev.minceraft.sonus.protocol.meta.IMetaHandler;
 import dev.minceraft.sonus.protocol.meta.servicebound.AudioStreamMessage;
 import dev.minceraft.sonus.protocol.meta.servicebound.BackendTickMessage;
 import dev.minceraft.sonus.protocol.meta.servicebound.RegisterAudioCategoryMessage;
 import dev.minceraft.sonus.protocol.meta.servicebound.UpdateRoomDefinitionMessage;
 import dev.minceraft.sonus.service.SonusService;
-import dev.minceraft.sonus.service.player.PlayerManager;
-import dev.minceraft.sonus.service.player.SonusPlayer;
+import dev.minceraft.sonus.service.manager.PlayerManager;
+import dev.minceraft.sonus.service.manager.SonusCategoryManager;
+import dev.minceraft.sonus.service.participant.SonusPlayer;
 import dev.minceraft.sonus.service.server.SonusServer;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -47,7 +49,7 @@ public class AgentListener implements IMetaHandler, AutoCloseable {
             .build(new CacheLoader<>() {
                 @Override
                 public AudioProcessor load(UUID key) {
-                    return AgentListener.this.service.createAudioProcessor(AudioProcessor.Mode.AUDIO);
+                    return AgentListener.this.service.createAudioProcessor(OpusMode.AUDIO);
                 }
             });
 
@@ -78,15 +80,10 @@ public class AgentListener implements IMetaHandler, AutoCloseable {
         if (frames.isEmpty()) {
             return; // no frames sent
         }
-        // ensure category is sent to the player if set
-        UUID categoryId = message.getCategoryId();
-        if (categoryId != null) {
-            this.server.ensureCategory(player, categoryId);
-        }
 
         // send all frames at once, the client will queue them (at most 32)
         UUID channelId = message.getChannelId();
-        IAudioSource source = new IAudioSource.Static(channelId, categoryId);
+        IAudioSource source = new IAudioSource.Static(channelId, message.getCategoryId());
         Supplier<AudioProcessor> processor = () -> this.processorCache.getUnchecked(channelId);
         for (AudioStreamMessage.Frame frame : frames) {
             SonusAudio audio = SonusAudio.fromOpus(frame.sequence(), frame.data()).setProcessor(processor);
@@ -96,7 +93,7 @@ public class AgentListener implements IMetaHandler, AutoCloseable {
 
     @Override
     public void handleRegisterAudioCategory(RegisterAudioCategoryMessage message) {
-        this.server.registerCategory(message.getCategory());
+        this.service.getCategoryManager().registerCategory(message.getCategory(), SonusCategoryManager.CategorySource.AGENT);
     }
 
     private void handlePositions(@Nullable Map<UUID, WorldRotatedVec3d> positions) {

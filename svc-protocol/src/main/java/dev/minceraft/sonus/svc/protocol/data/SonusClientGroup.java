@@ -1,7 +1,7 @@
 package dev.minceraft.sonus.svc.protocol.data;
 
-import dev.minceraft.sonus.common.protocol.util.Utf8String;
-import dev.minceraft.sonus.common.rooms.IRoom;
+import dev.minceraft.sonus.common.participant.builtin.IRoom;
+import dev.minceraft.sonus.common.util.codec.Utf8String;
 import io.netty.buffer.ByteBuf;
 
 import java.util.UUID;
@@ -26,7 +26,7 @@ public class SonusClientGroup {
 
     public SonusClientGroup(IRoom room, boolean bypassPassword) {
         this.name = room.getName();
-        this.groupId = room.getId();
+        this.groupId = room.getUniqueId();
         this.password = room.getPassword() != null && !bypassPassword;
         this.persistent = false; // dummy value, not used on client
         this.hidden = !room.isVisible();

@@ -1,6 +1,7 @@
 package dev.minceraft.sonus.service.commands.arguments;
 
-import dev.minceraft.sonus.common.rooms.RoomAudioType;
+
+import dev.minceraft.sonus.common.participant.builtin.RoomAudioType;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked

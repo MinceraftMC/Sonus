@@ -1,7 +1,7 @@
 package dev.minceraft.sonus.svc.adapter;
 
-import dev.minceraft.sonus.common.IPlayerManager;
-import dev.minceraft.sonus.common.data.ISonusPlayer;
+import dev.minceraft.sonus.common.adapter.IPlayerManager;
+import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
 import dev.minceraft.sonus.common.protocol.tcp.AbstractPluginMessageCodec;
 import dev.minceraft.sonus.common.protocol.tcp.IPluginMessageSource;
 import dev.minceraft.sonus.common.protocol.tcp.holder.PmDataHolderBuf;

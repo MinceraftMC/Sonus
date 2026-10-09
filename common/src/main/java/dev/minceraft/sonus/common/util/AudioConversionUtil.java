@@ -2,7 +2,6 @@ package dev.minceraft.sonus.common.util;
 // Created by booky10 in TjcSonus (19:40 17.11.2024)
 
 import dev.minceraft.sonus.common.natives.LameNativesLoader;
-import dev.minceraft.sonus.common.natives.LameNativesLoader.Decoder;
 import org.jspecify.annotations.NullMarked;
 
 import javax.sound.sampled.AudioFormat;
@@ -136,19 +135,19 @@ public final class AudioConversionUtil {
 
     public static short[] decodeMp3ToSonus(LameNativesLoader natives, int fileSize, InputStream input, float volume) throws IOException {
         try (BufferedInputStream bufferedInput = new BufferedInputStream(input);
-             Decoder decoder = natives.new Decoder(bufferedInput)) {
+             LameNativesLoader.Decoder decoder = natives.new Decoder(bufferedInput)) {
             return decodeMp3ToSonus(fileSize, decoder, volume);
         }
     }
 
-    public static short[] decodeMp3ToSonus(Decoder decoder, float volume) {
+    public static short[] decodeMp3ToSonus(LameNativesLoader.Decoder decoder, float volume) {
         return decodeMp3ToSonus(0, decoder, volume);
     }
 
     private static final int INITIAL_SAMPLE_COUNT = 2048;
 
     // inspired by https://github.com/henkelmax/simple-voice-chat/blob/20218b8d4169ec2af56c34a0aa07c2ee711a01e1/common/src/main/java/de/maxhenkel/voicechat/plugins/impl/mp3/Mp3DecoderImpl.java
-    public static short[] decodeMp3ToSonus(int fileSize, Decoder decoder, float volume) {
+    public static short[] decodeMp3ToSonus(int fileSize, LameNativesLoader.Decoder decoder, float volume) {
         short[] firstFrame = decoder.decodeNextFrame();
         if (firstFrame == null) {
             throw new IllegalArgumentException("Failed to decode first mp3 frame from " + decoder);

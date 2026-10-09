@@ -1,6 +1,6 @@
 package dev.minceraft.sonus.common.data;
 
-import dev.minceraft.sonus.common.protocol.util.DataTypeUtil;
+import dev.minceraft.sonus.common.util.codec.DataTypeUtil;
 import io.netty.buffer.ByteBuf;
 import net.kyori.adventure.key.Key;
 

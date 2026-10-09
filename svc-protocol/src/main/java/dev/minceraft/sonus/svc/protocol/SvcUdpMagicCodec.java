@@ -1,7 +1,7 @@
 package dev.minceraft.sonus.svc.protocol;
 
 
-import dev.minceraft.sonus.common.adapter.UdpSonusAdapter;
+import dev.minceraft.sonus.common.protocol.adapter.UdpSonusAdapter;
 import dev.minceraft.sonus.common.protocol.udp.AbstractMagicUdpCodec;
 import dev.minceraft.sonus.svc.protocol.voice.SvcVoicePacket;
 import io.leangen.geantyref.TypeToken;

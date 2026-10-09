@@ -1,10 +1,10 @@
 package dev.minceraft.sonus.web.protocol.model;
 // Created by booky10 in Sonus (20:36 28.11.2025)
 
-import dev.minceraft.sonus.common.data.ISonusPlayer;
-import dev.minceraft.sonus.common.protocol.util.DataTypeUtil;
-import dev.minceraft.sonus.common.protocol.util.Utf8String;
-import dev.minceraft.sonus.common.rooms.IRoom;
+import dev.minceraft.sonus.common.participant.builtin.IRoom;
+import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
+import dev.minceraft.sonus.common.util.codec.DataTypeUtil;
+import dev.minceraft.sonus.common.util.codec.Utf8String;
 import io.netty.buffer.ByteBuf;
 import net.kyori.adventure.text.Component;
 import org.jspecify.annotations.NullMarked;
@@ -54,7 +54,7 @@ public class SonusWebPlayerState {
         boolean muted = player.isMuted();
         boolean deafened = player.isDeafened();
         IRoom primaryRoom = player.getPrimaryRoom();
-        UUID primaryRoomId = primaryRoom != null ? primaryRoom.getId() : null;
+        UUID primaryRoomId = primaryRoom != null ? primaryRoom.getUniqueId() : null;
         UUID serverId = player.getServerId();
         return new SonusWebPlayerState(uniqueId, name, textureHash, muted, deafened, primaryRoomId, serverId);
     }

@@ -1,6 +1,6 @@
 package dev.minceraft.sonus.plasmo.protocol.tcp.clientbound;
 
-import dev.minceraft.sonus.common.protocol.util.DataTypeUtil;
+import dev.minceraft.sonus.common.util.codec.DataTypeUtil;
 import dev.minceraft.sonus.plasmo.protocol.tcp.TcpHandler;
 import dev.minceraft.sonus.plasmo.protocol.tcp.TcpPlasmoPacket;
 import io.netty.buffer.ByteBuf;

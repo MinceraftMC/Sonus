@@ -1,7 +1,7 @@
 package dev.minceraft.sonus.web.protocol.packets;
 
 import dev.minceraft.sonus.common.protocol.registry.ContextedRegistry;
-import dev.minceraft.sonus.common.protocol.util.VarInt;
+import dev.minceraft.sonus.common.util.codec.VarInt;
 import dev.minceraft.sonus.web.protocol.WsPacketContext;
 import dev.minceraft.sonus.web.protocol.packets.clientbound.CategoryAddPacket;
 import dev.minceraft.sonus.web.protocol.packets.clientbound.CategoryRemovePacket;

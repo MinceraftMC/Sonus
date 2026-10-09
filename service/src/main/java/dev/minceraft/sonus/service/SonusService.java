@@ -2,24 +2,25 @@ package dev.minceraft.sonus.service;
 // Created by booky10 in Sonus (01:33 17.07.2025)
 
 import com.google.gson.Gson;
-import dev.minceraft.sonus.common.ISonusService;
-import dev.minceraft.sonus.common.audio.AudioProcessor;
-import dev.minceraft.sonus.common.config.ISonusConfig;
+import dev.minceraft.sonus.common.adapter.ISonusService;
+import dev.minceraft.sonus.common.adapter.config.ISonusConfig;
+import dev.minceraft.sonus.common.adapter.service.ISonusEventManager;
+import dev.minceraft.sonus.common.adapter.service.ISonusRoomManager;
+import dev.minceraft.sonus.common.adapter.service.ISonusScheduler;
 import dev.minceraft.sonus.common.config.YamlConfigHolder;
 import dev.minceraft.sonus.common.natives.OpusNativesLoader;
 import dev.minceraft.sonus.common.natives.SpeexNativesLoader;
 import dev.minceraft.sonus.common.protocol.udp.IUdpServer;
-import dev.minceraft.sonus.common.service.ISonusEventManager;
-import dev.minceraft.sonus.common.service.ISonusRoomManager;
-import dev.minceraft.sonus.common.service.ISonusScheduler;
 import dev.minceraft.sonus.service.adapter.AdapterManager;
 import dev.minceraft.sonus.service.agent.AgentManager;
+import dev.minceraft.sonus.service.api.ApiServiceImpl;
 import dev.minceraft.sonus.service.commands.CommandHolder;
 import dev.minceraft.sonus.service.commands.builtin.SonusCommand;
+import dev.minceraft.sonus.service.manager.PlayerManager;
+import dev.minceraft.sonus.service.manager.SonusCategoryManager;
+import dev.minceraft.sonus.service.manager.SonusRoomManager;
 import dev.minceraft.sonus.service.network.UdpServer;
 import dev.minceraft.sonus.service.platform.IServicePlatform;
-import dev.minceraft.sonus.service.player.PlayerManager;
-import dev.minceraft.sonus.service.rooms.SonusRoomManager;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -31,9 +32,8 @@ import java.nio.file.Path;
 @NullMarked
 public final class SonusService implements ISonusService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger("Sonus");
     public static final Gson GSON = new Gson();
-
+    private static final Logger LOGGER = LoggerFactory.getLogger("Sonus");
     private final IServicePlatform platform;
     private final PlayerManager players;
     private final CommandHolder commands = new CommandHolder();
@@ -41,6 +41,7 @@ public final class SonusService implements ISonusService {
     private final SonusEventManager eventManager = new SonusEventManager(this);
     private final SonusScheduler scheduler = new SonusScheduler();
     private final SonusRoomManager roomManager = new SonusRoomManager(this);
+    private final SonusCategoryManager categoryManager = new SonusCategoryManager(this);
     private final AdapterManager adapters = new AdapterManager(this);
     private final AgentManager agentManager = new AgentManager(this);
     private final YamlConfigHolder<SonusConfig> config;
@@ -66,12 +67,16 @@ public final class SonusService implements ISonusService {
         LOGGER.info("Loading configuration...");
         this.config.reloadConfig();
 
+        LOGGER.info("Initializing managers");
         this.adapters.init();
         this.roomManager.init();
         this.agentManager.init();
         this.udpServer.bind();
 
         this.initCommands();
+
+        LOGGER.info("Initializing api");
+        ApiServiceImpl.init(this);
     }
 
     private void initCommands() {
@@ -152,6 +157,11 @@ public final class SonusService implements ISonusService {
     @Override
     public PlayerManager getPlayerManager() {
         return this.players;
+    }
+
+    @Override
+    public SonusCategoryManager getCategoryManager() {
+        return this.categoryManager;
     }
 
     @Override

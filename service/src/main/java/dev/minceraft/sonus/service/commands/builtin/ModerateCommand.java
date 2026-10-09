@@ -1,14 +1,14 @@
 package dev.minceraft.sonus.service.commands.builtin;
 
-import dev.minceraft.sonus.common.data.ISonusPlayer;
-import dev.minceraft.sonus.common.rooms.IRoom;
+import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
+import dev.minceraft.sonus.common.participant.builtin.IRoom;
 import dev.minceraft.sonus.service.SonusService;
 import dev.minceraft.sonus.service.commands.Command;
 import dev.minceraft.sonus.service.commands.CommandSender;
 import dev.minceraft.sonus.service.commands.LiteralCommandNode;
 import dev.minceraft.sonus.service.commands.arguments.PlayerArgument;
 import dev.minceraft.sonus.service.commands.arguments.StringArgument;
-import dev.minceraft.sonus.service.player.SonusPlayer;
+import dev.minceraft.sonus.service.participant.SonusPlayer;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.ComponentBuilder;
 import net.kyori.adventure.text.JoinConfiguration;

@@ -16,6 +16,8 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
+import static dev.minceraft.sonus.common.SonusConstants.PLUGIN_MESSAGE_CHANNEL;
+
 @NullMarked
 public class AgentManager implements IAgentManager {
 
@@ -33,7 +35,7 @@ public class AgentManager implements IAgentManager {
 
     public AgentManager(SonusService service) {
         this.service = service;
-        this.codec = new SonusAgentPmCodec(Set.of(Key.key(SonusConstants.PLUGIN_MESSAGE_CHANNEL)), this);
+        this.codec = new SonusAgentPmCodec(Set.of(Key.key(PLUGIN_MESSAGE_CHANNEL)), this);
     }
 
     @Override

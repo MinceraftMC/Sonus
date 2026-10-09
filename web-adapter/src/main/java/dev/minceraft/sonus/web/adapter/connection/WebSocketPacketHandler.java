@@ -1,9 +1,9 @@
 package dev.minceraft.sonus.web.adapter.connection;
 
 import dev.minceraft.sonus.common.SonusConstants;
-import dev.minceraft.sonus.common.data.ISonusPlayer;
-import dev.minceraft.sonus.common.rooms.IRoom;
-import dev.minceraft.sonus.common.service.ISonusRoomManager;
+import dev.minceraft.sonus.common.adapter.service.ISonusRoomManager;
+import dev.minceraft.sonus.common.participant.builtin.IRoom;
+import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
 import dev.minceraft.sonus.web.adapter.rtc.RtcHandler;
 import dev.minceraft.sonus.web.protocol.packets.IWebSocketHandler;
 import dev.minceraft.sonus.web.protocol.packets.clientbound.RoomJoinResponsePacket;
@@ -67,7 +67,7 @@ public class WebSocketPacketHandler implements IWebSocketHandler {
         }
         ISonusRoomManager rooms = this.connection.getAdapter().getService().getRoomManager();
         IRoom room = rooms.createStaticRoom(packet.getName(), packet.getPassword(), packet.getAudioType(), false);
-        this.tryJoinRoom(room.getId(), packet.getPassword());
+        this.tryJoinRoom(room.getUniqueId(), packet.getPassword());
     }
 
     @Override
@@ -86,7 +86,7 @@ public class WebSocketPacketHandler implements IWebSocketHandler {
         IRoom primaryRoom = player.getPrimaryRoom();
         // prevent accidentally leaving wrong room because of desyncs
         boolean success;
-        if (primaryRoom != null && primaryRoom.getId().equals(packet.getRoomId())) {
+        if (primaryRoom != null && primaryRoom.getUniqueId().equals(packet.getRoomId())) {
             player.setPrimaryRoom(null);
             success = true;
         } else {

@@ -1,7 +1,7 @@
 package dev.minceraft.sonus.service;
 
-import dev.minceraft.sonus.common.service.IScheduledTask;
-import dev.minceraft.sonus.common.service.ISonusScheduler;
+import dev.minceraft.sonus.common.adapter.service.IScheduledTask;
+import dev.minceraft.sonus.common.adapter.service.ISonusScheduler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

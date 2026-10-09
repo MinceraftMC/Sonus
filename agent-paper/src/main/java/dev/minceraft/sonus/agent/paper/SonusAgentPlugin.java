@@ -7,7 +7,7 @@ import dev.minceraft.sonus.agent.paper.config.SonusAgentConfig;
 import dev.minceraft.sonus.common.config.YamlConfigHolder;
 import dev.minceraft.sonus.common.natives.LameNativesLoader;
 import dev.minceraft.sonus.common.natives.OpusNativesLoader;
-import dev.minceraft.sonus.common.rooms.options.RoomDefinition;
+import dev.minceraft.sonus.common.participant.builtin.RoomDefinition;
 import dev.minceraft.sonus.protocol.meta.IMetaMessage;
 import dev.minceraft.sonus.protocol.meta.MetaRegistry;
 import dev.minceraft.sonus.protocol.meta.servicebound.UpdateRoomDefinitionMessage;

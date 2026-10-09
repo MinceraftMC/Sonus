@@ -1,7 +1,8 @@
 package dev.minceraft.sonus.svc.adapter.connection;
 
 import dev.minceraft.sonus.common.audio.AudioProcessor;
-import dev.minceraft.sonus.common.data.ISonusPlayer;
+import dev.minceraft.sonus.common.audio.OpusMode;
+import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
 import dev.minceraft.sonus.common.protocol.tcp.holder.PmDataHolderBuf;
 import dev.minceraft.sonus.common.protocol.udp.WrappedUdpPipelineData;
 import dev.minceraft.sonus.svc.adapter.SvcProtocolAdapter;
@@ -154,7 +155,7 @@ public class SvcConnection implements AutoCloseable {
 
     public AudioProcessor getProcessor(UUID channelId) {
         return this.processors.computeIfAbsent(channelId, __ ->
-                this.protocolAdapter.getAdapter().getService().createAudioProcessor(AudioProcessor.Mode.VOICE));
+                this.protocolAdapter.getAdapter().getService().createAudioProcessor(OpusMode.VOICE));
     }
 
     @Nullable

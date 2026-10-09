@@ -1,8 +1,8 @@
 package dev.minceraft.sonus.web.pion.ipc.commonbound;
 // Created by booky10 in Sonus (7:03 PM 06.03.2026)
 
-import dev.minceraft.sonus.common.protocol.util.Utf8String;
-import dev.minceraft.sonus.common.protocol.util.VarInt;
+import dev.minceraft.sonus.common.util.codec.Utf8String;
+import dev.minceraft.sonus.common.util.codec.VarInt;
 import dev.minceraft.sonus.web.pion.ipc.IpcMessage;
 import io.netty.buffer.ByteBuf;
 import org.jspecify.annotations.NullMarked;

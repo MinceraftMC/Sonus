@@ -1,15 +1,16 @@
 package dev.minceraft.sonus.svc.adapter;
 // Created by booky10 in Sonus (02:19 10.08.2025)
 
-import dev.minceraft.sonus.common.IAudioSource;
-import dev.minceraft.sonus.common.ISonusService;
-import dev.minceraft.sonus.common.adapter.AdapterInfo;
-import dev.minceraft.sonus.common.adapter.SonusAdapter;
-import dev.minceraft.sonus.common.adapter.UdpSonusAdapter;
-import dev.minceraft.sonus.common.audio.AudioCategory;
+
+import dev.minceraft.sonus.common.adapter.ISonusService;
+import dev.minceraft.sonus.common.adapter.adapter.AdapterInfo;
+import dev.minceraft.sonus.common.adapter.adapter.SonusAdapter;
+import dev.minceraft.sonus.common.protocol.audio.AudioCategory;
 import dev.minceraft.sonus.common.audio.SonusAudio;
-import dev.minceraft.sonus.common.data.ISonusPlayer;
 import dev.minceraft.sonus.common.data.Vec3d;
+import dev.minceraft.sonus.common.participant.IAudioSource;
+import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
+import dev.minceraft.sonus.common.protocol.adapter.UdpSonusAdapter;
 import dev.minceraft.sonus.svc.adapter.config.SvcConfig;
 import dev.minceraft.sonus.svc.adapter.connection.SvcConnection;
 import dev.minceraft.sonus.svc.protocol.data.SonusVolumeCategory;
@@ -63,10 +64,10 @@ public class SvcAdapter implements SonusAdapter {
         }
 
         GroupSoundSvcPacket packet = new GroupSoundSvcPacket();
-        packet.setChannelId(source.getSenderId(player));
-        packet.setSender(source.getSenderId(player));
+        packet.setChannelId(source.getUniqueId(player));
+        packet.setSender(source.getUniqueId(player));
         packet.setCategory(SonusVolumeCategory.generateId(source.getCategoryId()));
-        packet.setData(audio.setProcessor(() -> connection.getProcessor(source.getSenderId(player))).opus());
+        packet.setData(audio.setProcessor(() -> connection.getProcessor(source.getUniqueId(player))).opus());
         packet.setSequenceNumber(audio.getSequenceNumber());
         connection.sendPacket(packet);
     }
@@ -79,10 +80,10 @@ public class SvcAdapter implements SonusAdapter {
         }
 
         LocationSoundSvcPacket packet = new LocationSoundSvcPacket();
-        packet.setChannelId(source.getSenderId(player));
-        packet.setSender(source.getSenderId(player));
+        packet.setChannelId(source.getUniqueId(player));
+        packet.setSender(source.getUniqueId(player));
         packet.setCategory(SonusVolumeCategory.generateId(source.getCategoryId()));
-        packet.setData(audio.setProcessor(() -> connection.getProcessor(source.getSenderId(player))).opus());
+        packet.setData(audio.setProcessor(() -> connection.getProcessor(source.getUniqueId(player))).opus());
         packet.setSequenceNumber(audio.getSequenceNumber());
         packet.setLocation(pos);
         packet.setDistance((float) this.service.getConfig().getVoiceChatRange());
@@ -97,10 +98,10 @@ public class SvcAdapter implements SonusAdapter {
         }
 
         PlayerSoundSvcPacket packet = new PlayerSoundSvcPacket();
-        packet.setChannelId(source.getSenderId(player));
-        packet.setSender(source.getSenderId(player));
+        packet.setChannelId(source.getUniqueId(player));
+        packet.setSender(source.getUniqueId(player));
         packet.setCategory(SonusVolumeCategory.generateId(source.getCategoryId()));
-        packet.setData(audio.setProcessor(() -> connection.getProcessor(source.getSenderId(player))).opus());
+        packet.setData(audio.setProcessor(() -> connection.getProcessor(source.getUniqueId(player))).opus());
         packet.setSequenceNumber(audio.getSequenceNumber());
         packet.setDistance((float) this.service.getConfig().getVoiceChatRange());
         connection.sendPacket(packet);
@@ -114,8 +115,8 @@ public class SvcAdapter implements SonusAdapter {
         }
 
         GroupSoundSvcPacket packet = new GroupSoundSvcPacket(); // Generic sound packet
-        packet.setChannelId(source.getSenderId(player));
-        packet.setSender(source.getSenderId(player));
+        packet.setChannelId(source.getUniqueId(player));
+        packet.setSender(source.getUniqueId(player));
         packet.setCategory(SonusVolumeCategory.generateId(source.getCategoryId()));
         packet.setData(EMPTY_BUFFER);
         packet.setSequenceNumber(sequence);

@@ -1,7 +1,7 @@
 package dev.minceraft.sonus.common.natives;
 // Created by booky10 in Sonus (20:53 20.12.2025)
 
-import dev.minceraft.sonus.common.audio.AudioProcessor;
+import dev.minceraft.sonus.common.audio.OpusMode;
 import org.jspecify.annotations.NullMarked;
 
 import java.lang.invoke.MethodHandle;
@@ -63,7 +63,7 @@ public class OpusNativesLoader extends NativesLoader {
         }
     }
 
-    private Object convertMode(AudioProcessor.Mode mode) {
+    private Object convertMode(OpusMode mode) {
         return this.applicationClass.getEnumConstants()[mode.ordinal()];
     }
 
@@ -76,7 +76,7 @@ public class OpusNativesLoader extends NativesLoader {
         private final MethodHandle close;
 
 
-        public Encoder(int sampleRate, int channels, AudioProcessor.Mode mode) {
+        public Encoder(int sampleRate, int channels, OpusMode mode) {
             Object encoder;
             try {
                 encoder = OpusNativesLoader.this.encoderCtor.invoke(
@@ -123,7 +123,6 @@ public class OpusNativesLoader extends NativesLoader {
             }
         }
 
-        @Override
         public void close() {
             try {
                 this.close.invoke();
@@ -177,7 +176,6 @@ public class OpusNativesLoader extends NativesLoader {
             }
         }
 
-        @Override
         public void close() {
             try {
                 this.close.invoke();

@@ -23,12 +23,12 @@ public final class AudioProcessor implements AutoCloseable {
 
     private final OpusNativesLoader loader;
     private final IntSupplier mtu;
-    private final Mode mode;
+    private final OpusMode mode;
 
     private @MonotonicNonNull Decoder decoder;
     private @MonotonicNonNull Encoder encoder;
 
-    public AudioProcessor(OpusNativesLoader loader, IntSupplier mtu, Mode mode) {
+    public AudioProcessor(OpusNativesLoader loader, IntSupplier mtu, OpusMode mode) {
         this.loader = loader;
         this.mtu = mtu;
         this.mode = mode;
@@ -75,12 +75,5 @@ public final class AudioProcessor implements AutoCloseable {
              Encoder ignoredEncoder = this.encoder) {
             // NO-OP
         }
-    }
-
-    public enum Mode {
-
-        VOICE,
-        AUDIO,
-        LOW_DELAY,
     }
 }

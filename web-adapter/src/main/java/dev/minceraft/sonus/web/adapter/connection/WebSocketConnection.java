@@ -1,7 +1,7 @@
 package dev.minceraft.sonus.web.adapter.connection;
 
-import dev.minceraft.sonus.common.data.ISonusPlayer;
-import dev.minceraft.sonus.common.data.ISonusServer;
+import dev.minceraft.sonus.common.adapter.data.ISonusServer;
+import dev.minceraft.sonus.common.participant.builtin.ISonusPlayer;
 import dev.minceraft.sonus.web.adapter.WebAdapter;
 import dev.minceraft.sonus.web.adapter.rtc.RtcHandler;
 import dev.minceraft.sonus.web.protocol.AbstractWebPacket;

@@ -1,5 +1,6 @@
 dependencies {
     api(projects.webProtocol)
+    api(projects.commonAdapter)
 
     api(projects.webrtcAdapter)
     runtimeOnly(projects.webrtcPion)
